@@ -1,5 +1,7 @@
 capiBank, o banco da capybaras
 
+    este projeto almeja criar um simulador simplificado de operações bancárias, como método de avaliação e requisito para aprovação semestral.
+    
 por motivos de restrição do projeto, os arquivos todo o projeto será escrito em JS com node rodando por trás, com uma página html respondendo posteriormente.
 
 o projeto deve rodar utilizando html, css e javascript, contendo as partes:
