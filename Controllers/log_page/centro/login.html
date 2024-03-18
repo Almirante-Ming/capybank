@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
-    <script src="login.ts"></script>
+    <script src="login.js"></script>
     <title>Document</title>
 </head>
 
@@ -23,12 +23,12 @@
 
 
             <div class="form-box">
-                <form>
+                <form action="next_page.html" method="post">
 
                     <div class="input-box">
 
                         <h2>User ID</h2>
-                        <input type="email" id="usr" placeholder="Insira seu Acesso">
+                        <input type="text" id="usr" placeholder="Insira seu Acesso">
 
                     </div>
 
@@ -48,9 +48,9 @@
                     <div class="center-button">
 
                         <div class="bott">
-                            <input type="submit" class="btn" value="Login" id="login">
+                            <input type="submit" class="btn" value="Login" onclick="login()">
 
-                            <input type="submit" class="btn" value="Esqueceu Minha Conta" id="fgt_pw">
+                            <input type="submit" class="btn" value="Esqueceu Minha Conta" onclick="fgt_pw()">
 
                         </div>
                     </div>

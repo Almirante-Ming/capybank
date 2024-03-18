@@ -4,7 +4,9 @@ function login(usr, pwd) {
 
     if (usr == "admin" && pwd == "admin") {
         window.location.href = "/log_page/centro/dashboard.html";
-    } else {
+    } 
+    
+    else {
         alert("Usuario o contraseña incorrectos");
     }
 }
