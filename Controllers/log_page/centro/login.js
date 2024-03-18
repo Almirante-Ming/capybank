@@ -7,6 +7,6 @@ function login(usr, pwd) {
     } 
     
     else {
-        alert("Usuario o contraseña incorrectos");
+        alert("");
     }
 }
