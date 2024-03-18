@@ -1,4 +1,4 @@
-Teste banco SQL
+Teste com banco SQL
 
 # Necessário ter instalado:
 
@@ -11,7 +11,7 @@ Teste banco SQL
 ## Esse é um teste para ser executado localmente, então é necessário também criar uma base de dados local.
 
 ## node server.js para inicializar o localhost ( e ctrl + c para finalizar)
-# localhost:8080 -> URL local 
+# localhost:8080 -> URL local
 
 
 
