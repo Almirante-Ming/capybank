@@ -6,6 +6,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
+:root {
+    --capigreen: #87b344;
+    --capypasta: #c4e477;
+    --murky-water: #f2fbeb;
+    --glistening-moon: #171219;
+}
+
 .container {
     display: grid;
     gap: 10px;
@@ -22,18 +29,20 @@
 }
 
 .sideMenu {
-    height:100%;
+    height: 100%;
     grid-area: sideMenu;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
 }
+
 .topBox {
-    align-items: flex-start;
-    justify-self:center;
+    display: flex;
+    align-items: center;
 }
+
 .topBox img {
     max-width: 20%;
     align-items: center;
@@ -59,9 +68,27 @@
 }
 
 .topBar {
-    grid-area: topBar;
     display: flex;
+    justify-content: space-around;
+    grid-area: topBar;
 }
+
+.topBar .search-area {
+    display: flex;
+    padding: 3%;
+    border-radius: 5px;
+    width: 215px;
+    background: var(--capypasta);
+    color: white;
+}
+
+.topBar .search-area > input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
 .content {
     grid-area: content;
     display: flex;
