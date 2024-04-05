@@ -26,26 +26,26 @@ const cadastro = `
 </head>
 <body>
         <div>
-            <h1> Cadastro - Capibank </h1>
+            <h1> Cadastro - Capibank (PROTÓTIPO) </h1>
         </div>
-        <form action = "#" method = "POST">
+        <form action = "/salvar_cadastro.js" method = "POST">
             <section>
-                <label>Nome Completo:</label>
-                <input type="text">
-                <label> CPF: </label>
-                <input type="text">
+                <label for = 'name'>Nome Completo:</label>
+                <input name = 'name' type="text">
+                <label for = 'cpf'> CPF: </label>
+                <input name = 'cpf' type="text">
             </section>
             <section>
-                <label> Email: </label>
-                <input type="text">
-                <label> Telefone </label>
-                <input type="text">
-                <label>Data de nascimento: </label>
-                <input type = "date">
+                <label for = 'email'> Email: </label>
+                <input name = 'email' type="text">
+                <label for = 'telefone'> Telefone </label>
+                <input name = 'telefone' type="text">
+                <label for = 'data_nascimento'>Data de nascimento: </label>
+                <input name = 'data_nascimento' type = "date">
             </section>
             <section>
-                <label> Senha: </label>
-                <input type = "password">
+                <label for = 'senha'> Senha: </label>
+                <input name = 'senha' type = "password">
                 <label> Confirme a senha: </label>
                 <input type = "password">
             </section>

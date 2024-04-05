@@ -4,3 +4,6 @@ Iniciando testes de interação postGre com Node
 
 - Armazenar dados de cadastro
 - Validar informação de login, a partir da informação contida em banco
+
+-> npm install pg (biblioteca postgreSQL x Node)
+-> npm install formidable (módulo do node.js que lida com os dados do formulário)
