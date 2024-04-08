@@ -67,6 +67,7 @@ const server = http.createServer((req, res) => {
 });
 
 
+// Processo assíncrono.. A função addTable importada de database/clients tem como retorno um booleano que é True ou False. Se for false, ele impede que o servidor execute e encerra a função assíncrona.
 addTable().then(isConnected => {
 
     if (!isConnected) {
