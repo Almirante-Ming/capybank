@@ -60,7 +60,7 @@ const css = `
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 15px;
     font-size: 16px;
-    color: #fff;
+    color: #000;
     padding: 20px 45px 20px 45px;
     margin-bottom: 30px;
 }
