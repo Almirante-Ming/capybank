@@ -26,14 +26,14 @@ const login = `
                 </div>
             </div>
             <div class="form-box">
-                <form action="dash.html" method="post">
+                <form action="/validar_login.js" method="post">
                     <div class="input-box">
                         <h2>ID</h2>
-                        <input type="text" id="usr" placeholder="Insira seu User ID">
+                        <input name = 'name' type="text" id="usr" placeholder="Insira seu User ID" required>
                     </div>
                     <div class="input-box">
                         <h2>Passphase</h2>
-                        <input type="password" id="pwd" placeholder="passphase">
+                        <input name = 'senha' type="password" id="pwd" placeholder="passphase" required>
                     </div>
                     <div class="remember">
                         <label>

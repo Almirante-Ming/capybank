@@ -6,7 +6,6 @@ function getFormData(req, callback) {
     
     const form = new formidable.IncomingForm() // Método do formidable para lidar com formulário
 
-
     form.parse(req, (err, fields) => {
         // Aqui é armazenada a resposta assíncrona 1 e encerra a função caso True
         if (err) {
@@ -21,7 +20,14 @@ function getFormData(req, callback) {
         const dataNascimento = fields.data_nascimento
         const senha = fields.senha
 
-        callback(null, { nome, cpf, email, telefone, dataNascimento, senha }) // Necessário para associar o VALUE ao fieldNAME
+        // Essas condicionais servem para reutilizar essa função nos dois contextos: pegar informção do cadastro e pegar informação do login
+        if (req.url === '/salvar_cadastro.js') {
+            callback(null, { nome, cpf, email, telefone, dataNascimento, senha }) // Necessário para associar o VALUE ao fieldNAME
+        }
+        else if (req.url === '/validar_login.js') {
+           callback(null, {nome, senha})
+        }
+
     })
 }
 
