@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
             }
             else {
                 validateLogin(data)
-                res.end('<h1> HAHAHAHAHAHAHAHAHHAHAHAHAA </h1>')
+                res.end('<h1>Você está no validar_login.js!</h1>')
             }
         });
          
