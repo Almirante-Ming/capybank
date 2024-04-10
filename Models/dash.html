@@ -1,13 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Controllers/Stylists/dash.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --capigreen: #87b344;
+            --capypasta: #c4e477;
+            --murky-water: #f2fbeb;
+            --glistening-moon: #171219;
+        }
+
+        .container {
+            display: grid;
+            gap: 10px;
+            height: 100vh;
+            width: 100vw;
+            grid-template-rows: 40px 1fr 1fr 1fr;
+            grid-template-columns: 200px 1fr 1fr 1fr;
+            grid-template-areas:
+                "sideMenu topBar topBar topBar"
+                "sideMenu content content content"
+                "sideMenu content content content"
+                "SideMenu content content content"
+            ;
+        }
+
+        .sideMenu {
+            height: 100%;
+            grid-area: sideMenu;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topBox {
+            display: flex;
+            align-items: center;
+        }
+
+        .topBox img {
+            max-width: 20%;
+            align-items: center;
+        }
+
+        .optBox {
+            align-items: center;
+            justify-content: end;
+        }
+
+        .optBox ul li {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        .botBox {
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .botBox ul li {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        .topBar {
+            display: flex;
+            justify-content: space-around;
+            grid-area: topBar;
+        }
+
+        .topBar .search-area {
+            display: flex;
+            padding: 3%;
+            border-radius: 5px;
+            width: 215px;
+            background: var(--capypasta);
+            color: white;
+        }
+
+        .topBar .search-area>input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+
+        .content {
+            grid-area: content;
+            display: flex;
+        }
+    </style>
+   
     <script src="../Controllers/Scripts/dash.js"></script>
     <title>Capybank Dashboard</title>
 </head>
+
 <body>
     <div class="container">
         <div class="sideMenu">
@@ -16,12 +116,12 @@
                 <h3>Capybank</h3>
             </div>
             <div class="optBox">
-                 <ul>
+                <ul>
                     <li>Página Inicial</li>
                     <li>Transferências</li>
                     <li>Pagamentos</li>
                     <li>Notificações</li>
-                 </ul>           
+                </ul>
             </div>
             <div class="botBox">
                 <ul>
@@ -36,7 +136,7 @@
                 <h2>Início</h2>
             </div>
             <div class="midSide">
-                <div class = 'search-area'>
+                <div class='search-area'>
                     <span class="material-symbols-outlined">search</span>
                     <input type="search" name="srchBar" id="srhBar">
                 </div>
@@ -63,4 +163,5 @@
         </div>
     </div>
 </body>
+
 </html>

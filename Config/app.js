@@ -3,6 +3,7 @@ const http = require('http')
 /* PÁGINAS FRONT END */
 const loginPage = require('./pages/login/html.js')
 const registerPage = require('./pages/cadastro/html.js')
+const dashboard = require('./pages/dashboard/html.js')
 
 /* SCRIPTS DE PROCESSAMENTO */
 const getFormData = require('./scripts/pegar_dados.js')
@@ -10,7 +11,7 @@ const saveData = require('./scripts/salvar_cadastro.js')
 const validateLogin = require('./scripts/validar_login.js')
 
 /* DATABASE */
-const { addTable } = require('./database/clientes.js') // Quando o servidor local é inicializado, a tabela dados_clientes é criada
+const { addTable } = require('./database/clientes.js') // Cria tabela dados_clientes
 
 const server = http.createServer((req, res) => {
   
@@ -26,35 +27,49 @@ const server = http.createServer((req, res) => {
         res.end(registerPage)
     }
 
+    else if (req.url === '/dashboard.html') {
+        res.writeHead(200, { 'Content-Type': 'text/html'})
+        res.end(dashboard)
+    }
+
     // LIDA COM AS REQUISIÇÕES DE UM FORMULÁRIO (ACTION)
 
     else if (req.url === '/salvar_cadastro.js') {
-        // Função assíncrona, o getFormData vai trabalhar com o dado (req). Os outros dois dados (err, data) são as resposta assíncronas. A função getFormData está localizada em scripts/pegar_dados.js
+        // Função que recebe os dados de formulário
         const formData = getFormData(req, (err, data) => {
-            // Se der erro, o callback exibe o erro
             if (err) {
                 console.error('Erro ao processar o registro:', error);
                 return;
             }
-            // Se funcionar, o dicionário é armazenado em 'data' e enviado para a função saveData (armazenado em scripts/salvar_cadastro.js)
             else {
-                saveData(data)
-                res.end('<h1> Cadastro realizado com sucesso! </h1> \n <a href = "login.html">Voltar</a>')
+                saveData(data) // Salva os dados do formulário no servidor postGRESQL
+                res.end('<h1> Cadastro realizado com sucesso! </h1> \n <a href = "login.html">Voltar</a>') // Mensagem de sucesso
             }
         });
 
     }
 
     else if (req.url === '/validar_login.js') {
+        // Pega dados de formulário de login
         const formData = getFormData(req, (err, data) => {
+
             if (err) {
                 console.error('Erro ao processar o registro:', error);
                 return;
             }
             else {
-                validateLogin(data)
-                res.end('<h1>Você está no validar_login.js!</h1>')
+                // Começa a validar o login com os dados enviados (nome, senha)
+               validateLogin(data).then(login => { 
+                    if (login == true) {
+                        res.writeHead(302, { 'Location': '/dashboard.html' }); // Manda a URL para dashboard se encontrar login
+                        res.end() 
+                    }
+                    else {
+                        res.end(`<script>alert("ERRO! Login não encontrado")</script>`) // Alert de erro, caso não encontre nada corresondente..
+                    }
+                });
             }
+
         });
          
     }
