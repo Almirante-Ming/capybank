@@ -3,9 +3,10 @@ const { Client } = require('pg');
 // Antes de iniciar o teste, certificar que todas as informações de conexão estão de acordo. Criar a base de dados antes.
 const clients = new Client({
     host: 'localhost',
+    port: 5432,
     database: 'clientes',
     user: 'postgres',
-    password: 'root'
+    password: 'postgres'
 });
 
 async function addTable() {
@@ -15,12 +16,12 @@ async function addTable() {
     try {
       await clients.connect();
       const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
-        nome VARCHAR(100),
-        CPF VARCHAR(100),
-        email VARCHAR(100) UNIQUE,
-        telefone VARCHAR(100),
-        dataDeNascimento DATE,
-        senha VARCHAR(100)
+        nome VARCHAR(50) NOT NULL,
+        CPF VARCHAR(11) NOT NULL UNIQUE, 
+        email VARCHAR(50) NOT NULL UNIQUE,
+        telefone VARCHAR(11) NOT NULL UNIQUE,
+        data_De_Nascimento DATE NOT NULL,
+        senha VARCHAR(25) NOT NULL
       );`
 
       await clients.query(query);
