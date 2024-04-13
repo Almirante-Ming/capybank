@@ -10,6 +10,7 @@ const login = `
     <link rel="stylesheet" href="login.css">
     <script src="../Controllers/Scripts/login.js"></script>
     <title>CapyBank Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         ${style_css}
     </style>
@@ -55,6 +56,12 @@ const login = `
             <a href="cadastro.html"><button> Cadastre-se!</button></a>
         </div>
     </div>
+
+    <div class = 'flash-error'>
+        <i class='bx bx-error-circle' ></i>
+        <div>ID ou senha inválido!</div>
+    </div>
+
 </body>
 
 </html>`

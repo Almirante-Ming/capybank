@@ -97,6 +97,19 @@ const css = `
     background: #77B255;
 }
 
+.container-left .error-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background: pink;
+    width: 90%;
+}
+
+.container-left .error-message span {
+    font-size: 15px;
+    color: red;
+}
+
 
 
 
@@ -115,6 +128,31 @@ const css = `
     z-index: 1;
     display: flex;
 }
+
+.flash-error {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    gap: 5px;
+    top: 10px;
+    right: 10px;
+    border: 2px solid darkred;
+    width: 300px;
+    height: 65px;
+    background: pink;
+    animation: fadeOut 8s forwards;
+}
+
+.flash-error > i {
+    font-size: 20px;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; } /* Opacidade inicial */
+    100% { opacity: 0; } /* Opacidade final */
+}
+
 </style>`
 
 module.exports = css

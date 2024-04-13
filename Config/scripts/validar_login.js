@@ -1,11 +1,12 @@
 // Toda vez que quero abrir a base de dados, preciso instanciar nova conexão...
-const { Client } = require('pg')
+const { Pool } = require('pg')
 
-const clients = new Client({
+const clients = new Pool({
     host: 'localhost',
     database: 'clientes',
     user: 'postgres',
-    password: 'root'
+    password: 'root',
+    max: 20
 })
 
 const formidable = require('formidable') // Importar biblioteca que pega dados de formulário
@@ -39,10 +40,6 @@ async function validateLogin(data) {
         console.log(err)
     }// Quando clicar no submit de login, as informações de nome e senha são extraídas e armazenadas em form. Essa informação pode ser posteriormente manipulada para consultar o banco e retornar uma saída p/ usuário.
     
-    finally {
-        clients.end()
-    }
-
     return accountFound 
 }
 

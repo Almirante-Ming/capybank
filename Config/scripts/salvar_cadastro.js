@@ -1,13 +1,14 @@
 
 // const clients = require('../database/clientes.js') -> Essa importação não funcionou e me retornou erro. Depois que o client se conecta a base de dados e fecha a conexão, ela não pode ser aberta novamente. Então instanciei uma conexão do zero como foi feito abaixo. Não consegui reutilizar o módulo que já realizava essa conexão uma vez
 
-const { Client } = require('pg')
+const { Pool } = require('pg')
 
-const clients = new Client({
+const clients = new Pool({
     host: 'localhost',
     database: 'clientes',
     user: 'postgres',
-    password: 'root'
+    password: 'root',
+    max: 20
 })
 
 const saveData = async (data) => {
@@ -34,10 +35,6 @@ const saveData = async (data) => {
     
     catch(err) {
         console.log(err)
-    }
-    
-    finally {
-        await clients.end()
     }
     
 }
