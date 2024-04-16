@@ -1,0 +1,16 @@
+{
+    "rootFolder": "../Models",
+    "defaultIndex": "/login.html",
+    "types" : {
+        "htm": "text/html",
+        "html": "text/html",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "png": "image/png",
+        "css": "text/css",
+        "js": "text/javascript",
+        "json": "application/json",
+        "ico": "image/x-icon"
+        }
+   
+}
