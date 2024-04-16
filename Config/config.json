@@ -10,7 +10,6 @@
         "css": "text/css",
         "js": "text/javascript",
         "json": "application/json",
-        "ico": "image/x-icon"
-        }
-   
-}
+        "ico": "image/x-icon" 
+    }
+} 
