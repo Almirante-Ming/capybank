@@ -2,9 +2,9 @@ const { Client } = require('pg');
 
 const clients = new Client({
     host: 'localhost',
-    database: 'clientes',
-    user: 'postgres',
-    password: 'root'
+    database: '',
+    user: '',
+    password: ''
 });
 
 async function addTable() {

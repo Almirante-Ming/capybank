@@ -4,10 +4,10 @@ const formidable = require('formidable') // Importar biblioteca que pega dados d
 
 const clients = new Pool({
     host: 'localhost',
-    database: 'clientes',
-    user: 'postgres',
-    password: 'root',
-    max: 20
+    database: '',
+    user: '',
+    password: '',
+    max: 20 /**/
 })
 
 async function validateData(data) {
