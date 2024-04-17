@@ -1,4 +1,24 @@
-.flash-error {
+body {
+    width: 100vh;
+    height: 100vw;
+}
+
+form > section {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 300px;
+}
+
+button {
+    width: 50px;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.flash {
     display: none;
     align-items: center;
     justify-content: center;
@@ -6,18 +26,27 @@
     gap: 5px;
     top: 10px;
     right: 10px;
-    border: 2px solid darkred;
     width: 300px;
     height: 65px;
+}
+
+.flash.error {
     background: pink;
+    border: 2px solid darkred;
     animation: fadeOut 8s forwards;
 }
 
-.flash-error > i {
-    font-size: 20px;
+.flash.sucess  {
+    background: lightcyan;
+    border: 2px solid green;
+}
+
+i {
+    font-size: 30px;
 }
 
 @keyframes fadeOut {
     0% { opacity: 1; } /* Opacidade inicial */
     100% { opacity: 0; } /* Opacidade final */
 }
+
