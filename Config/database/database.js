@@ -1,12 +1,10 @@
 const { Client } = require('pg');
 
-// Antes de iniciar o teste, certificar que todas as informações de conexão estão de acordo. Criar a base de dados antes.
 const clients = new Client({
     host: 'localhost',
-    port: 5432,
     database: 'clientes',
     user: 'postgres',
-    password: 'postgres'
+    password: 'root'
 });
 
 async function addTable() {

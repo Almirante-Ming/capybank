@@ -1,31 +1,27 @@
-const style_css = require('./css.js')
-
-const html = `
 <!DOCTYPE html>
 <html lang="pt_BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel = 'stylesheet' href = './style/dashboard.css'></link>
+    <script src="./script/login.js"></script>
     <title>Capybank Dashboard</title>
-    <style>
-        ${style_css}
-    </style>
 </head>
+
 <body>
     <div class="container">
         <div class="sideMenu">
             <div class="topBox">
-                <img src="#" alt="Capy_logo">
                 <h3>Capybank</h3>
             </div>
             <div class="optBox">
-                 <ul>
+                <ul>
                     <li>Página Inicial</li>
                     <li>Transferências</li>
                     <li>Pagamentos</li>
                     <li>Notificações</li>
-                 </ul>           
+                </ul>
             </div>
             <div class="botBox">
                 <ul>
@@ -40,7 +36,7 @@ const html = `
                 <h2>Início</h2>
             </div>
             <div class="midSide">
-                <div class = 'search-area'>
+                <div class='search-area'>
                     <span class="material-symbols-outlined">search</span>
                     <input type="search" name="srchBar" id="srhBar">
                 </div>
@@ -67,7 +63,5 @@ const html = `
         </div>
     </div>
 </body>
-</html>
-`
 
-module.exports = html
+</html>

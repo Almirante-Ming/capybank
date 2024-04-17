@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Controllers/Stylists/login.css">
-    <script src="../Controllers/Scripts/login.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./style/login.css">
+    <script src="./script/login.js"></script>
     <title>CapyBank Login</title>
 </head>
 
@@ -15,19 +16,19 @@
         <div class="container-left">
             <div class="logo-tudo">
                 <div class="logo">
-                    <!-- <img src="../imgs/capi.png" alt=""> -->
+                    <img src="./imgs/capi.png" alt="">
                     <span>Acesse sua conta</span>
                 </div>
             </div>
             <div class="form-box">
-                <form action="dash.html" method="post">
+                <form action="/validar_login.js" method="post">
                     <div class="input-box">
                         <h2>ID</h2>
-                        <input type="text" id="usr" placeholder="Insira seu User ID">
+                        <input name = 'name' type="text" id = "usr" placeholder="Insira seu User ID">
                     </div>
                     <div class="input-box">
                         <h2>Passphase</h2>
-                        <input type="password" id="pwd" placeholder="passphase">
+                        <input name = 'senha' type="password" id="pwd" placeholder="passphase">
                     </div>
                     <div class="remember">
                         <label>
@@ -46,13 +47,19 @@
         </div>
         <div class="container-direita">
             <div class="baner">
-                <img src="../imgs/capi-a.jpeg" alt="">
+               
             </div>
             <div class="titulo">
-                <h1>CapyBank</h1>
-                <span>Sua Conexão segura com Suas Finanças</span>
+                <h1> Ainda não possui cadastro? </h1>
+                <a href = "cadastro.html"> Entre aqui! </a>
             </div>
         </div>
     </div>
+    
+    <div class = 'flash-error'>
+        <i class='bx bx-error-circle' ></i>
+        <div>ID ou senha inválido!</div>
+    </div>
+
 </body>
 </html>
