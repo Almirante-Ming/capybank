@@ -2,10 +2,10 @@ const { Pool } = require('pg')
 
 const clients = new Pool({
     host: 'localhost',
-    database: '',
-    user: '',
-    password: '',
-    max: 20
+    database: 'clientes',
+    user: 'postgres',
+    password: 'root',
+    max: 20 /**/
 })
 
 async function saveData(data) {

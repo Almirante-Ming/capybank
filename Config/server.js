@@ -1,7 +1,7 @@
 const http = require('http')
 
 // FUNÇÃO QUE LÊ OS ARQUIVOS DO FRONT-END
-const getFile = require('./scripts/getFile')
+const getFiles = require('./scripts/getFile')
 
 // FUNÇÃO QUE CRIA TABELA
 const { addTable } = require('./database/database') 
@@ -20,12 +20,14 @@ var pasta_root = config.rootFolder
 var inicial = config.defaultIndex
 var types = config.types
 
+let fetchResult 
+
 const server = http.createServer((req, res) => {
 
     function renderPage() {
 
         var arquivo_front = parse(req.url).pathname, path, extension
-
+        
         if (req.url == '/') {
             arquivo_front = inicial
         }
@@ -33,14 +35,22 @@ const server = http.createServer((req, res) => {
         path = pasta_root + arquivo_front
         extension = path.substr(path.lastIndexOf('.') + 1);
 
-        getFile(path, function (data) {
-            res.writeHead(200, { 'Content-Type': types[extension] || 'text/plain',});
+        getFiles(path, function (data) {
+            let head = checkError(arquivo_front) == false ? 401 : 200
+            res.writeHead(head, { 'Content-Type': types[extension] || 'text/plain',});
             res.end(data);
         }, function (err) {
             console.log(err)
             res.writeHead(404);
             res.end(); 
         });
+
+
+        function checkError(file) {
+            if (file.includes('html') && typeof(fetchResult) == 'function') { // Checa se o arquivo é html e se inicializou uma função
+                return fetchResult()
+            }
+        }
     }
    
     if (req.url === '/salvar_cadastro.js' || req.url === '/validar_login.js') {
@@ -53,9 +63,9 @@ const server = http.createServer((req, res) => {
 
             let operation  = req.url == '/salvar_cadastro.js' ? saveData(data) : validateData(data) // Retorna booleano que indica o estado de login / cadastro
             let page = req.url == '/salvar_cadastro.js' ? 'cadastro.html' : 'login.html' // Página que será direcionado de volta em caso de erro
-
-            operation.then((result) => {
             
+            operation.then((result) => {
+
                 if ((result) && page == 'login.html') {
                     res.writeHead(302, { 'Location': 'dashboard.html' });
                     res.end() 
@@ -67,9 +77,11 @@ const server = http.createServer((req, res) => {
 
                 else  {
                     res.writeHead(302, { 'Location': page });
-                    res.end()
-                    return 
+                    res.end() 
                 } 
+
+                fetchResult = () => result
+                return
 
             })
 
