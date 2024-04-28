@@ -63,28 +63,31 @@ const server = http.createServer((req, res) => {
 
             let operation  = req.url == '/salvar_cadastro.js' ? saveData(data) : validateData(data) // Retorna booleano que indica o estado de login / cadastro
             let page = req.url == '/salvar_cadastro.js' ? 'cadastro.html' : 'login.html' // Página que será direcionado de volta em caso de erro
-            
+     
             operation.then((result) => {
-
-                if ((result) && page == 'login.html') {
+                console.log(result)
+            })
+                /*
+                if ((result.dataSaved) && page == 'login.html') {
                     res.writeHead(302, { 'Location': 'dashboard.html' });
                     res.end() 
                 }
-
-                else if ((result) && page == 'cadastro.html') {
+                
+                else if ((result.dataSaved) && page == 'cadastro.html') {
                     res.end('<h1> Cadastro efetuado! </h1> <a href = "login.html">Voltar</a>')
                 }
-
+                
                 else  {
                     res.writeHead(302, { 'Location': page });
                     res.end() 
                 } 
-
-                fetchResult = () => result
+                
+                fetchResult = () => { result.dataSaved , result.error }
                 return
-
+                
             })
-
+  
+            */
         })
     }
     

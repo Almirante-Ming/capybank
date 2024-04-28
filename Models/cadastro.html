@@ -1,46 +1,81 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Cadastro</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel = 'stylesheet' href = './style/cadastro.css'>
-    <script src = "./script/cadastro.js"></script>
+    <script src = './script/cadastro.js'></script>
 </head>
 <body>
         <div>
             <h1> Cadastro - Capibank (PROTÓTIPO) </h1>
         </div>
-        <form action="/salvar_cadastro.js" method="POST">
+        <form action='/salvar_cadastro.js' method='POST'>
             <section>
-                <label for='name'>Nome Completo:</label>
-                <input name='name' type="text">
-                <label for='cpf'> CPF: </label>
-                <input name='cpf' type="text"  placeholder="Informe um CPF válido (xxx.xxx.xxx-xx)">
-            </section>
-            <section>
-                <label for='email'> Email: </label>
-                <input name='email' type="email">
-                <label for='telefone'> Telefone </label>
-                <input name='telefone' type="text">
-                <label for='data_nascimento'>Data de nascimento: </label>
-                <input name='data_nascimento' type="date">
+                <label for = 'name'>Nome Completo:</label>
+                <div class = 'Input'>
+                    <input name = 'name' type='text' id = 'nome' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                </div>
+                <div class = 'Error-Message'></div>
+                <!---->
             </section>
             <section>
-                <label for='senha'> Senha: </label>
-                <input name='senha' type="password">
-                <label> Confirme a senha: </label>
-                <input name='confirmar_senha' type="password">
+                <label for = 'cpf'> CPF: </label>
+                <div class = 'Input'>
+                    <input name = 'cpf' type = 'text' id = 'cpf' placeholder = '___.___.___-__' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                </div>
+                <div class = 'Error-Message'></div>
             </section>
-            <section> 
-                <button type='submit'>Enviar </button>
+            <section>
+                <label for = 'email'> Email: </label>
+                <div class = 'Input'>
+                    <input name = 'email' type = 'email' id = 'email' autocomplete = 'off' maxlength= "50">
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                </div>
+                <div class = 'Error-Message'></div>
             </section>
+            <section>
+                <label for = 'telefone'> Telefone </label>
+                <div class = 'Input'>
+                    <input name = 'telefone' type = 'text' id = 'telefone' placeholder = '(__) ____-____' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                </div>
+                <div class = 'Error-Message'></div>
+            </section>
+                <label for = 'data_nascimento'>Data de nascimento: </label>
+                <div class = 'Input'>
+                    <input name = 'data_nascimento' type = 'date' id = 'date' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                </div>
+                <div class = 'Error-Message'></div>
+            </section>
+            <section>
+                <label for = 'senha'> Senha: </label>
+                <div class = 'Input'>
+                    <input name = 'senha' type = 'password' id = 'senha' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                    <i class='bx bx-show' id = 'p1'></i>
+                </div>
+                <div class = 'Error-Message'></div>
+            </section>
+            <section>
+                <label for = 'confirmar_senha'> Confirme a senha: </label>
+                <div class = 'Input'>
+                    <input name = 'confirmar_senha' type = 'password' id = 'senha2' autocomplete = 'off'>
+                    <div class = 'Error-Sign'><i class='bx bx-error-circle'></i></div>
+                    <i class='bx bx-show' id = 'p2'></i>
+                </div>
+                <div class = 'Error-Message'></div>
+            </section>
+            <button type = 'submit'>Enviar </button>
         </form>
         <hr>
-
-                
+  
         <div class = 'flash error'>
             <i class='bx bx-error-circle' ></i>
             <div>Não foi possível realizar cadastro!</div>
@@ -48,7 +83,7 @@
 
         <div class = 'flash sucess'>
             <i class='bx bx-error-circle' ></i>
-            <div>Cadastro realizado com sucesso! <a href = "login.html"> Voltar </a> </div>
+            <div>Cadastro realizado com sucesso! <a href = 'login.html'> Voltar </a> </div>
             <a>
         </div>
  

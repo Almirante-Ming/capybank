@@ -12,6 +12,7 @@ async function saveData(data) {
 
     var formValues = []
     let dataSaved = false
+    let error
     
     Object.keys(data).forEach((item) => {
         formValues.push(String(data[item])) // Pegando os valores do dicionário, convertendo todos para STRING e armazenando em um array
@@ -29,11 +30,11 @@ async function saveData(data) {
     }
     
     catch(err) {
-        console.log(err)
+        error = err.detail 
     }
     
     finally {
-        return dataSaved
+        return { dataSaved, error }
     }
 
 }
