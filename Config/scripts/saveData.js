@@ -5,13 +5,13 @@ const clients = new Pool({
     database: 'clientes',
     user: 'postgres',
     password: 'root',
-    max: 20 /**/
+    max: 20 
 })
 
 async function saveData(data) {
 
     var formValues = []
-    let dataSaved = false
+    let outcome = false
     let error
     
     Object.keys(data).forEach((item) => {
@@ -20,21 +20,21 @@ async function saveData(data) {
     
     try {
         await clients.connect()
-        
         const query = `
-        INSERT INTO dados_clientes (nome, CPF, email, telefone, dataDeNascimento, senha)
+        INSERT INTO dados_clientes (nome, cpf, email, telefone, data_De_Nascimento, senha)
         VALUES ($1, $2, $3, $4, $5, $6)
         `
         var result = await clients.query(query, formValues) // Recebe a query e depois o array formValues. O indíce de cada array bate com o placeholder do query (primeiro indíce será $1, segundo indíce será $2....)
-        if (result.rowCount > 0) { dataSaved = true }
+        if (result.rowCount > 0) { outcome = true }
     }
     
     catch(err) {
+        console.log(err)
         error = err.detail 
     }
     
     finally {
-        return { dataSaved, error }
+        return { outcome, error }
     }
 
 }
