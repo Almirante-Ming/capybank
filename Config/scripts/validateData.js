@@ -15,7 +15,8 @@ async function validateData(data) {
 
     let formNome = String(data.nome) 
     let formSenha = String(data.senha)
-    let accountFound = false
+    let outcome = false
+    let error
 
     try {
         
@@ -28,19 +29,18 @@ async function validateData(data) {
         
         clientData.forEach((client) => {
             if (client.nome == formNome && client.senha == formSenha) { // Comparação entre dados do formulário com todos os 'nomes' e 'senhas' da tabela
-                accountFound = true
+                outcome = true
             }
         })
-
-        
+    
     }
     
     catch(err) {
-        console.log(err)
-    }// Quando clicar no submit de login, as informações de nome e senha são extraídas e armazenadas em form. Essa informação pode ser posteriormente manipulada para consultar o banco e retornar uma saída p/ usuário.
+        error = err.details
+    }
     
     finally {
-        return accountFound 
+        return { outcome , error }
     }
     
 }
