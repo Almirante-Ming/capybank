@@ -4,10 +4,9 @@ const formidable = require('formidable') // Importar biblioteca que pega dados d
 
 const clients = new Pool({
     host: 'localhost',
-    port: 5433,
-    database: 'postgres',
+    database: 'clientes',
     user: 'postgres',
-    password: 'postgres',
+    password: 'root',
     max: 20 /**/
 })
 
