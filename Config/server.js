@@ -77,14 +77,14 @@ const server = http.createServer((req, res) => {
     if (req.url === '/salvar_cadastro.js' || req.url === '/validar_login.js') {
 
         const captureForm = getFormData(req, (err, data) => {
-
+            
             if (err) {
                 return 'Erro ao processar o registro:' + err
             }
 
             let operation = req.url == '/salvar_cadastro.js' ? saveData(data) : validateData(data) // Retorna booleano que indica o estado de login / cadastro
             let page = req.url == '/salvar_cadastro.js' ? 'cadastro.html' : 'login.html' // Página que será direcionado de volta em caso de erro
-        
+
             operation.then((result) => {
                 
                 if ((result.outcome) && page == 'login.html') {
