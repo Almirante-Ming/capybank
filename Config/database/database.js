@@ -71,10 +71,22 @@ async function validateData(data) {
 
   //let outcome = false
   //let error
+  console.log(data)
 
-  
+  const test = acessData('SELECT nome, senha FROM dados_clientes')
+
+  test.then((t) => {
+    const databaseValues = t.rows 
+    for (i=0; i < databaseValues.length; i++) {
+      if (databaseValues[i].nome == data.nome && databaseValues[i].senha == data.senha) 
+        console.log('é igual real!')
+    }
+    
+  })
 
 }
+
+validateData({'nome': 'Murilo', 'senha': '123456'})
 
 async function acessData(query) {
   let result
@@ -90,4 +102,4 @@ async function acessData(query) {
   }
 }
 
-module.exports = { addTable , saveData, validateData, acessData };
+//module.exports = { addTable , saveData, validateData, acessData };
