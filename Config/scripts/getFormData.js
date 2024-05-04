@@ -11,6 +11,7 @@ function getFormData(req, callback) {
             callback(err, null)
             return
         }
+        
         // Abaixo é armazenada a resposta assíncrona  2, com armazenamento dos dados do formulário em variáveis correspondentes
         const nome = fields.name
         const cpf = fields.cpf

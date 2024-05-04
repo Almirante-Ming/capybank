@@ -4,7 +4,7 @@ const { Pool } = require('pg')
 
 const clients = new Pool({
   host: 'localhost',
-  database: 'clientes',
+  database: 'teste2',
   user: 'postgres',
   password: 'root',
   max: 20
@@ -48,6 +48,7 @@ async function saveData(data) {
   });
   
   try {
+      console.log(formValues)
       await clients.connect()
       const query = `
       INSERT INTO dados_clientes (nome, cpf, email, telefone, data_De_Nascimento, senha)
@@ -69,31 +70,37 @@ async function saveData(data) {
 
 async function validateData(data) {
 
-  //let outcome = false
-  //let error
-  console.log(data)
+  let formNome = String(data.nome) 
+  let formSenha = String(data.senha)
 
-  const test = acessData('SELECT nome, senha FROM dados_clientes')
+  let outcome = false 
+  let user_data
 
-  test.then((t) => {
-    const databaseValues = t.rows 
-    for (i=0; i < databaseValues.length; i++) {
-      if (databaseValues[i].nome == data.nome && databaseValues[i].senha == data.senha) 
-        console.log('é igual real!')
-    }
+  const validating = acessData('SELECT * FROM dados_clientes')
+
+  await validating.then((result) => {
+    
+    const databaseValues = result.rows 
+
+    databaseValues.forEach((coluna) => {
+      if (coluna.nome == formNome && coluna.senha == formSenha) {
+        outcome = true
+        user_data = coluna
+      } 
+    })
     
   })
 
-}
+  clientInfo = JSON.stringify(user_data)
 
-validateData({'nome': 'Murilo', 'senha': '123456'})
+  return { outcome, clientInfo }
+}
 
 async function acessData(query) {
   let result
   try {
     await clients.connect();   
     result = await clients.query(query)
-
   }
   catch(err) {
   }
@@ -102,4 +109,4 @@ async function acessData(query) {
   }
 }
 
-//module.exports = { addTable , saveData, validateData, acessData };
+module.exports = { addTable , saveData, validateData, acessData };
