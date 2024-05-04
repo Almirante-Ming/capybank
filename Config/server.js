@@ -3,13 +3,13 @@ const http = require('http')
 // FUNÇÃO QUE LÊ OS ARQUIVOS DO FRONT-END
 const getFiles = require('./scripts/getFile')
 
-// FUNÇÃO QUE CRIA TABELA
-const { addTable } = require('./database/database')
+// FUNÇOES QUE INTERAGEM COM A TABELA
+const { addTable , saveData, validateData, acessData } = require('./database/database')
 
 // SCRIPTS INTERAÇÃO FORM X BANCO
 const getFormData = require('./scripts/getFormData')
-const saveData = require('./scripts/saveData')
-const validateData = require('./scripts/validateData')
+//const saveData = require('./scripts/saveData')
+// const validateData = require('./scripts/validateData')
 
 // BIBLIOTECA NODE PARA EXTRAIR DADOS DA URL
 var parse = require('url').parse
@@ -78,7 +78,7 @@ const server = http.createServer((req, res) => {
 
             let operation = req.url == '/salvar_cadastro.js' ? saveData(data) : validateData(data) // Retorna booleano que indica o estado de login / cadastro
             let page = req.url == '/salvar_cadastro.js' ? 'cadastro.html' : 'login.html' // Página que será direcionado de volta em caso de erro
-
+        
             operation.then((result) => {
                 
                 if ((result.outcome) && page == 'login.html') {
