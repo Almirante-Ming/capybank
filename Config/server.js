@@ -46,13 +46,7 @@ const server = http.createServer((req, res) => {
                             'Custom-Message': `${getResponse(page).error}`
                         });
                     }
-                    
-                    if (page == '/dashboard.html') {
-                        res.writeHead(200, {
-                            'Content-Type': types[extension] || 'text/plain',
-                            'Custom-Message': `${getResponse(page).clientInfo}`
-                        });
-                    }
+                  
                 }
                 else {
                     res.writeHead(200, {'Content-Type': types[extension] || 'text/plain', });
