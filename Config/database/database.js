@@ -2,7 +2,7 @@ const { Client } = require('pg');
 
 const clients = new Client({
   host: 'localhost',
-  database: 'clientes',
+  database: 'teste2',
   user: 'postgres',
   password: 'root'
 });
@@ -14,6 +14,7 @@ async function addTable() {
   try {
     await clients.connect();
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
+        ID int NOT NULL AUTO_INCREMENT
         nome VARCHAR(50) NOT NULL,
         CPF VARCHAR(14) NOT NULL UNIQUE, 
         email VARCHAR(50) NOT NULL UNIQUE,
