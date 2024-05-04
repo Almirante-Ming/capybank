@@ -8,8 +8,6 @@ const { addTable , saveData, validateData, acessData } = require('./database/dat
 
 // SCRIPTS INTERAÇÃO FORM X BANCO
 const getFormData = require('./scripts/getFormData')
-//const saveData = require('./scripts/saveData')
-// const validateData = require('./scripts/validateData')
 
 // BIBLIOTECA NODE PARA EXTRAIR DADOS DA URL
 var parse = require('url').parse

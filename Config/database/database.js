@@ -1,3 +1,5 @@
+// Todas as funções que interagem com o DB
+
 const { Pool } = require('pg')
 
 const clients = new Pool({
@@ -52,7 +54,6 @@ async function saveData(data) {
       VALUES ($1, $2, $3, $4, $5, $6)
       `
       var result = await clients.query(query, formValues) // Recebe a query e depois o array formValues. O indíce de cada array bate com o placeholder do query (primeiro indíce será $1, segundo indíce será $2....)
-      console.log(result)
       if (result.rowCount > 0) { outcome = true }
   }
   
