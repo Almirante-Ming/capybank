@@ -39,10 +39,18 @@ const server = http.createServer((req, res) => {
             function (data) {  
                 
                 if (page.includes('html') && typeof (fetchResult) == 'function') {
-                    if (!checkError(page).outcome) { 
+
+                    if (!getResponse(page).outcome) { 
                         res.writeHead(401, {
                             'Content-Type': types[extension] || 'text/plain',
-                            'Custom-Message': `${checkError(page).error}`
+                            'Custom-Message': `${getResponse(page).error}`
+                        });
+                    }
+                    
+                    if (page == '/dashboard.html') {
+                        res.writeHead(200, {
+                            'Content-Type': types[extension] || 'text/plain',
+                            'Custom-Message': `${getResponse(page).clientInfo}`
                         });
                     }
                 }
@@ -60,7 +68,7 @@ const server = http.createServer((req, res) => {
             }
         )
         
-        function checkError(file) {  
+        function getResponse(file) {  
             const result = fetchResult()
             return result
         }
@@ -97,7 +105,6 @@ const server = http.createServer((req, res) => {
                 return
 
             })
-
 
         })
     }
