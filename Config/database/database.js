@@ -69,36 +69,11 @@ async function saveData(data) {
 
 async function validateData(data) {
 
-  let formNome = String(data.nome) 
-  let formSenha = String(data.senha)
-  let outcome = false
-  let error
+  //let outcome = false
+  //let error
 
-  try {
-      
-      await clients.connect()
-      
-      const query = `SELECT nome, senha FROM dados_clientes;`
-      const result = await clients.query(query)
-      
-      const clientData = result.rows 
-      
-      clientData.forEach((client) => {
-          if (client.nome == formNome && client.senha == formSenha) { // Comparação entre dados do formulário com todos os 'nomes' e 'senhas' da tabela
-              outcome = true
-          }
-      })
   
-  }
-  
-  catch(err) {
-      error = err.details
-  }
-  
-  finally {
-      return { outcome , error }
-  }
-  
+
 }
 
 async function acessData(query) {
