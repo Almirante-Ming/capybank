@@ -39,13 +39,23 @@ const server = http.createServer((req, res) => {
             function (data) {  
                 
                 if (page.includes('html') && typeof (fetchResult) == 'function') {
-                    if (!checkError(page).outcome) { 
+                    
+                    if (!getResponse(page).outcome) { 
                         res.writeHead(401, {
                             'Content-Type': types[extension] || 'text/plain',
-                            'Custom-Message': `${checkError(page).error}`
+                            'Custom-Message': `${getResponse(page).error}`
                         });
                     }
                 }
+
+                if ((page == '/dashboard.html' || page == '/perfil.html') && typeof (fetchResult) == 'function') {
+                    res.writeHead(200, {
+                        'Content-Type': types[extension] || 'text/plain',
+                        'Custom-Message': `${getResponse(page).id}`
+                    });
+                }
+
+
                 else {
                     res.writeHead(200, {'Content-Type': types[extension] || 'text/plain', });
                 }
@@ -60,7 +70,7 @@ const server = http.createServer((req, res) => {
             }
         )
         
-        function checkError(file) {  
+        function getResponse(file) {  
             const result = fetchResult()
             return result
         }
@@ -100,6 +110,16 @@ const server = http.createServer((req, res) => {
 
 
         })
+    }
+
+    else if (req.url === '/api/users') {
+        const test = acessData('SELECT * FROM dados_clientes')
+        test.then((t) => {
+            let users = t.rows
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(users));
+        })
+        
     }
 
     else {

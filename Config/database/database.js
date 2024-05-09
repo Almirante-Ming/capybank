@@ -4,7 +4,7 @@ const { Pool } = require('pg')
 
 const clients = new Pool({
   host: 'localhost',
-  database: 'teste2',
+  database: 'clientes',
   user: 'postgres',
   password: 'root',
   max: 20
@@ -74,7 +74,7 @@ async function validateData(data) {
   let formSenha = String(data.senha)
 
   let outcome = false 
-  let user_data
+  let id
 
   const validating = acessData('SELECT * FROM dados_clientes')
 
@@ -85,15 +85,13 @@ async function validateData(data) {
     databaseValues.forEach((coluna) => {
       if (coluna.nome == formNome && coluna.senha == formSenha) {
         outcome = true
-        user_data = coluna
+        id = coluna.id
       } 
     })
     
   })
 
-  clientInfo = JSON.stringify(user_data)
-
-  return { outcome, clientInfo }
+  return { outcome, id }
 }
 
 async function acessData(query) {
