@@ -108,7 +108,7 @@ function sendFormData() {
 
         fetch('http://localhost:8080/api/validateData', requestOptions).then((response) => {
             if (response.status == 200) { 
-                window.location.href = '/dashboard.html'
+                window.location.href = '/Models/dashboard.html'
             } 
             else { 
                 render.outcome('ID ou senha incorretos!') 
