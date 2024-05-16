@@ -7,23 +7,25 @@
     <title>Cadastro</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='./style/cadastro.css'>
-    <script src='./script/cadastro.js'></script>
+    <script type = 'module' src = '/script/cadastro.js'></script>
 </head>
 
 <body>
     <div>
+        <div id = 'outcome'></div>
         <h1> Cadastro - Capibank (PROTÓTIPO) </h1>
     </div>
-    <form action='/salvar_cadastro.js' method='POST'>
+    <form method='POST'>
+        
         <section>
-            <label for='name'>Nome Completo:</label>
+            <label for='nome'>Nome Completo:</label>
             <div class='Input'>
-                <input name='name' type='text' id='nome' autocomplete='off' maxlength="100">
+                <input name='nome' type='text' id='nome' autocomplete='off' maxlength="100">
                 <div class='Error-Sign'><i class='bx bx-error-circle'></i></div>
             </div>
             <div class='Error-Message'></div>
-            <!---->
         </section>
+
         <section>
             <label for='cpf'> CPF: </label>
             <div class='Input'>
@@ -32,6 +34,7 @@
             </div>
             <div class='Error-Message'></div>
         </section>
+        
         <section>
             <label for='email'> Email: </label>
             <div class='Input'>
@@ -40,6 +43,7 @@
             </div>
             <div class='Error-Message'></div>
         </section>
+
         <section>
             <label for='telefone'> Telefone </label>
             <div class='Input'>
@@ -49,17 +53,16 @@
             <div class='Error-Message'></div>
         </section>
 
-
-        </section>
-        <label for='data_nascimento'>Data de nascimento: </label>
-        <div class='Input'>
-            <input name='data_nascimento' type='date' id='date' autocomplete='off' required>
-            <div class='Error-Sign'><i class='bx bx-error-circle'></i></div>
-        </div>
-        <div class='Error-Message'></div>
-        </section>
         <section>
+            <label for='data_nascimento'>Data de nascimento: </label>
+            <div class='Input'>
+                <input name='data_nascimento' type='date' id='data' autocomplete='off'>
+                <div class='Error-Sign'><i class='bx bx-error-circle'></i></div>
+            </div>
+            <div class='Error-Message'></div>
+        </section>
 
+        <section>
             <label for='senha'> Senha: </label>
             <div class='Input'>
                 <input name='senha' type='password' id='senha' autocomplete='off'>
@@ -68,29 +71,21 @@
             </div>
             <div class='Error-Message'></div>
         </section>
+
         <section>
             <label for='confirmar_senha'> Confirme a senha: </label>
             <div class='Input'>
-                <input name='confirmar_senha' type='password' id='senha2' autocomplete='off'>
+                <input name='confirmar_senha' type='password' id='confirmar-senha' autocomplete='off'>
                 <div class='Error-Sign'><i class='bx bx-error-circle'></i></div>
                 <i class='bx bx-show' id='p2'></i>
             </div>
             <div class='Error-Message'></div>
         </section>
+
         <button type='submit'>Enviar </button>
     </form>
-    <hr>
+    <a href = "login.html"> Voltar </a>
 
-    <div class='flash error'>
-        <i class='bx bx-error-circle'></i>
-        <div>Não foi possível realizar cadastro!</div>
-    </div>
-
-    <div class='flash sucess'>
-        <i class='bx bx-error-circle'></i>
-        <div>Cadastro realizado com sucesso! <a href='login.html'> Voltar </a> </div>
-        <a>
-    </div>
 
 </body>
 

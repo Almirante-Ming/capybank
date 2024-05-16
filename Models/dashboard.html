@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = 'stylesheet' href = './style/dashboard.css'></link>
-    <script src="./script/login.js"></script>
+    <script type = "module" src="./script/dashboard.js"></script>
     <title>Capybank Dashboard</title>
 </head>
 
@@ -25,7 +25,7 @@
             </div>
             <div class="botBox">
                 <ul>
-                    <li>Minha Conta</li>
+                    <li><a href = "perfil.html">Minha Conta</a></li>
                     <li>Configurações</li>
                     <li>Ajuda</li>
                 </ul>
@@ -43,25 +43,30 @@
             </div>
             <div class="rgtSide">
                 <!---user name (drop down menu)-->
-                <span> Claudia Alves</span>
-                <img src="user photo" alt="">
+                <span id = 'name'></span>
+                <img src= "#" alt="">
             </div>
         </div>
-        <div class="content">
-            <div class="box1">
-                <h4>Cofre do Sr. capybara</h4>
-            </div>
-            <div class="box2">
-                <h4>Saldo</h4>
-            </div>
-            <div class="box3">
-                <h4>Histórico</h4>
-            </div>
-            <div class="box4">
-                <h3>Shopping</h3>
+        <div class="content" style = 'display: flex;flex-direction:column'>
+            <h1> Operações - protótipo </h1>
+            <div id = 'saldo'></div>
+            <div class = 'Operations'>
+        
             </div>
         </div>
+        <button id = 't-button'> + </button>
     </div>
+    <dialog class = 'Dialog' open>
+        <form action = '/realizar_transferencia.js' method = 'POST'>
+            <div class = 'Input-Box'>
+                <select name = "name" id = "clientes">
+                    <option value="">Escolha um cliente: </option>
+                </select>                  
+            </div>
+            <input type = 'number' name = 'valor' id = 'valor'>
+            <input id = 'submit' type = 'submit' value = 'submit'>
+        </form>
+    </dialog>
 </body>
 
 </html>

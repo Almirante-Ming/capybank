@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./style/login.css">
-    <script src="./script/login.js"></script>
+    <script type = "module" src="./script/login.js"></script>
     <title>CapyBank Login</title>
 </head>
 
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="form-box">
-                <form action="/validar_login.js" method="post">
+                <form method = "POST" action = "/dashboard.html">
                     <div class="input-box">
                         <h2>ID</h2>
-                        <input name = 'name' type="text" id = "usr" placeholder="Insira seu User ID">
+                        <input name = 'cpf' type="text" id = "cpf" placeholder="Insira seu User ID" maxlength = '14'>
                     </div>
                     <div class="input-box">
                         <h2>Passphase</h2>
@@ -44,6 +44,7 @@
                     </div>
                 </form>
             </div>
+            <div id = 'outcome'></div>
         </div>
         <div class="container-direita">
             <div class="baner">
