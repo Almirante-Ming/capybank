@@ -44,24 +44,29 @@
             <div class="rgtSide">
                 <!---user name (drop down menu)-->
                 <span id = 'name'></span>
-                <img src="user photo" alt="">
+                <img src= "#" alt="">
             </div>
         </div>
-        <div class="content">
-            <div class="box1">
-                <h4>Cofre do Sr. capybara</h4>
-            </div>
-            <div class="box2">
-                <h4>Saldo</h4>
-            </div>
-            <div class="box3">
-                <h4>Histórico</h4>
-            </div>
-            <div class="box4">
-                <h3>Shopping</h3>
+        <div class="content" style = 'display: flex;flex-direction:column'>
+            <h1> Operações - protótipo </h1>
+            <div id = 'saldo'></div>
+            <div class = 'Operations'>
+        
             </div>
         </div>
+        <button id = 't-button'> + </button>
     </div>
+    <dialog class = 'Dialog' open>
+        <form action = '/realizar_transferencia.js' method = 'POST'>
+            <div class = 'Input-Box'>
+                <select name = "name" id = "clientes">
+                    <option value="">Escolha um cliente: </option>
+                </select>                  
+            </div>
+            <input type = 'number' name = 'valor' id = 'valor'>
+            <input id = 'submit' type = 'submit' value = 'submit'>
+        </form>
+    </dialog>
 </body>
 
 </html>
