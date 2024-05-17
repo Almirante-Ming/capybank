@@ -4,7 +4,8 @@ const { Pool } = require('pg')
 
 const clients = new Pool({
   host: 'localhost',
-  database: 'teste2',
+  port: 5432,
+  database: 'clientes',
   user: 'postgres',
   password: 'root',
   max: 20
@@ -69,22 +70,21 @@ async function saveData(data) {
 
 async function validateData(data) {
 
-  let formNome = String(data.nome) 
+  let formCpf = String(data.cpf) 
   let formSenha = String(data.senha)
   let outcome = false
   let error
-
   try {
       
       await clients.connect()
       
-      const query = `SELECT nome, senha FROM dados_clientes;`
+      const query = `SELECT cpf, senha FROM dados_clientes;`
       const result = await clients.query(query)
       
       const clientData = result.rows 
       
       clientData.forEach((client) => {
-          if (client.nome == formNome && client.senha == formSenha) { // Comparação entre dados do formulário com todos os 'nomes' e 'senhas' da tabela
+          if (client.cpf == formCpf && client.senha == formSenha) { // Comparação entre dados do formulário com todos os 'nomes' e 'senhas' da tabela
               outcome = true
           }
       })
