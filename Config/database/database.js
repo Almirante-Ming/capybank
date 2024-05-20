@@ -3,73 +3,49 @@
 const { Pool } = require('pg')
 
 const clients = new Pool({
-  host: 'localhost',
-  port: 5432,
-  database: 'clientes',
-  user: 'postgres',
-  password: 'root',
+  host: '#',
+  port: '#',
+  database: '#',
+  user: '#',
+  password: '#',
   max: 20
 })
 
-async function addTable() {
+async function createTable() {
 
   let isDatabaseConnected = true
 
   try {
-    await clients.connect();
+
+    await clients.connect()
+
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
-        ID serial NOT NULL,
-        nome VARCHAR(50) NOT NULL,
-        CPF VARCHAR(14) NOT NULL UNIQUE, 
-        email VARCHAR(50) NOT NULL UNIQUE,
-        telefone VARCHAR(14) NOT NULL UNIQUE,
-        data_De_Nascimento DATE NOT NULL,
-        senha VARCHAR(25) NOT NULL
-      );`
+      ID serial NOT NULL PRIMARY KEY UNIQUE,
+      nome VARCHAR(50) NOT NULL,
+      CPF VARCHAR(14) NOT NULL UNIQUE, 
+      email VARCHAR(50) NOT NULL UNIQUE,
+      telefone VARCHAR(14) NOT NULL UNIQUE,
+      data_nascimento DATE NOT NULL,
+      senha VARCHAR(25) NOT NULL
+    );`
 
-    await clients.query(query);
-
+    await clients.query(query)
   }
+
   catch (error) {
-    console.error('Erro ao adicionar tabela:', error);
-    isDatabaseConnected = false;
-  } 
+    console.error('Erro ao adicionar tabela:', error)
+    isDatabaseConnected = false
+  }
 
-  return isDatabaseConnected;
+  return isDatabaseConnected
 }
 
-async function saveData(data) {
+async function createColumn(data, custom_query) {
 
-  var formValues = []
-  let outcome = false
-  let error
+  var data_values = []
+  var outcome = 200
+  var error
   
-  Object.keys(data).forEach((item) => {
-    formValues.push(String(data[item])) // Pegando os valores do dicionário, convertendo todos para STRING e armazenando em um array
-  });
-  
-  try {
-      await clients.connect()
-      const query = `
-      INSERT INTO dados_clientes (nome, cpf, email, telefone, data_De_Nascimento, senha)
-      VALUES ($1, $2, $3, $4, $5, $6)
-      `
-      var result = await clients.query(query, formValues) // Recebe a query e depois o array formValues. O indíce de cada array bate com o placeholder do query (primeiro indíce será $1, segundo indíce será $2....)
-      if (result.rowCount > 0) { outcome = true }
-  }
-  
-  catch(err) {
-      console.log(err)
-      error = err.detail 
-  }
-  
-  finally {
-      return { outcome, error }
-  }
-}
-
-async function validateData(data) {
-
   let formCpf = String(data.cpf) 
   let formSenha = String(data.senha)
   let outcome = false
@@ -88,31 +64,45 @@ async function validateData(data) {
               outcome = true
           }
       })
-  
+  }
+
+  catch (err) {
+    outcome = 400
+    error = err
   }
   
-  catch(err) {
-      error = err.details
-  }
-  
-  finally {
+  finally { 
       return { outcome , error }
   }
   
 }
 
-async function acessData(query) {
-  let result
-  try {
-    await clients.connect();   
-    result = await clients.query(query)
+async function readColumn(custom_query) {
 
+  let result
+
+  try {
+    await clients.connect();
+    result = await clients.query(custom_query)
   }
-  catch(err) {
+
+  catch (err) {
+    console.log(err)
   }
+
   finally {
     return result
   }
+
+}
+/*
+async function updateColumn(custom_query) {
+
 }
 
-module.exports = { addTable , saveData, validateData, acessData };
+async function deleteColumn(custom_query) {
+
+}
+*/
+  
+module.exports = { createTable, createColumn, readColumn };

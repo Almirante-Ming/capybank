@@ -34,6 +34,10 @@ form > section {
     border: 1px solid black;
 }
 
+.Input.Invalid  {
+    border: 1px solid red
+}
+
 .Input > input {
     border: none;
     outline: none;
@@ -49,6 +53,11 @@ form > section {
     right: -35px;
 }
 
+section > .Error-Message {
+    color: red;
+    font-size: 15px;
+}
+
 .bx.show {
     color: blue;
 }
@@ -62,38 +71,12 @@ i {
     font-size: 20px;
 }
 
-.Error-Message {
-    font-weight: 100;
-    font-size: 12px;
-    color: red;
-}
-
-.flash {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    gap: 5px;
-    top: 10px;
-    right: 10px;
-    width: 300px;
-    height: 65px;
-}
-
-.flash.error {
-    background: pink;
-    border: 2px solid darkred;
-    animation: fadeOut 8s forwards;
-}
-
-.flash.sucess  {
-    background: lightcyan;
-    border: 2px solid green;
-}
 
 i:hover {
     cursor: pointer;
 }
+
+
 
 @keyframes fadeOut {
     0% { opacity: 1; } /* Opacidade inicial */
