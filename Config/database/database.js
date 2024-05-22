@@ -3,11 +3,11 @@
 const { Pool } = require('pg')
 
 const clients = new Pool({
-  host: '#',
-  port: '#',
-  database: '#',
-  user: '#',
-  password: '#',
+  host: 'localhost',
+  port: '5432',
+  database: 'clientes',
+  user: 'postgres',
+  password: 'root',
   max: 20
 })
 
@@ -45,28 +45,18 @@ async function createColumn(data, custom_query) {
   var data_values = []
   var outcome = 200
   var error
-  
-  let formCpf = String(data.cpf) 
-  let formSenha = String(data.senha)
-  let outcome = false
-  let error
+
+  Object.keys(data).forEach((item) => {
+    data_values.push(String(data[item])) // Pegando os valores do dicionário, convertendo todos para STRING e armazenando em um array
+  })
+
   try {
-      
-      await clients.connect()
-      
-      const query = `SELECT cpf, senha FROM dados_clientes;`
-      const result = await clients.query(query)
-      
-      const clientData = result.rows 
-      
-      clientData.forEach((client) => {
-          if (client.cpf == formCpf && client.senha == formSenha) { // Comparação entre dados do formulário com todos os 'nomes' e 'senhas' da tabela
-              outcome = true
-          }
-      })
+    await clients.connect()
+    await clients.query(custom_query, data_values)
   }
 
   catch (err) {
+    console.log(err)
     outcome = 400
     error = err
   }

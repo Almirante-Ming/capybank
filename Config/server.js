@@ -4,7 +4,6 @@ const { createTable, createColumn, readColumn } = require('./database/database')
 const getBody = require('./scripts/getBody')
 
 let fetchID
-
 const server = http.createServer((req, res) => {
     // Esse bloco realiza operação e volta status 200 ou 400 para API
     if (req.url.includes('Data')) {
@@ -14,16 +13,17 @@ const server = http.createServer((req, res) => {
             data = JSON.parse(data)
 
             if (req.url == '/api/saveData') {
-                const operation = createColumn(data, `INSERT INTO dados_clientes (nome, cpf, email, telefone, data_nascimento, senha) VALUES ($1, $2, $3, $4, $5, $6)`)
+                const operation = createColumn(data, `INSERT INTO dados_clientes (nome, cpf, email, telefone, data_de_nascimento, senha) VALUES ($1, $2, $3, $4, $5, $6)`)
                 operation.then((response) => {
                     res.writeHead(response.outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
                     res.end()
                 })
             }
-        
+            
+            let outcome = 400
             if (req.url == '/api/validateData') {
+
                 const database = readColumn('SELECT * FROM dados_clientes')
-                let outcome = 400
 
                 database.then((db) => {
                     let userData = db.rows
