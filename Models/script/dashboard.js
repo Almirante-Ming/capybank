@@ -14,6 +14,7 @@ async function DOMInteraction() {
         toggleDialogue()
     })
     .catch((err) => {
+        // Serve para redirecionar caso não tenha Login. Não está 100%
         const redirectTo = window.location.href.includes("Models") ? '../Models/login.html' : 'login.html'
         window.location.href = redirectTo
         console.log(err)
