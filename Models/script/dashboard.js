@@ -2,15 +2,28 @@ import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 
 async function DOMInteraction() {
+
+    const body = document.querySelector('.container')
     
-    const user = await getUserData()
     const render = renderData()
+    const data = getUserData()
 
-    render.name(user.nome) // renderiza nome do usuário
-    render.select(user.id) // renderiza botão select
+    .then((user) => {
+        render.name(user.nome)
+        render.select(user.id)
+        toggleDialogue()
+    })
+    .catch((err) => {
+        // Serve para redirecionar caso não tenha Login. Não está 100%
+        const redirectTo = window.location.href.includes("Models") ? '../Models/login.html' : 'login.html'
+        window.location.href = redirectTo
+        console.log(err)
+    })
 
-    toggleDialogue()
+
+
     
+
 }
 
 // Caixa para realizar operações

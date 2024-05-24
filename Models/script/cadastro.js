@@ -3,18 +3,25 @@ import { renderData } from '../modules/renderData.js'
 function validateForm(e) {
 
     const form = document.querySelector('form')
+    const submit = document.querySelector('#submit')
     const bx = document.querySelectorAll('.bx')
     const inputs = document.querySelectorAll('input')
     const inputBox = document.querySelectorAll('.Input')
+    
+    submit.disabled = true
 
     inputs.forEach((input) => {
+
+        let invalidInputs
 
         input.addEventListener('input', (e) => {
             checkErrors(input)
             if (input.id == 'cpf') { cpfMaskOnInput(e) }
             if (input.id == 'telefone') { /*phoneMaskOnInput(e) */ }
+            let validInputs = checkInputs(inputBox)
+            if (validInputs >= 7) { submit.disabled = false } else { submit.disabled = true }
         })
-
+        
         bx.forEach((check) => {
             check.addEventListener('click', () => {
                 check.classList.toggle('show')
@@ -23,26 +30,22 @@ function validateForm(e) {
                 if (input.id == 'confirmar-senha' && check.id == 'p2') { input.type = showPassword }
             })
         })
-
+        
+    
     })
 
-    // Procura algum input inválido antes de enviar ao banco
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-        let invalidInputs
-        inputs.forEach((input) => {
-            checkErrors(input)
-            invalidInputs = checkInputs(inputBox)
-        })
-        if (invalidInputs == 0) { sendFormData(form) }
+        sendFormData(form)
     })
+
 
 }
 
 function checkInputs(inputBox) {
     let counter = 0
     inputBox.forEach((box) => {
-        if (box.className.includes('Invalid')) {
+        if (box.className.includes('Certified')) {
             counter ++
         } 
     })
@@ -130,6 +133,7 @@ function errorOutput(input) {
 
 function showMessage(inputBox, errorSign, errorMessage, text) {
     inputBox.classList.add('Invalid')
+    inputBox.classList.remove('Certified')
     errorSign.style.display = 'block'
     errorMessage.style.display = 'block'
     errorMessage.textContent = text
@@ -137,6 +141,7 @@ function showMessage(inputBox, errorSign, errorMessage, text) {
 
 function hideMessage(inputBox, errorSign, errorMessage, text) {
     inputBox.classList.remove('Invalid')
+    inputBox.classList.add('Certified')
     inputBox.style.border = '1px solid black'
     errorSign.style.display = 'none'
     errorMessage.style.display = 'none'
@@ -219,12 +224,17 @@ function cpfMaskOnInput(event) {
     event.target.previousValue = value;
 }
 
+function clearForm() {
+    const inputs = document.querySelectorAll('input')
+    inputs.forEach((input) => {
+        input.value = ''
+    })
+}
+
 function sendFormData(form) {
 
     const render = renderData()
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
 
         let formData = new FormData(form)
 
@@ -243,16 +253,16 @@ function sendFormData(form) {
         }
 
         fetch('http://localhost:8080/api/saveData', requestOptions).then((response) => {
-            console.log(response.status)
             if (response.status == 200) {
                 render.outcome('Cadastro concluído!')
             }
             else {
                 render.outcome('Algo deu errado..')
             }
+
+            form.reset()
         })
 
-    })
 }
 
 document.addEventListener('DOMContentLoaded', validateForm)
