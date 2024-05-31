@@ -7,7 +7,7 @@ function validateForm(e) {
     const bx = document.querySelectorAll('.bx')
     const inputs = document.querySelectorAll('input')
     const inputBox = document.querySelectorAll('.Input')
-    
+
     submit.disabled = true
 
     inputs.forEach((input) => {
@@ -17,11 +17,11 @@ function validateForm(e) {
         input.addEventListener('input', (e) => {
             checkErrors(input)
             if (input.id == 'cpf') { cpfMaskOnInput(e) }
-            if (input.id == 'telefone') { /*phoneMaskOnInput(e) */ }
+            if (input.id == 'telefone') { phoneMaskOnInput(e) }
             let validInputs = checkInputs(inputBox)
-            if (validInputs >= 7) { submit.disabled = false } else { submit.disabled = true }
+        if (validInputs >= 7) { submit.disabled = false  } else { submit.disabled = true } 
         })
-        
+
         bx.forEach((check) => {
             check.addEventListener('click', () => {
                 check.classList.toggle('show')
@@ -30,8 +30,8 @@ function validateForm(e) {
                 if (input.id == 'confirmar-senha' && check.id == 'p2') { input.type = showPassword }
             })
         })
-        
-    
+
+
     })
 
     form.addEventListener('submit', (e) => {
@@ -46,8 +46,8 @@ function checkInputs(inputBox) {
     let counter = 0
     inputBox.forEach((box) => {
         if (box.className.includes('Certified')) {
-            counter ++
-        } 
+            counter++
+        }
     })
     return counter
 }
@@ -224,6 +224,35 @@ function cpfMaskOnInput(event) {
     event.target.previousValue = value;
 }
 
+function phoneMaskOnInput(event) {
+
+    var value = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    var caret = event.target.selectionStart;
+    var previousValue = event.target.previousValue || '';
+
+    if (value.length > 11) {
+        value = value.substring(0, 11);
+    }
+
+    if (value.length > 2) {
+        value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
+        if (caret > 2) caret += 2;
+    }
+
+    if (value.length > 9) {
+        value = value.substring(0, 9) + '-' + value.substring(9);
+        if (caret > 9) caret += 1;
+    }
+
+    event.target.value = value;
+    event.target.selectionStart = caret;
+    event.target.selectionEnd = caret;
+    event.target.previousValue = value;
+}
+
+
+
+
 function clearForm() {
     const inputs = document.querySelectorAll('input')
     inputs.forEach((input) => {
@@ -236,33 +265,29 @@ function sendFormData(form) {
     const render = renderData()
 
 
-        let formData = new FormData(form)
+    let formData = new FormData(form)
 
-        let userData = {
-            'nome': formData.get('nome'),
-            'cpf': formData.get('cpf'),
-            'email': formData.get('email'),
-            'telefone': formData.get('telefone'),
-            'data_nascimento': formData.get('data_nascimento'),
-            'senha': formData.get('senha'),
-        }
+    let userData = {
+        'nome': formData.get('nome'),
+        'cpf': formData.get('cpf'),
+        'email': formData.get('email'),
+        'telefone': formData.get('telefone'),
+        'data_nascimento': formData.get('data_nascimento'),
+        'senha': formData.get('senha'),
+    }
 
-        let requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(userData)
-        }
+    let requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(userData)
+    }
 
-        fetch('http://localhost:8080/api/saveData', requestOptions).then((response) => {
-            if (response.status == 200) {
-                render.outcome('Cadastro concluído!')
-            }
-            else {
-                render.outcome('Algo deu errado..')
-            }
-
-            form.reset()
-        })
+    fetch('http://localhost:8080/saveData', requestOptions).then(async (response) => {
+        const result = await response.json()
+        render.outcome(result.message)
+        form.reset()
+    })
 
 }
 
 document.addEventListener('DOMContentLoaded', validateForm)
+ 

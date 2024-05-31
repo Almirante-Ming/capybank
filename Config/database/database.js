@@ -8,7 +8,7 @@ const clients = new Pool({
   database: 'clientes',
   user: 'postgres',
   password: 'root',
-  max: 20
+  max: 100
 })
 
 async function createTable() {
@@ -43,7 +43,7 @@ async function createTable() {
 async function createColumn(data, custom_query) {
 
   var data_values = []
-  var outcome = 200
+  var outcome = 400
   var error
 
   Object.keys(data).forEach((item) => {
@@ -52,15 +52,13 @@ async function createColumn(data, custom_query) {
 
   try {
     await clients.connect()
-    await clients.query(custom_query, data_values)
+    const result = await clients.query(custom_query, data_values)
+    console.log(result, result.rows)
+    if (result.rowCount > 0) { outcome = 200 }
   }
-
   catch (err) {
-    console.log(err)
-    outcome = 400
     error = err
   }
-  
   finally { 
       return { outcome , error }
   }

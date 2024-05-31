@@ -106,13 +106,14 @@ function sendFormData() {
             body: JSON.stringify(userData)
         }
 
-        fetch('http://localhost:8080/api/validateData', requestOptions).then((response) => {
-            if (response.status == 200) { 
-                window.location.href = 'dashboard.html'
-            } 
-            else { 
-                render.outcome('ID ou senha incorretos!') 
-            } 
+        fetch('http://localhost:8080/validateData', requestOptions).then( async (response) => {
+            if (response.status == 200) {
+                window.location.href = window.location.href.includes('Models') ? '../Models/dashboard.html' : '/dashboard.html'
+            }
+            else {
+                const error = await response.json()
+                render.outcome(error.message)
+            }
         })
         
     })

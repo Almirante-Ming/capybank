@@ -16,10 +16,8 @@ export async function getUserData() {
         
         const response = await fetch('http://localhost:8080/api/user')
         const database = await response.json()
-
-        for (const user of database) {
-            return new Cliente(user.id, user.nome, user.cpf, user.email, user.telefone, user.senha)
-        }
+        return new Cliente(database.id, database.nome, database.cpf, database.email, database.telefone, database.senha)
+    
     }
 
     const userData = await getUser()

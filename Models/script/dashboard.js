@@ -10,9 +10,10 @@ async function DOMInteraction() {
 
     .then((user) => {
         render.name(user.nome)
-        render.select(user.id)
+        //render.select(user.id)
         toggleDialogue()
     })
+
     .catch((err) => {
         // Serve para redirecionar caso não tenha Login. Não está 100%
         const redirectTo = window.location.href.includes("Models") ? '../Models/login.html' : 'login.html'
