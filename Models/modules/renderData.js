@@ -35,12 +35,15 @@ export  function renderData() {
 
     // OUTCOMES
     const outcome = (data) => {
-        let outcome = document.querySelector('#outcome')
+        let outcome = document.querySelector('.Outcome')
+        toggleActiveClass(outcome)
         outcome.textContent = data
     }
 
     //CLIENTES 
+    // Essa função abaixo precisa ser quebrada em partes menores, caso continue sendo utilizada no projeto
     const select = async (user) => {
+        /*
         const select = document.querySelector('select')
         const response = await fetch('http://localhost:8080/api/users')
         const database = await response.json()
@@ -53,14 +56,18 @@ export  function renderData() {
                 select.append(option)
             }
         })
-        
-
+        */
     }
   
-
     return { name , cpf, email , telefone, senha, saldo, outcome, select }
 }
 
 
 
-
+function toggleActiveClass(outcome) {
+    if (outcome.classList.contains('Active')) {
+      outcome.classList.remove('Active')
+      void outcome.offsetWidth
+    }
+    outcome.classList.add('Active')
+  }
