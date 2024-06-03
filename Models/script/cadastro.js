@@ -1,25 +1,46 @@
 import { renderData } from '../modules/renderData.js'
+import { DataFormatter } from '../modules/DataFormatter.js'
+// Relação entre o ID dos inputs e a posição deles no array de .Inputs 
 
-function validateForm(e) {
+const input_relation = [
+    { id: "nome", position: 0, minimum: 3, requiredString: [], mustMatch: null, regex: /(\w)\1{2,}/ },
+    { id: "cpf", position: 1, minimum: 14, requiredString: [], mustMatch: null, regex: null},
+    { id: "email", position: 2, minimum: 3, requiredString: [".com", "@"], mustMatch: null, regex: null },
+    { id: "telefone", position: 3, minimum: 14, requiredString: [], mustMatch: null, regex: null },
+    { id: "data_nascimento", position: 4, minimum: 10, requiredString: [], mustMatch: null, regex: null },
+    { id: "senha", position: 5, minimum: 6, requiredString: [], mustMatch: 'confirmar-senha', regex: null },
+    { id: "confirmar-senha", position: 6, minimum: 6, requiredString: [], mustMatch: 'senha', regex: null }
+]
 
-    const form = document.querySelector('form')
+// Função principal
+function validateForm() {
+
+    const Inputs = document.querySelectorAll('.Input')
     const submit = document.querySelector('#submit')
     const bx = document.querySelectorAll('.bx')
-    const inputs = document.querySelectorAll('input')
-    const inputBox = document.querySelectorAll('.Input')
 
-    submit.disabled = true
+    const format = DataFormatter()
+    toggleSubmit(submit, Inputs)
+    
+    Inputs.forEach((box) => {
 
-    inputs.forEach((input) => {
-
-        let invalidInputs
-
+        const input = box.firstElementChild 
+        // Verifica erros em todos os inputs
         input.addEventListener('input', (e) => {
-            checkErrors(input)
-            if (input.id == 'cpf') { cpfMaskOnInput(e) }
-            if (input.id == 'telefone') { phoneMaskOnInput(e) }
-            let validInputs = checkInputs(inputBox)
-        if (validInputs >= 7) { submit.disabled = false  } else { submit.disabled = true } 
+            checkRelation(input)
+            toggleSubmit(submit, Inputs)
+            if (input.id == 'cpf') { format.CPF(e) }
+            if (input.id == 'telefone') { format.phone(e) }
+        })
+
+        input.addEventListener('blur', () => {
+            checkRelation(input)
+            toggleSubmit(submit, Inputs)
+        })
+
+        input.addEventListener('focus', () => {
+            checkRelation(input)            
+            toggleSubmit(submit, Inputs)
         })
 
         bx.forEach((check) => {
@@ -30,241 +51,98 @@ function validateForm(e) {
                 if (input.id == 'confirmar-senha' && check.id == 'p2') { input.type = showPassword }
             })
         })
-
-
+    
     })
 
-    form.addEventListener('submit', (e) => {
+    submit.addEventListener('click', (e) => {
         e.preventDefault()
+        const form = document.querySelector('form')
         sendFormData(form)
     })
 
-
 }
 
-function checkInputs(inputBox) {
-    let counter = 0
-    inputBox.forEach((box) => {
-        if (box.className.includes('Certified')) {
-            counter++
+// Procura se o input digitado bate com algum da relação
+function checkRelation(input) {
+    input_relation.forEach((relation) => {
+        if (relation.id == input.id) {
+            lookForErrors(relation, input)
         }
     })
-    return counter
 }
 
-function checkErrors(input) {
+// Procura os erros com base na relação
+function lookForErrors(relation, input) {
 
-    const checking = errorOutput(input)
-    // Campo 0
-    if (input.id == 'nome') {
-        checking.isLengthSmallerThan(5, 0)
-    }
-    // Campo 1
-    if (input.id == 'cpf') {
-        checking.isLengthSmallerThan(14, 1)
-    }
-    // Campo 2
-    if (input.id == 'email') {
-        checking.isWordMissing('.com', 2)
-    }
-    // Campo 3
-    if (input.id == 'telefone') {
-        checking.isLengthSmallerThan('11', 3)
-    }
-    //Campo 4
-    if (input.id == 'data') {
-        checking.isEmpty(4)
-    }
-    // Campo 5
-    if (input.id == 'senha') {
-        checking.isLengthSmallerThan('6', 5)
-    }
-    // Campo 6
-    if (input.id == 'confirmar-senha') {
-        let password = document.querySelector('#senha')
-        checking.arePasswordsMatching(password.value, input.value, 6)
+    const box = input.parentElement
+    const errorPanel = errorController()
+    const matchingInput = document.querySelector(`#${relation.mustMatch}`)
+
+    if (input.value.length < relation.minimum) {
+        errorPanel.showError(box, relation, `${input.id} precisa ter no mínimo ${relation.minimum} caracteres!`)
     }
 
+    else if (!relation.requiredString.every(str => input.value.includes(str))) {
+        errorPanel.showError(box, relation, `${input.id} precisa incluir ${relation.requiredString.join(" ou ")} em seu corpo!`)
+    }
+
+    else if (relation.mustMatch && matchingInput.value !== input.value) {
+        errorPanel.showError(box, relation, `Os campos de senha não coincidem!`)
+    }
+
+    else if (relation.regex !== null && relation.regex.test(input.value)) {
+        errorPanel.showError(box, relation, `Campo não pode possuir caracteres consecutivos!`)
+    }
+
+    else {
+        errorPanel.hideError(box, relation)
+    }
 }
 
-function errorOutput(input) {
+// Painel de erro, exibe a mensagem e deixa o campo inválido. Também esconde o erro
+function errorController() {
 
-    const errorMessage = document.querySelectorAll('.Error-Message')
-    const errorSign = document.querySelectorAll('.Error-Sign')
-    const inputBox = document.querySelectorAll('.Input')
+    const message = document.querySelectorAll('.Error-Message')
 
-    const isLengthSmallerThan = (value, index) => {
-        if (input.value.length < value) {
-            showMessage(inputBox[index], errorSign[index], errorMessage[index], `${input.id} precisa ter mais que ${value} caracteres!`)
-        }
-        else {
-            hideMessage(inputBox[index], errorSign[index], errorMessage[index], '')
-        }
+    const showError = (box, relation, msg) => {
+        message[relation.position].textContent = msg
+        box.classList.add('Invalid')
     }
 
-    const isWordMissing = (string, index) => {
-        if (!(input.value.includes(string))) {
-            showMessage(inputBox[index], errorSign[index], errorMessage[index], `${input.id} precisa incluir ${string} em seu corpo`)
-        }
-        else {
-            hideMessage(inputBox[index], errorSign[index], errorMessage[index], '')
-        }
+    const hideError = (box, relation) => {
+        message[relation.position].textContent = ''
+        box.classList.remove('Invalid')
     }
 
-    const arePasswordsMatching = (p1, p2, index) => {
-        if (p1 != p2) {
-            showMessage(inputBox[index], errorSign[index], errorMessage[index], `Os campos de senha não coincidem!`)
-        }
-        else {
-            hideMessage(inputBox[index], errorSign[index], errorMessage[index], '')
-        }
-    }
+    return { showError, hideError }
+}
 
-    const isEmpty = (index) => {
+// Ativa e desativa o submit com base na validação dos inputs && se todos estão preenchidos
+function toggleSubmit(submit, Inputs) {
+
+    submit.disabled = true
+    var emptyInputs = 0
+    var InvalidInputs = 0
+
+    // Procura algum input vazio ou inválido 
+    Inputs.forEach((box) => {
+        const input = box.firstElementChild
         if (input.value.length == 0) {
-            showMessage(inputBox[index], errorSign[index], errorMessage[index], `O campo não pode ficar vazio!`)
+            emptyInputs += 1
         }
-        else {
-            hideMessage(inputBox[index], errorSign[index], errorMessage[index], '')
+        if (box.className.includes('Invalid')) {
+            InvalidInputs += 1
         }
-    }
-    return { isLengthSmallerThan, isWordMissing, arePasswordsMatching, isEmpty }
-}
-
-function showMessage(inputBox, errorSign, errorMessage, text) {
-    inputBox.classList.add('Invalid')
-    inputBox.classList.remove('Certified')
-    errorSign.style.display = 'block'
-    errorMessage.style.display = 'block'
-    errorMessage.textContent = text
-}
-
-function hideMessage(inputBox, errorSign, errorMessage, text) {
-    inputBox.classList.remove('Invalid')
-    inputBox.classList.add('Certified')
-    inputBox.style.border = '1px solid black'
-    errorSign.style.display = 'none'
-    errorMessage.style.display = 'none'
-    errorMessage.textContent = text
-}
-
-function cpfMaskOnInput(event) {
-
-    var value = event.target.value;
-    var caret = event.target.selectionStart;
-    var previousValue = event.target.previousValue;
-
-    if (value + "-" === previousValue || value + "." === previousValue) {
-        if (caret === 3 && value.substring(3, 4) !== ".") {
-            var prefix = value.substring(0, 2);
-            var suffix = value.substring(3);
-            value = prefix + suffix;
-            caret--;
-        } else if (caret === 7 && value.substring(7, 8) !== ".") {
-            var prefix = value.substring(0, 6);
-            var suffix = value.substring(7);
-            value = prefix + suffix;
-            caret--;
-        } else if (caret === 11 && value.substring(11, 12) !== "-") {
-            var prefix = value.substring(0, 10);
-            var suffix = value.substring(11);
-            value = prefix + suffix;
-            caret--;
-        }
-    }
-
-    for (var i = value.length - 1; i >= 0; i--) {
-        var char = value[i];
-        if (char >= "0" && char <= "9") {
-            continue;
-        }
-
-        var prefix = value.substring(0, i);
-        var suffix = value.substring(i + 1);
-        value = prefix + suffix;
-        if (caret > i) {
-            caret--;
-        }
-    }
-
-    if (value.length > 11) {
-        value = value.substring(0, 11);
-    }
-
-    if (value.length >= 3) {
-        var prefix = value.substring(0, 3);
-        var suffix = value.substring(3);
-        value = prefix + "." + suffix;
-        if (caret >= 3) {
-            caret++;
-        }
-    }
-
-    if (value.length >= 7) {
-        var prefix = value.substring(0, 7);
-        var suffix = value.substring(7);
-        value = prefix + "." + suffix;
-        if (caret >= 7) {
-            caret++;
-        }
-    }
-
-    if (value.length >= 11) {
-        var prefix = value.substring(0, 11);
-        var suffix = value.substring(11);
-        value = prefix + "-" + suffix;
-        if (caret >= 11) {
-            caret++;
-        }
-    }
-
-    event.target.value = value;
-    event.target.selectionStart = caret;
-    event.target.selectionEnd = caret;
-    event.target.previousValue = value;
-}
-
-function phoneMaskOnInput(event) {
-
-    var value = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-    var caret = event.target.selectionStart;
-    var previousValue = event.target.previousValue || '';
-
-    if (value.length > 11) {
-        value = value.substring(0, 11);
-    }
-
-    if (value.length > 2) {
-        value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
-        if (caret > 2) caret += 2;
-    }
-
-    if (value.length > 9) {
-        value = value.substring(0, 9) + '-' + value.substring(9);
-        if (caret > 9) caret += 1;
-    }
-
-    event.target.value = value;
-    event.target.selectionStart = caret;
-    event.target.selectionEnd = caret;
-    event.target.previousValue = value;
-}
-
-
-
-
-function clearForm() {
-    const inputs = document.querySelectorAll('input')
-    inputs.forEach((input) => {
-        input.value = ''
     })
+
+    // Ativa o botão se todos os inputs estiverem preenchidos e válidos
+    if (emptyInputs == 0 && InvalidInputs == 0) { submit.disabled = false }
 }
 
+// Envia as informações para servidor
 function sendFormData(form) {
 
     const render = renderData()
-
-
     let formData = new FormData(form)
 
     let userData = {
@@ -290,4 +168,3 @@ function sendFormData(form) {
 }
 
 document.addEventListener('DOMContentLoaded', validateForm)
- 

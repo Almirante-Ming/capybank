@@ -53,7 +53,6 @@ async function createColumn(data, custom_query) {
   try {
     await clients.connect()
     const result = await clients.query(custom_query, data_values)
-    console.log(result, result.rows)
     if (result.rowCount > 0) { outcome = 200 }
   }
   catch (err) {
