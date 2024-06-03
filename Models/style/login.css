@@ -113,11 +113,13 @@
     z-index: 1;
     display: flex;
 }
-
-#outcome {
+/* temporário */
+.Outcome {
     font-weight: bolder;
-    margin-top: 25px;
     text-align: center;
     background: black;
     color: red;
+    position: absolute;
+    top: 70%;
+    left: 7.5%;
 }

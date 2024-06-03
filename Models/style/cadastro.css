@@ -76,7 +76,23 @@ i:hover {
     cursor: pointer;
 }
 
+.Outcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 50px;
+    width: 300px;
+    opacity: 0;
+    font-weight: bolder;
+    border: 2px solid black;
+}
 
+.Active {
+    animation: fadeOut 10s;
+}
 
 @keyframes fadeOut {
     0% { opacity: 1; } /* Opacidade inicial */
