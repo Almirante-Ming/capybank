@@ -1,3 +1,5 @@
+// FORMATA CPF E TELEFONE
+
 export function DataFormatter() {
 
     const CPF = (e) => {

@@ -76,7 +76,7 @@ i:hover {
     cursor: pointer;
 }
 
-.Outcome {
+#outcome {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -56,6 +56,7 @@ async function createColumn(data, custom_query) {
     if (result.rowCount > 0) { outcome = 200 }
   }
   catch (err) {
+    console.log(err)
     error = err
   }
   finally { 
@@ -82,14 +83,31 @@ async function readColumn(custom_query) {
   }
 
 }
-/*
-async function updateColumn(custom_query) {
 
+async function updateColumn(custom_query, data) {
+
+    let outcome = 400
+    let error
+
+    try {
+      await clients.connect()
+      let result = await clients.query(custom_query, data)
+      if (result.rowCount > 0) { outcome = 200}
+      
+    }
+    catch(err) {
+      error = err
+      console.log(err)
+    }
+    finally {
+      return {outcome, error }
+    }
 }
 
+/*
 async function deleteColumn(custom_query) {
 
 }
 */
   
-module.exports = { createTable, createColumn, readColumn };
+module.exports = { createTable, createColumn, readColumn, updateColumn };
