@@ -19,4 +19,4 @@ function getMessage_Detail(detail, messages) {
 }
 
 
-module.exports = getError
+module.exports = { getError }

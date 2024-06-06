@@ -8,4 +8,4 @@ function getBody(req) {
 }
 
 
-module.exports = getBody
+module.exports = { getBody }

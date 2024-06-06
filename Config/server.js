@@ -1,9 +1,9 @@
 const http = require('http')
 
-const { createTable, createColumn, readColumn } = require('./database/database')
-const getBody = require('./scripts/getBody')
-const getError = require('./scripts/getError')
-
+const { createTable, readColumn } = require('./database/db')
+const { getBody } = require('./scripts/getBody')
+const { getResponse } = require("./scripts/getResponse")
+const { getError } = require('./scripts/getError')
 let fetchID
 
 const server = http.createServer( async (req, res) => {
@@ -12,28 +12,38 @@ const server = http.createServer( async (req, res) => {
 
         let body = await getBody(req).catch((err) => console.log(err)) 
         let data = JSON.parse(body)
+        
+        let response = getResponse()
 
         if (req.url == '/saveData') {
-            saveData(data, res)
+            response.saveData(data, res)
         }
         
         else if (req.url == '/validateData') {
-            validateData(data, res)
+            const id = await response.validateData(data, res)
+            fetchID = () =>  id 
         }
+
+        else if (req.url == '/updateData' && typeof(fetchID) == 'function') {
+            response.updateData(data, res, fetchID)
+        }
+
         
     }
-         
-    if (typeof(fetchID) == 'function' && req.url.includes('api')) {
-        
+
+    if (typeof(fetchID) == 'function' && (req.url.includes('api'))) {
+
         let id = fetchID()
         let query 
         
         if (req.url == '/api/users') {
             query = 'SELECT id, nome FROM dados_clientes'
         }
+
         else if (req.url == '/api/user') {
             query = `SELECT * FROM dados_clientes WHERE id = ${id}`
         }
+  
         
         const database = await readColumn(query)
         const userData = database.rows[0]
@@ -46,43 +56,7 @@ const server = http.createServer( async (req, res) => {
 
 })
 
-async function saveData(data, res) {
-    const operation = await createColumn(data, `INSERT INTO dados_clientes (nome, cpf, email, telefone, data_de_nascimento, senha) VALUES ($1, $2, $3, $4, $5, $6)`).catch((err) => { console.log(err) } )
-    const response = operation.outcome == 400 ? getError(operation.error) : 'Cadastro concluído com sucesso!'
-    res.writeHead(operation.outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
-    res.end(JSON.stringify({
-        message: response
-    }))
-}
 
-async function validateData(data, res) {
-    
-    const database = await readColumn('SELECT id, cpf, senha FROM dados_clientes').catch((err) => { console.log(err) })
-    const userData = database.rows
-    let is_user_found 
-    
-    for (i=0; i < userData.length; i++) {
-        const user = userData[i]
-
-        if (user.cpf == data.cpf && user.senha == data.senha) {
-            fetchID = () => user.id
-            is_user_found = true
-            break
-        }
-
-    }
-    
-    outcome = (is_user_found) ?  200 : 400
-    const response = (is_user_found) ? '' : 'ID ou senha inválidos!'
-
-    res.writeHead(outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
-
-    res.end(JSON.stringify({
-        message: response
-    }))
-
-    
-}
 
 createTable().then(isConnected => {
 
