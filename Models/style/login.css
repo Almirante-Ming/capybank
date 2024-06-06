@@ -128,7 +128,7 @@
     display: flex;
 }
 /* temporário */
-.Outcome {
+#outcome {
     font-weight: bolder;
     text-align: center;
     background: black;
