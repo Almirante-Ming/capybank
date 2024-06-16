@@ -56,6 +56,7 @@ function sendFormData(form) {
         }
         else {
             toggleSubmit('activate')
+            render.outcome(result.message)
         }
 
     }).catch((err) => {
