@@ -1,9 +1,10 @@
 const http = require('http')
 
 const { createTable, readColumn } = require('./database/db')
+
 const { getBody } = require('./scripts/getBody')
 const { getResponse } = require("./scripts/getResponse")
-const { getError } = require('./scripts/getError')
+
 let fetchID
 
 const server = http.createServer( async (req, res) => {
@@ -12,7 +13,6 @@ const server = http.createServer( async (req, res) => {
 
         let body = await getBody(req).catch((err) => console.log(err)) 
         let data = JSON.parse(body)
-        
         let response = getResponse()
 
         if (req.url == '/saveData') {
@@ -21,14 +21,17 @@ const server = http.createServer( async (req, res) => {
         
         else if (req.url == '/validateData') {
             const id = await response.validateData(data, res)
-            fetchID = () =>  id 
+            fetchID = () =>  { return id }
         }
 
-        else if (req.url == '/updateData' && typeof(fetchID) == 'function') {
+        else if (req.url == '/updateData') {
             response.updateData(data, res, fetchID)
         }
 
-        
+        else if (req.url == '/sendData') {
+            response.sendData(data, res)
+        }
+ 
     }
 
     if (typeof(fetchID) == 'function' && (req.url.includes('api'))) {
@@ -43,8 +46,7 @@ const server = http.createServer( async (req, res) => {
         else if (req.url == '/api/user') {
             query = `SELECT * FROM dados_clientes WHERE id = ${id}`
         }
-  
-        
+         
         const database = await readColumn(query)
         const userData = database.rows[0]
 
@@ -55,8 +57,6 @@ const server = http.createServer( async (req, res) => {
     
 
 })
-
-
 
 createTable().then(isConnected => {
 

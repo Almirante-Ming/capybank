@@ -38,7 +38,6 @@ export function DataValidator() {
 
 
 function lookForErrors(relation, input) {
-
     const box = input.parentElement
     const errorPanel = errorController()
 
@@ -82,6 +81,3 @@ function errorController() {
 
     return { showError, hideError }
 }
-
-
-

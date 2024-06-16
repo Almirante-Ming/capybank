@@ -51,8 +51,6 @@ function sendFormData() {
             body: JSON.stringify(userData)
         }
 
-        console.log(requestOptions.body)
-
         fetch('http://localhost:8080/validateData', requestOptions).then( async (response) => {
             if (response.status == 200) {
                 window.location.href = window.location.href.includes('Models') ? '../Models/dashboard.html' : '/dashboard.html'
@@ -68,4 +66,12 @@ function sendFormData() {
       
 }
 
+function forgetPWD() {
+    const forgot_pwd = document.querySelector("#forgot-pwd")
+    forgot_pwd.addEventListener('click', () => {
+        window.location.href = "./esqueci-senha.html"
+    })
+}
+
 document.addEventListener('DOMContentLoaded', validateForm)
+document.addEventListener('DOMContentLoaded', forgetPWD)
