@@ -1,16 +1,32 @@
 import {renderData} from '../modules/renderData.js'
 import { DataFormatter } from '../modules/DataFormatter.js'
+import { DataValidator } from '../modules/DataValidator.js'
+
+const relation = [
+    { id: "cpf", position: 0, minimum: 14, requiredString: [], mustMatch: null, regex: null},
+    { id: "senha", position: 1, minimum: 6, requiredString: [], mustMatch: null, regex: null }
+]
 
 function validateForm() {
 
-    const inputs = document.querySelectorAll('input')
+    const Inputs = document.querySelectorAll('.Input')
+    const submit = document.querySelector('#submit')
+    
     const format = DataFormatter()
+    const validate = DataValidator()
 
-    inputs.forEach((input) => {
+    validate.toggleSubmit(submit, Inputs)
+
+    Inputs.forEach((box) => {
+        let input = box.firstElementChild
+
         input.addEventListener('input', (e) => {
+            validate.checkRelation(input, relation)
+            validate.toggleSubmit(submit, Inputs)
             if (input.id == 'cpf') { format.CPF(e) }
         })
     })
+
 
     sendFormData()
 }
@@ -42,6 +58,7 @@ function sendFormData() {
             else {
                 const error = await response.json()
                 render.outcome(error.message)
+                form.reset()
             }
         })
         
@@ -49,4 +66,12 @@ function sendFormData() {
       
 }
 
+function forgetPWD() {
+    const forgot_pwd = document.querySelector("#forgot-pwd")
+    forgot_pwd.addEventListener('click', () => {
+        window.location.href = "./esqueci-senha.html"
+    })
+}
+
 document.addEventListener('DOMContentLoaded', validateForm)
+document.addEventListener('DOMContentLoaded', forgetPWD)

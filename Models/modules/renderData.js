@@ -30,12 +30,12 @@ export  function renderData() {
         let saldo = document.querySelector('#saldo')
         saldo.textContent = data
     }
-
+    
     //CAPYBANK DATA
 
     // OUTCOMES
     const outcome = (data) => {
-        let outcome = document.querySelector('.Outcome')
+        let outcome = document.querySelector('#outcome')
         toggleActiveClass(outcome)
         outcome.textContent = data
     }
