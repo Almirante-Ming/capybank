@@ -31,6 +31,10 @@ const server = http.createServer( async (req, res) => {
         else if (req.url == '/sendData') {
             response.sendData(data, res)
         }
+
+        else if (req.url == '/deleteData') {
+            response.deleteData(data, res)
+        }
  
     }
 
