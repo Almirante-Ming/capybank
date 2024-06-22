@@ -1,34 +1,49 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { DataValidator } from '../modules/DataValidator.js'
+import { ProtectRoute } from '../modules/ProtectRoute.js'
 
 async function renderUserData() {
-
-    const user = await getUserData()
+    
     const render = renderData()
-    const button = document.querySelectorAll('button')
+    const data = await getUserData()
 
-    render.name("Nome: " + user.nome)
-    render.cpf("CPF: " + user.cpf)
-    render.telefone("Telefone: " + user.telefone)
-    render.email("Email: " + user.email)
-    render.senha("Senha: " + user.senha)
-    render.name("Nome: " + user.nome)
+    .then((user) => {
+        
+        render.name("Nome: " + user.nome)
+        render.cpf("CPF: " + user.cpf)
+        render.telefone("Telefone: " + user.telefone)
+        render.email("Email: " + user.email)
+        render.senha("Senha: " + user.senha)
+        render.name("Nome: " + user.nome)
+        
+        openDialogue()
+        deleteAccount(user.id)
+    })
 
-    button.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            openDialogue(btn)
-        })
+    .catch((err) => {
+        ProtectRoute()
+        console.log(err)
     })
 
 }
 
-function openDialogue(btn) {
+function openDialogue() {
+
     const dialog = document.querySelector('.Dialog')
-    if (!(dialog.className.includes('Open'))) {
-        dialog.classList.add('Open')
-    }
-    renderDialogue(dialog, btn.id)
+    const button = document.querySelectorAll('.Alterate')
+    console.log(button)
+
+    button.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (!(dialog.className.includes('Open'))) {
+                dialog.classList.add('Open')
+            }
+            renderDialogue(dialog, btn.id)
+        })
+    })
+
+
 }
 
 function renderDialogue(dialog, id) {
@@ -142,6 +157,51 @@ function sendFormData(form, id) {
     })
  
     
-}   
+}  
+
+function deleteAccount(id) {
+
+    const a = document.querySelector('a')
+    const dialogue = document.querySelector('.Delete_Acc')
+
+    function openDialogue() {
+        a.addEventListener('click', (e) => {
+            e.preventDefault()
+            dialogue.classList.toggle('Open')
+        })    
+    }
+
+    function closeDialogue() {
+        dialogue.classList.toggle('Open')
+    }
+
+    function getAnswer() {
+        const yes = document.querySelector('#yes')
+        const no = document.querySelector('#no')
+        yes.addEventListener('click', () => {startDelete()})
+        no.addEventListener('click', () => {closeDialogue()})
+    }
+
+    function startDelete() {
+
+        let userData = { 'user_id': id }
+        let requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        }
+
+        fetch('http://localhost:8080/deleteData', requestOptions).then(async(response) => {
+            // Por algum motivo, isso aqui não tá fazendo nada. Mas a conta é deletada quando o status é 200
+            // Só dar F5
+            if (response.status == 200) {
+                alert('Conta deletada')
+                ProtectRoute()
+            }
+        })
+    }
+
+    openDialogue()
+    getAnswer()
+}
 
 document.addEventListener('DOMContentLoaded', renderUserData)
