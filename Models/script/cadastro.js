@@ -14,7 +14,6 @@ const relation = [
     { id: "confirmar-senha", position: 6, minimum: 6, requiredString: [], mustMatch: 'senha', regex: null }
 ]
 
-// Função principal
 function validateForm() {
 
     const Inputs = document.querySelectorAll('.Input')
@@ -64,11 +63,6 @@ function validateForm() {
     })
 
 }
-
-
-
-// Ativa e desativa o submit com base na validação dos inputs && se todos estão preenchidos
-
 
 // Envia as informações para servidor
 function sendFormData(form) {
