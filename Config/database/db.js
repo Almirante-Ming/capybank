@@ -47,7 +47,7 @@ async function createColumn(data, custom_query) {
   var error
 
   Object.keys(data).forEach((item) => {
-    data_values.push(String(data[item])) // Pegando os valores do dicionário, convertendo todos para STRING e armazenando em um array
+    data_values.push(String(data[item]))
   })
 
   try {
@@ -55,14 +55,16 @@ async function createColumn(data, custom_query) {
     const result = await clients.query(custom_query, data_values)
     if (result.rowCount > 0) { outcome = 200 }
   }
+
   catch (err) {
     console.log(err)
     error = err
   }
-  finally { 
-      return { outcome , error }
+
+  finally {
+    return { outcome, error }
   }
-  
+
 }
 
 async function readColumn(custom_query) {
@@ -85,39 +87,27 @@ async function readColumn(custom_query) {
 }
 
 async function updateColumn(custom_query, data) {
-    let outcome = 400
-    let error
-    try {
-      await clients.connect()
-      let result = await clients.query(custom_query, data)
-      if (result.rowCount > 0) { outcome = 200}
-      
-    }
-    catch(err) {
-      error = err
-      console.log(err)
-    }
-    finally {
-      return {outcome, error }
-    }
-}
 
+  let outcome = 400
+  let error
 
-async function deleteColumn(custom_query, data) {
-    let outcome = 400
-    try {
-      await clients.connect()
-      let result = await clients.query(custom_query, data)
-      if (result.rowCount > 0) { outcome = 200}
-    }
-    catch(err) {
-      error = err
-      console.log(err)
-    }
-    finally {
-      return { outcome, error }
-    }
-}
+  try {
+    await clients.connect()
+    let result = await clients.query(custom_query, data)
+    if (result.rowCount > 0) { outcome = 200 }
+  }
 
+  catch (err) {
+    error = err
+    console.log(err)
+  }
+
+  finally {
+    return { outcome, error }
+  }
   
-module.exports = { createTable, createColumn, readColumn, updateColumn, deleteColumn };
+}
+
+
+
+module.exports = { createTable, createColumn, readColumn, updateColumn };

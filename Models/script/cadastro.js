@@ -1,6 +1,6 @@
 import { renderData } from '../modules/renderData.js'
-import { DataFormatter } from '../modules/DataFormatter.js'
-import { DataValidator } from '../modules/DataValidator.js'
+import { DataFormatter } from '../modules/formDealer.js'
+import { DataValidator } from '../modules/formDealer.js'
 
 // Relação entre o ID dos inputs e a posição deles no array de .Inputs 
 

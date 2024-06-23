@@ -1,6 +1,6 @@
 import {renderData} from '../modules/renderData.js'
-import { DataFormatter } from '../modules/DataFormatter.js'
-import { DataValidator } from '../modules/DataValidator.js'
+import { DataFormatter } from '../modules/formDealer.js'
+import { DataValidator } from '../modules/formDealer.js'
 
 const relation = [
     { id: "cpf", position: 0, minimum: 14, requiredString: [], mustMatch: null, regex: null},

@@ -1,5 +1,5 @@
 import { renderData } from "../modules/renderData.js"
-import { DataValidator } from "../modules/DataValidator.js"
+import { DataValidator } from "../modules/formDealer.js"
 
 const relation = [
     { id: "email", position: 0, minimum: 3, requiredString: [".com", "@"], mustMatch: null, regex: null},
@@ -45,18 +45,21 @@ function sendFormData(form) {
         method: 'POST',
         body: JSON.stringify(userData)
     }
+
     fetch('http://localhost:8080/sendData', requestOptions).then(async (check_email) => {
 
         toggleLoader('deact')
         const result = await check_email.json()
 
+        render.outcome(result.message)
+
         if (check_email.status == 200) { 
             toggleForm('deact')
-            render.outcome(result.message)
+            return 
         }
-        else {
-            toggleSubmit('activate')
-        }
+      
+        toggleSubmit('activate')
+        
 
     }).catch((err) => {
         console.log(err)
@@ -64,42 +67,47 @@ function sendFormData(form) {
   
 }  
 
+// Ativar e desativar form
 function toggleForm(toggle) {
-
     const form = document.querySelector('.Forgot-PWD')
     const label = document.querySelector('#email-label')
     const elements = form.elements;
 
     if (toggle == 'deact') {
         label.style.opacity = 0.5
-        elements[0].disabled = true        
+        elements[0].disabled = true   
+        return     
     }
-    else {
-        label.style.opacity = 0.1
-        elements[0].disabled = false        
-    }
-
+ 
+    label.style.opacity = 0.1
+    elements[0].disabled = false        
+    
 }
 
+// Ativar e desativar botão de submit
 function toggleSubmit(toggle) {
     const submit = document.querySelector('#submit-1')
+    
     if (toggle == 'deact') {
         submit.disabled = true
+        return
     }
-    else {
-        submit.disabled = false
-    }
+    
+    submit.disabled = false
+    
 }
 
+// Ativar e desativar gif de loading
 function toggleLoader(toggle) {
     const loading = document.querySelector('#loading')
 
     if (toggle == 'deact') {
         loading.style.display = 'none'
+        return
     }
-    else {
-        loading.style.display = 'block'
-    }
+
+    loading.style.display = 'block'
+    
 }
 
 document.addEventListener('DOMContentLoaded', validateForm)

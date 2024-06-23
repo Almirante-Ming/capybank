@@ -12,23 +12,14 @@ async function sendEmail(email) {
         try {
 
             const database = await readColumn(`SELECT * FROM dados_clientes WHERE email = '${email}';`)
+            if (database.rowCount == 0) { return { outcome: 400, response: "Email não encontrado" } } 
+
+            const update_pwd = await updatePassword(email)
+            if (update_pwd.operation.outcome == 400) { return { outcome: 400, response: "Não foi possível alterar a senha!" } }
+
+            const sending = await sendNewPassword(email, update_pwd.new_password)
+            return sending
             
-            if (database.rowCount == 0) {
-                return { outcome: 400, response: "Email não encontrado" }
-            } 
-            
-            else {
-
-                const update_pwd = await updatePassword(email)
-
-                if (update_pwd.operation.outcome == 400) {
-                    return { outcome: 400, response: "Não foi possível alterar a senha!" }
-                }
-
-                const sending = await sendNewPassword(email, update_pwd.new_password)
-                return sending
-            }
-
         }
 
         catch (err) {
@@ -48,7 +39,6 @@ async function updatePassword(email) {
 
 async function sendNewPassword(email, new_pwd) {
     const transporter = authenticate()
-
     return new Promise((resolve, reject) => {
         transporter.sendMail({
             from: `${EMAIL_USER} <${EMAIL_ADRESS}>`,
@@ -66,6 +56,7 @@ async function sendNewPassword(email, new_pwd) {
 }
 
 function generatePassword() {
+    
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
     const numbers = '0123456789'.split('')
     const special = ['@', '#', '$', '%', '&', '!']
