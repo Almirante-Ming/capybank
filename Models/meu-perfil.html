@@ -38,6 +38,13 @@
             color: red;
         }
 
+        .Delete_Acc {
+            display: none;
+        }
+
+        .Delete_Acc.Open {
+            display: flex;
+        }
     
     </style>
 </head>
@@ -55,14 +62,19 @@
         </section>
         <section style = 'display: flex; gap: 20px'>
             <p id = 'email'></p>
-            <button id = 'email'>Alterar email</button>
+            <button id = 'email' class = 'Alterate'>Alterar email</button>
         </section>
         <section style = 'display: flex; gap: 20px'>
             <p id = 'senha'></p>
-            <button id = 'senha'>Alterar senha</button>
+            <button id = 'senha' class = 'Alterate'>Alterar senha</button>
         </section>
     </main>
     <a style = 'color: red' href = "#">Deletar conta</a>
     <dialog class = 'Dialog' open></dialog>
+    <dialog class = 'Delete_Acc' open>
+        <h1> Deseja deletar a conta?</h1>
+        <button id = 'yes'>Sim</button>
+        <button id = 'no'>Não</button>
+    </dialog>
 </body>
 </html>

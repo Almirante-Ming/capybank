@@ -1,12 +1,12 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
-import { DataValidator } from '../modules/DataValidator.js'
+import { DataValidator } from '../modules/formDealer.js'
 
 async function renderUserData() {
 
     const user = await getUserData()
     const render = renderData()
-    const button = document.querySelectorAll('button')
+    const button = document.querySelectorAll('.Alterate')
 
     render.name("Nome: " + user.nome)
     render.cpf("CPF: " + user.cpf)
@@ -134,15 +134,13 @@ function sendFormData(form, id) {
         const result = await response.json()
         
         if (response.status == 200) {
-            window.location.reload()
-            
-        })
+            window.location.reload()   
+        }
+    })
      
-        
-    }  
-    
     const dialog = document.querySelector('.Dialog')
     const button = document.querySelectorAll('.Alterate')
+    
 
     button.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -190,6 +188,7 @@ function openDeleteDialogue(id) {
             body: JSON.stringify(userData)
         }
 
+        console.log(userData, requestOptions)
         // Faz o fetch para uma URL /deleteData
         /*
         fetch('http://localhost:8080/deleteData', requestOptions).then(async(response) => {
@@ -206,13 +205,10 @@ function openDeleteDialogue(id) {
     openDialogue()
     getAnswer()
 }
-        }
-        else {
-            render.outcome(result.message)
-        }
-    })
+  
  
     
-}   
+
 
 document.addEventListener('DOMContentLoaded', renderUserData)
+document.addEventListener('DOMContentLoaded', openDeleteDialogue)
