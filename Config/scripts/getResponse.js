@@ -80,7 +80,13 @@ function getResponse() {
 
     }   
 
-    return { saveData, validateData, updateData, sendData }
+    const deleteData = async (data, res) => {
+        const operation = await updateColumn(`DELETE FROM dados_clientes WHERE id = $1`, [data.user_id])
+        res.writeHead(operation.outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+        res.end()
+    }
+
+    return { saveData, validateData, updateData, sendData, deleteData }
 }
 
 
