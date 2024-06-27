@@ -1,25 +1,37 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { DataValidator } from '../modules/formDealer.js'
+import { ProtectRoute } from '../modules/ProtectRoute.js'
 
 async function renderUserData() {
 
-    const user = await getUserData()
-    const render = renderData()
-    const button = document.querySelectorAll('.Alterate')
+    const render = renderData()  
+    const data = getUserData()
 
-    render.name("Nome: " + user.nome)
-    render.cpf("CPF: " + user.cpf)
-    render.telefone("Telefone: " + user.telefone)
-    render.email("Email: " + user.email)
-    render.senha("Senha: " + user.senha)
-    render.name("Nome: " + user.nome)
+    .then((user) => {
 
-    button.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            openDialogue(btn)
+        render.name("Nome: " + user.nome)
+        render.cpf("CPF: " + user.cpf)
+        render.telefone("Telefone: " + user.telefone)
+        render.email("Email: " + user.email)
+        render.senha("Senha: " + user.senha)
+        render.name("Nome: " + user.nome)
+
+        const button = document.querySelectorAll('.Alterate') 
+
+        button.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                openDialogue(btn)
+            })
         })
+
+        openDeleteDialogue(user.id)
+
     })
+    .catch((err) => {
+        ProtectRoute()
+    })
+
 
 }
 
@@ -204,11 +216,7 @@ function openDeleteDialogue(id) {
 
     openDialogue()
     getAnswer()
-}
-  
- 
     
-
+}
 
 document.addEventListener('DOMContentLoaded', renderUserData)
-document.addEventListener('DOMContentLoaded', openDeleteDialogue)

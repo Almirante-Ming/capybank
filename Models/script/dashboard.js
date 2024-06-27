@@ -1,5 +1,6 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
+import { ProtectRoute } from '../modules/ProtectRoute.js'
 
 async function DOMInteraction() {
 
@@ -15,15 +16,9 @@ async function DOMInteraction() {
     })
 
     .catch((err) => {
-        // Serve para redirecionar caso não tenha Login. Não está 100%
-        const redirectTo = window.location.href.includes("Models") ? '../Models/login.html' : 'login.html'
-        window.location.href = redirectTo
+        ProtectRoute()
         console.log(err)
     })
-
-
-
-    
 
 }
 
