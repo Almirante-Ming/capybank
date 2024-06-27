@@ -135,6 +135,77 @@ function sendFormData(form, id) {
         
         if (response.status == 200) {
             window.location.reload()
+            
+        })
+     
+        
+    }  
+    
+    const dialog = document.querySelector('.Dialog')
+    const button = document.querySelectorAll('.Alterate')
+
+    button.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (!(dialog.className.includes('Open'))) {
+                dialog.classList.add('Open')
+            }
+            renderDialogue(dialog, btn.id)
+        })
+    })
+
+}
+
+//Todas as interações possíveis com a caixa de diálogo: deletar conta
+function openDeleteDialogue(id) {
+
+    const a = document.querySelector('a')
+    const dialogue = document.querySelector('.Delete_Acc')
+
+    function openDialogue() {
+        a.addEventListener('click', (e) => {
+            e.preventDefault()
+            dialogue.classList.toggle('Open')
+        })    
+    }
+
+    function closeDialogue() {
+        dialogue.classList.toggle('Open')
+    }
+
+    function getAnswer() {
+        const yes = document.querySelector('#yes')
+        const no = document.querySelector('#no')
+        yes.addEventListener('click', () => {startDelete()})
+        no.addEventListener('click', () => {closeDialogue()})
+    }
+
+    function startDelete() {
+
+        let userData = { 
+            'user_id': id 
+        }
+
+        let requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        }
+
+        // Faz o fetch para uma URL /deleteData
+        /*
+        fetch('http://localhost:8080/deleteData', requestOptions).then(async(response) => {
+        
+            if (response.status == 200) {
+                alert('Conta deletada')
+                ProtectRoute()
+            }
+        })
+        */
+    }
+    
+
+    openDialogue()
+    getAnswer()
+}
         }
         else {
             render.outcome(result.message)
