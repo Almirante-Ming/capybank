@@ -13,6 +13,7 @@ const server = http.createServer( async (req, res) => {
 
         let body = await getBody(req).catch((err) => console.log(err)) 
         let data = JSON.parse(body)
+        
         let response = getResponse()
 
         if (req.url == '/saveData') {
@@ -30,10 +31,6 @@ const server = http.createServer( async (req, res) => {
 
         else if (req.url == '/sendData') {
             response.sendData(data, res)
-        }
-
-        else if (req.url == '/deleteData') {
-            response.deleteData(data, res)
         }
  
     }
