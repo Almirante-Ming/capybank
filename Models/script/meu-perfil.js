@@ -1,25 +1,37 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
-import { DataValidator } from '../modules/DataValidator.js'
+import { DataValidator } from '../modules/formDealer.js'
+import { ProtectRoute } from '../modules/ProtectRoute.js'
 
 async function renderUserData() {
 
-    const user = await getUserData()
-    const render = renderData()
-    const button = document.querySelectorAll('button')
+    const render = renderData()  
+    const data = getUserData()
 
-    render.name("Nome: " + user.nome)
-    render.cpf("CPF: " + user.cpf)
-    render.telefone("Telefone: " + user.telefone)
-    render.email("Email: " + user.email)
-    render.senha("Senha: " + user.senha)
-    render.name("Nome: " + user.nome)
+    .then((user) => {
 
-    button.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            openDialogue(btn)
+        render.name("Nome: " + user.nome)
+        render.cpf("CPF: " + user.cpf)
+        render.telefone("Telefone: " + user.telefone)
+        render.email("Email: " + user.email)
+        render.senha("Senha: " + user.senha)
+        render.name("Nome: " + user.nome)
+
+        const button = document.querySelectorAll('.Alterate') 
+
+        button.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                openDialogue(btn)
+            })
         })
+
+        openDeleteDialogue(user.id)
+
     })
+    .catch((err) => {
+        ProtectRoute()
+    })
+
 
 }
 
@@ -134,14 +146,77 @@ function sendFormData(form, id) {
         const result = await response.json()
         
         if (response.status == 200) {
-            window.location.reload()
-        }
-        else {
-            render.outcome(result.message)
+            window.location.reload()   
         }
     })
- 
+     
+    const dialog = document.querySelector('.Dialog')
+    const button = document.querySelectorAll('.Alterate')
     
-}   
+
+    button.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (!(dialog.className.includes('Open'))) {
+                dialog.classList.add('Open')
+            }
+            renderDialogue(dialog, btn.id)
+        })
+    })
+
+}
+
+//Todas as interações possíveis com a caixa de diálogo: deletar conta
+function openDeleteDialogue(id) {
+
+    const a = document.querySelector('a')
+    const dialogue = document.querySelector('.Delete_Acc')
+
+    function openDialogue() {
+        a.addEventListener('click', (e) => {
+            e.preventDefault()
+            dialogue.classList.toggle('Open')
+        })    
+    }
+
+    function closeDialogue() {
+        dialogue.classList.toggle('Open')
+    }
+
+    function getAnswer() {
+        const yes = document.querySelector('#yes')
+        const no = document.querySelector('#no')
+        yes.addEventListener('click', () => {startDelete()})
+        no.addEventListener('click', () => {closeDialogue()})
+    }
+
+    function startDelete() {
+
+        let userData = { 
+            'user_id': id 
+        }
+
+        let requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        }
+
+        console.log(userData, requestOptions)
+        // Faz o fetch para uma URL /deleteData
+        /*
+        fetch('http://localhost:8080/deleteData', requestOptions).then(async(response) => {
+        
+            if (response.status == 200) {
+                alert('Conta deletada')
+                ProtectRoute()
+            }
+        })
+        */
+    }
+    
+
+    openDialogue()
+    getAnswer()
+    
+}
 
 document.addEventListener('DOMContentLoaded', renderUserData)

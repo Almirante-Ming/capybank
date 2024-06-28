@@ -1,5 +1,5 @@
 import { renderData } from "../modules/renderData.js"
-import { DataValidator } from "../modules/DataValidator.js"
+import { DataValidator } from "../modules/formDealer.js"
 
 const relation = [
     { id: "email", position: 0, minimum: 3, requiredString: [".com", "@"], mustMatch: null, regex: null},
@@ -56,6 +56,7 @@ function sendFormData(form) {
         }
         else {
             toggleSubmit('activate')
+            render.outcome(result.message)
         }
 
     }).catch((err) => {

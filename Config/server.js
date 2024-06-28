@@ -13,6 +13,7 @@ const server = http.createServer( async (req, res) => {
 
         let body = await getBody(req).catch((err) => console.log(err)) 
         let data = JSON.parse(body)
+        
         let response = getResponse()
 
         if (req.url == '/saveData') {
