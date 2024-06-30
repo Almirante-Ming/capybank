@@ -1,0 +1,397 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.container {
+  font-family: "Poppins";
+  display: grid;
+  background-color: #fafafa;
+  grid-template-areas:
+    "lateral-esquerda barra-pesquisa barra-pesquisa barra-pesquisa"
+    "lateral-esquerda main main lateral-direita"
+    "lateral-esquerda conteudo conteudo lateral-direita"
+    "lateral-esquerda conteudo conteudo lateral-direita"
+    "lateral-esquerda conteudo conteudo lateral-direita";
+  height: 98vh;
+  width: 92vw;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+html,body{
+  overflow-x: hidden;
+}
+
+.container div {
+  background-color: #fafafa;
+}
+
+/* ---------------------------------- */
+
+/* menu lateral esquerda */
+
+#lateral-esquerda {
+  grid-area: lateral-esquerda;
+  background-color: #fafafa;
+}
+
+.marca {
+  font-weight: bold;
+  display: flex;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #87b344;
+}
+.marca img {
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+  position: relative;
+  top: 10px;
+}
+nav {
+  padding: 10px;
+  background-color: #fafafa;
+  height: 80%;
+  width: 120px;
+  overflow: hidden;
+  transition: 1s;
+}
+
+nav:hover {
+  position: relative;
+  background-color: #fafafa;
+  height: 85vh;
+  overflow: hidden;
+  transition: 1s;
+  font-size: small;
+  width: 280px;
+  transition: 1s;
+}
+
+li:hover {
+  background: #87b344;
+  transition: 1s;
+  position: relative;
+  left: 2px;
+}
+
+nav ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: small;
+  padding: 15px;
+  left: 30px;
+}
+
+nav .material-symbols-outlined {
+  position: relative;
+  color: #87b344;
+  right: 105px;
+}
+
+nav ul {
+  list-style-type: none;
+  position: relative;
+  left: 50px;
+  width: 150px;
+}
+
+.lista3 {
+  background-color: #fafafa;
+  position: relative;
+  top: 270px;
+}
+
+.lista2 {
+  background-color: #fafafa;
+  position: relative;
+  top: 140px;
+}
+
+/* ---------------------- */
+
+/* Meio, barra de pesquisa */
+
+#barra-pesquisa {
+  border: #436e01 2px solid;
+  padding: 10px;
+  width: 100%;
+  background-color: white;
+  grid-area: barra-pesquisa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#barra-pesquisa img {
+  height: 50px;
+  width: 50px;
+  border-radius: 70%;
+  position: relative;
+  top: 9px;
+  left: 10px;
+}
+
+#barra-pesquisa .input {
+  display: flex;
+  height: 25px;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  background: #c4e477;
+  color: rgb(0, 0, 0);
+  outline: none;
+  box-sizing: border-box;
+}
+
+#barra-pesquisa .material-symbols-outlined {
+  color: white;
+}
+
+.barra-pesquisa-texto {
+  width: 120px;
+}
+
+#barra-pesquisa-texto {
+  background-color: #ffffff;
+}
+
+.barra-pesquisa-texto h2 {
+  background-color: white;
+}
+
+#perfil {
+  background: transparent;
+  position: relative;
+  display: flex;
+  right: 30px;
+}
+
+#perfil .material-symbols-outlined {
+  color: #436e01;
+  position: relative;
+  top: 45px;
+  right: 50px;
+}
+
+/* ---------------------------- */
+
+/* main(parte acima do conteudo e cards, ) */
+
+#main {
+  grid-area: main;
+  display: flex;
+  color: rgb(205, 205, 205);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.texto1 {
+  display: flex;
+  align-items: center;
+  color: #71a100;
+}
+
+.texto1 .saldo p {
+  position: relative;
+  top: 25px;
+  right: 95px;
+  color: rgb(75, 75, 75);
+  background-color: #51b3446d;
+}
+
+.texto1 .material-symbols-outlined {
+  position: relative;
+  top: 50px;
+  right: 145px;
+}
+
+.texto1 .material-symbols-outlined:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.meio-texto {
+  display: flex;
+  color: gray;
+  position: relative;
+  left: 15px;
+}
+
+.meio-texto p {
+  display: flex;
+  position: relative;
+  left: 25px;
+  top: 10px;
+  color: grey;
+  border-radius: 10px;
+  background-color: rgba(179, 179, 179, 0.307);
+}
+
+/* ------------------------- */
+
+/* conteudo, onde estará os cards */
+
+#conteudo {
+  background-color: #fafafa;
+  grid-area: conteudo;
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  flex-direction: column;
+}
+
+#conteudo .card-cofre {
+  background-color: #87b344;
+  width: 180px;
+  color: white;
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #00000090;
+  position: relative;
+  left: 120px;
+}
+
+#conteudo .card-cofre img {
+  height: 50px;
+  width: 50px;
+  border-radius: 70px;
+  position: relative;
+  top: 5px;
+}
+
+#conteudo .card-shopping {
+  background-color: #fafafa;
+  position: relative;
+  top: 25px;
+  display: flex;
+  flex-direction: column;
+  left: 120px;
+  padding: 30px;
+  background-color: #87b344;
+  height: 200px;
+  width: 600px;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #00000090;
+}
+
+#conteudo .card-shopping img {
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+  position: relative;
+  bottom: 350px;
+  left: 360px;
+}
+
+#conteudo .card-shopping h1 {
+  position: relative;
+  bottom: 35px;
+}
+
+#conteudo .card-shopping h3 {
+  position: relative;
+  bottom: 75px;
+  right: 10px;
+}
+
+#conteudo .card-shopping h6 {
+  position: relative;
+  bottom: 150px;
+  right: 10px;
+}
+button {
+  border: none;
+  position: relative;
+  bottom: 355px;
+  width: 160px;
+  height: 300px;
+  border-radius: 8px;
+  outline: none;
+  color: #7de052;
+  background-color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px #436e01;
+}
+
+button:hover {
+  color: rgb(255, 255, 255);
+  background-color: #51ff00;
+}
+
+/* ---------------------------------- */
+
+/* lateral direita, onde estará o histórico */
+
+#lateral-direita {
+  grid-area: lateral-direita;
+  position: relative;
+  left: 145px;
+  top: 20px;
+  border: #436e01 1px solid;
+  border-radius: 20px;
+  width: 17vw;
+  height: 85vh;
+}
+
+#lateral-direita .compra1:hover {
+  color: #436e01;
+  cursor: pointer;
+}
+
+#lateral-direita .compra2:hover {
+  color: #436e01;
+  cursor: pointer;
+}
+
+#lateral-direita .lateral-titulo h3 {
+  display: flex;
+  background: transparent;
+  flex-direction: column;
+  position: relative;
+  left: 110px;
+  overflow: hidden;
+}
+
+#lateral-direita img {
+  width: 65px;
+  height: 60px;
+  position: relative;
+  top: 95px;
+}
+
+#lateral-direita .card-compras {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#lateral-direita .card-compras .material-symbols-outlined {
+  color: #87b344;
+  position: relative;
+  left: 276px;
+  bottom: 40px;
+  cursor: pointer;
+}
+
+#lateral-direita .card-compras h3 {
+  position: relative;
+  left: 100px;
+}
+
+#lateral-direita .card-compras p {
+  position: relative;
+  left: 95px;
+  bottom: 90px;
+}
+
+/* -------------------------------------- */
