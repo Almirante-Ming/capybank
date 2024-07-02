@@ -29,7 +29,7 @@ async function createTable() {
       senha VARCHAR(25) NOT NULL,
       ativo BOOLEAN DEFAULT 1
     );`
-
+    
     await clients.query(query)
   }
 
