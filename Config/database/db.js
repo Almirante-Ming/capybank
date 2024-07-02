@@ -5,7 +5,7 @@ const { Pool } = require('pg')
 const clients = new Pool({
   host: 'localhost',
   port: '5432',
-  database: 'clientes',
+  database: 'postgres',
   user: 'postgres',
   password: 'root',
   max: 100
@@ -19,14 +19,15 @@ async function createTable() {
 
     await clients.connect()
 
-    const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
+    const query = `CREATE TABLE IF NOT EXISTS dados_usuarios (
       ID serial NOT NULL PRIMARY KEY UNIQUE,
       nome VARCHAR(50) NOT NULL,
       CPF VARCHAR(14) NOT NULL UNIQUE, 
       email VARCHAR(50) NOT NULL UNIQUE,
       telefone VARCHAR(14) NOT NULL UNIQUE,
       data_nascimento DATE NOT NULL,
-      senha VARCHAR(25) NOT NULL
+      senha VARCHAR(25) NOT NULL,
+      ativo BOOLEAN DEFAULT 1
     );`
 
     await clients.query(query)
