@@ -1,0 +1,135 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.mae{
+    display: flex;
+}
+
+.mae .direita{
+    background-color: #77B255;
+    width: 30%;
+    height: 100vh;
+}
+
+.mae .esquerda{
+    background-image: url("/Controllers/imgs/bandocapi.jpg");
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+ 
+
+}
+
+/* ---------parte central login------------ */
+
+.mae .login-central{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 550px;
+    top: 50px;
+    left: 20%;
+    z-index: 1;
+    position: absolute;  
+}
+
+.mae .login-central{
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---------Parte Imputes----------- */
+
+.mae .login-central .form-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mae .login-central .form-box .Error-Message {
+    color: red;
+    background: black;
+}
+
+.mae .login-central .form-box #submit {
+    background: #77B255;
+    color: white;
+    width: 200px;
+    font-weight: bolder;
+    height: 50px;
+    font-weight: bolder;
+}  
+
+.mae .login-central .titulo{
+    color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 40px;
+    margin-bottom: 10px;
+
+}
+
+.mae .login-central .input-box input {
+    width: 300px;
+    height: 50px;
+    /* background: transparent; */
+    background: white;
+    border: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 8px;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.mae .login-central .input-box input:hover {
+    border: 1px solid #57ec00;
+    box-shadow: 0px 0px 30px #57ec00;
+    transition: 0.4s;
+}
+
+.mae .login-central .input-box {
+    color: black;
+}
+
+.mae .login-central .center-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mae .login-central .center-button .bott .btn {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    background: #77B255;
+    border: 1px solid black;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    margin-top: 20px;
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.mae .login-central .center-button .bott .btn:hover{
+    border: 1px solid #57ec00;
+    box-shadow: 0px 0px 30px #57ec00;
+    transition: 0.4s;
+}
+
