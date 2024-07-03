@@ -19,7 +19,7 @@ async function createTable() {
 
     await clients.connect()
 
-    const query = `CREATE TABLE IF NOT EXISTS dados_usuarios (
+    const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
       ID serial NOT NULL PRIMARY KEY UNIQUE,
       nome VARCHAR(50) NOT NULL,
       CPF VARCHAR(14) NOT NULL UNIQUE, 
@@ -27,7 +27,7 @@ async function createTable() {
       telefone VARCHAR(14) NOT NULL UNIQUE,
       data_nascimento DATE NOT NULL,
       senha VARCHAR(25) NOT NULL,
-      ativo BOOLEAN DEFAULT 1
+      ativo BOOLEAN DEFAULT TRUE
     );`
     
     await clients.query(query)
