@@ -24,13 +24,13 @@ CREATE TABLE transferencia (
   date TIMESTAMP
 );
 
---tabela com a movimentacao mais recente para exibir na dashboard
-CREATE TABLE rece_mov (
-  envio_cpf VARCHAR(14),
-  valor FLOAT,
-  destino_cpf VARCHAR(14),
-  date DATE
-);
+-- --tabela com a movimentacao mais recente para exibir na dashboard
+-- CREATE TABLE rece_mov (
+--   envio_cpf VARCHAR(14),
+--   valor FLOAT,
+--   destino_cpf VARCHAR(14),
+--   date DATE
+-- );
 
 -- Criação da função e trigger para criação automática de conta
 CREATE OR REPLACE FUNCTION criar_conta_usuario()
