@@ -104,22 +104,5 @@ async function updateColumn(custom_query, data) {
     }
 }
 
-
-async function deleteColumn(custom_query, data) {
-    let outcome = 400
-    try {
-      await clients.connect()
-      let result = await clients.query(custom_query, data)
-      if (result.rowCount > 0) { outcome = 200}
-    }
-    catch(err) {
-      error = err
-      console.log(err)
-    }
-    finally {
-      return { outcome, error }
-    }
-}
-
   
-module.exports = { createTable, createColumn, readColumn, updateColumn, deleteColumn };
+module.exports = { createTable, createColumn, readColumn, updateColumn };
