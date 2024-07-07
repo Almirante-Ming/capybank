@@ -15,12 +15,12 @@ CREATE TABLE conta (
 );
 
 CREATE TABLE transferencia (
-  id SERIAL PRIMARY KEY,
-  cpf VARCHAR(14),
-  valor_disponivel FLOAT,
-  valor_transferido FLOAT,
-  saldo_user_envio FLOAT,
-  saldo_user_transferido FLOAT
+  cpf_envia VARCHAR(14),
+  valor_anterior FLOAT,
+  valor_pos_transferencia FLOAT,
+  cpf_recebe VARCHAR(14),
+  saldo_anterior FLOAT,
+  saldo_pos_transferencia FLOAT,
   date TIMESTAMP
 );
 
@@ -71,3 +71,85 @@ BEGIN
     END IF;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+
+-- --regras para transferencia
+-- CREATE OR REPLACE FUNCTION log_transferencia(
+--     cpf_remetente VARCHAR(14),
+--     cpf_destinatario VARCHAR(14),
+--     valor FLOAT
+-- ) RETURNS VOID AS $$
+-- DECLARE
+--     saldo_atual_sender FLOAT;
+--     saldo_atual_receiver FLOAT;
+-- BEGIN
+--     -- Limpar o CPF remetente e destinatário para remover caracteres não numéricos
+--     cpf_remetente := regexp_replace(cpf_remetente, '[^\d]', '', 'g');
+--     cpf_destinatario := regexp_replace(cpf_destinatario, '[^\d]', '', 'g');
+
+--     -- Verifica se existem remetente e destinatário
+--     IF NOT EXISTS (SELECT 1 FROM conta WHERE cpf = cpf_remetente) THEN
+--         RAISE EXCEPTION 'CPF de remetente não encontrado';
+--     END IF;
+
+--     IF NOT EXISTS (SELECT 1 FROM conta WHERE cpf = cpf_destinatario) THEN
+--         RAISE EXCEPTION 'CPF de destinatário não encontrado';
+--     END IF;
+
+--     -- Obtém o saldo atual do remetente e do destinatário
+--     SELECT saldo INTO saldo_atual_sender
+--     FROM conta
+--     WHERE cpf = cpf_remetente;
+
+--     SELECT saldo INTO saldo_atual_receiver
+--     FROM conta
+--     WHERE cpf = cpf_destinatario;
+
+--     -- Inicia a transação explícita
+--     BEGIN
+--         -- Verifica se o saldo transferido não é maior do que o saldo atual do remetente
+--         IF valor > saldo_atual_sender THEN
+--             RAISE EXCEPTION 'Saldo insuficiente para realizar a transferência';
+--         END IF;
+
+--         -- Insere uma nova entrada na tabela de transferencia
+--         INSERT INTO transferencia (
+--             cpf_envia, 
+--             valor_anterior, 
+--             valor_pos_transferencia, 
+--             cpf_recebe, 
+--             saldo_anterior, 
+--             saldo_pos_transferencia, 
+--             transfer_date
+--         ) VALUES (
+--             cpf_remetente, 
+--             saldo_atual_sender, 
+--             valor, 
+--             cpf_destinatario, 
+--             saldo_atual_receiver, 
+--             saldo_atual_receiver + valor, 
+--             NOW()
+--         );
+
+--         -- Atualiza o saldo do remetente
+--         UPDATE conta
+--         SET saldo = saldo_atual_sender - valor
+--         WHERE cpf = cpf_remetente;
+
+--         -- Atualiza o saldo do destinatário
+--         UPDATE conta
+--         SET saldo = saldo_atual_receiver + valor
+--         WHERE cpf = cpf_destinatario;
+
+--         -- Confirma a transação explícita
+--         COMMIT;
+--     EXCEPTION
+--         WHEN OTHERS THEN
+--             -- Em caso de erro, faz rollback da transação explícita
+--             ROLLBACK;
+--             RAISE;
+--     END;
+-- END;
+-- $$ LANGUAGE plpgsql;
