@@ -1,8 +1,8 @@
-CREATE TABLE usuario (
+CREATE TABLE dados_clientes (
   cpf VARCHAR(14) UNIQUE PRIMARY KEY,
   nome_completo VARCHAR(255),
   email VARCHAR(255),
-  telefone INT,
+  telefone VARCHAR(50) NOT NULL UNIQUE,
   data_de_nascimento DATE,
   senha VARCHAR(255)
 );
@@ -43,15 +43,15 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER cadastro_usuario
-AFTER INSERT ON usuario
+AFTER INSERT ON dados_clientes
 FOR EACH ROW
 EXECUTE FUNCTION criar_conta_usuario();
 
 -- Agentes  de saque e deposito, para servir de destino ou origem dos valores.
 INSERT INTO usuario (cpf, nome_completo, email, telefone, data_de_nascimento, senha)
 VALUES 
-('111.111.111-11', 'saque', 'saque@conta.saque', 111111111, '2000-01-01', '111111'),
-('999.999.999-99', 'deposito', 'deposito@conta.deposito', 999999999, '1999-09-09', '999999');
+('111.111.111-11', 'saque', 'saque@conta.saque', '(11) 1111-1111', '2000-01-01', '111111'),
+('999.999.999-99', 'deposito', 'deposito@conta.deposito', '(99) 9999-9999', '1999-09-09', '999999');
 
 UPDATE conta
 SET nome_usuario='deposito', saldo=999999999, ativo=true
