@@ -77,6 +77,10 @@ function getResponse() {
             operation = checkCPF(data.cpf, fetchID)
         }
 
+        else if (data.type == 'transfer_cash') {
+            operation = transferCash(data.cpf, fetchID, data.value)
+        }
+
         operation.then((result) => {
             res.writeHead(result.outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
             res.end(JSON.stringify({
