@@ -515,6 +515,29 @@ align-items: center;
 
 }
 
+/* Diálogo de transferência */
+
+.Dialog {
+    display: none;
+}
+
+.Dialog.Open {
+    display: block;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    margin: 0 auto;
+    top: 25%
+}
+
+.confirm-form {
+    display: none;
+}
+
+.confirm-form.open {
+    display: block;
+}
+
 
 
 
