@@ -18,7 +18,7 @@ async function DOMInteraction() {
         })
 
         .catch((err) => {
-            //ProtectRoute()
+            ProtectRoute()
             console.log(err)
         })
 
