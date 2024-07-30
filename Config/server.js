@@ -1,13 +1,15 @@
 const http = require('http')
+
 const { createTable, readColumn } = require('./database/db')
 const { getBody } = require('./scripts/getBody')
 const { getResponse } = require("./scripts/getResponse")
 
 // Variável global que vai receber, ao longo da execução do código, uma arrow function que conterá
 // a chave primária do usuário na tabela principal, nesse caso, foi alterado para CPF ao invés de ID.
-// Com a variável 'transformada' para function, 
+
 let fetchID
 
+// Server: irá receber os dados do front-end e tratar as requisiões realizadas pela fetch API.
 const server = http.createServer( async (req, res) => {
 
     if (req.url.includes('Data')) {
@@ -17,28 +19,37 @@ const server = http.createServer( async (req, res) => {
         
         let response = getResponse()
 
+        // Cadastro inicial
         if (req.url == '/saveData') {
             response.saveData(data, res)
         }
         
+        // Login
         else if (req.url == '/validateData') {
             const id = await response.validateData(data, res)
             fetchID = () =>  { return id } 
         }
 
+        // Atualização de dado
         else if (req.url == '/updateData') {
             response.updateData(data, res, fetchID)
         }
 
+        // Envio de dado (transferência, enviar email..)
         else if (req.url == '/sendData') {
             response.sendData(data, res, fetchID)
         }
  
     }
 
+    // Bloco desbloqueado pós-autenticação
     if (typeof(fetchID) == 'function' && (req.url.includes('api'))) {
-        
-        let id = fetchID() 
+
+        // Os tratamentos abaixo possuem um único objetivo:
+            // -> Extrair dados do banco, enviá-los para o servidor em formato JSON. 
+            // -> Esses dados são capturados pela fetch API (visto no script Cliente.JS) e renderizados na DOM do projeto (home.js, meu-perfil.js...) .
+
+        let id = fetchID() // Acesso ao ID = CPF do usuário
         let query 
         
         if (req.url == '/api/users') {
