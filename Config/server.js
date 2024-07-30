@@ -1,10 +1,11 @@
 const http = require('http')
-
 const { createTable, readColumn } = require('./database/db')
-
 const { getBody } = require('./scripts/getBody')
 const { getResponse } = require("./scripts/getResponse")
 
+// Variável global que vai receber, ao longo da execução do código, uma arrow function que conterá
+// a chave primária do usuário na tabela principal, nesse caso, foi alterado para CPF ao invés de ID.
+// Com a variável 'transformada' para function, 
 let fetchID
 
 const server = http.createServer( async (req, res) => {
@@ -22,7 +23,7 @@ const server = http.createServer( async (req, res) => {
         
         else if (req.url == '/validateData') {
             const id = await response.validateData(data, res)
-            fetchID = () =>  { return id }
+            fetchID = () =>  { return id } 
         }
 
         else if (req.url == '/updateData') {
@@ -36,8 +37,8 @@ const server = http.createServer( async (req, res) => {
     }
 
     if (typeof(fetchID) == 'function' && (req.url.includes('api'))) {
-
-        let id = fetchID()
+        
+        let id = fetchID() 
         let query 
         
         if (req.url == '/api/users') {
@@ -45,7 +46,7 @@ const server = http.createServer( async (req, res) => {
         }
 
         else if (req.url == '/api/user') {
-            query = `SELECT * FROM dados_clientes WHERE id = ${id}`
+            query = `SELECT * FROM dados_clientes WHERE cpf = '${id}'`
         }
          
         const database = await readColumn(query)

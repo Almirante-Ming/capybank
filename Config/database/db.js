@@ -5,7 +5,7 @@ const { Pool } = require('pg')
 const clients = new Pool({
   host: 'localhost',
   port: '5432',
-  database: 'postgres',
+  database: 'clientes',
   user: 'postgres',
   password: 'root',
   max: 100
@@ -42,6 +42,9 @@ async function createTable() {
   return isDatabaseConnected
 }
 
+// CREATE: Essa função de objetivo de criar alguma coluna dentro de uma tabela, recebendo como parâmetro:
+  // 1. Dados que serão salvos na tabela
+  // 2. A query customizada para salvar na tabela
 async function createColumn(data, custom_query) {
 
   var data_values = []
@@ -67,6 +70,8 @@ async function createColumn(data, custom_query) {
   
 }
 
+// READ: Essa função tem objetivo de ler os dados da coluna, utilizado no projeto para:
+  // 1. Capturar dados extraídos do banco e renderizá-los na DOM
 async function readColumn(custom_query) {
 
   let result
@@ -100,7 +105,7 @@ async function updateColumn(custom_query, data) {
       console.log(err)
     }
     finally {
-      return {outcome, error }
+      return { outcome, error }
     }
 }
 
