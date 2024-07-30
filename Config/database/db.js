@@ -18,18 +18,37 @@ async function createTable() {
   try {
 
     await clients.connect()
+  
+    // MUDANÇA AQUI:
 
-    // mudei para length 50 cpf e telefone pq tava dando erro de tamanho
+    // Inseri a criação de dados_clientes, conta e transferência na query inicial
+
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
-      ID serial NOT NULL PRIMARY KEY UNIQUE,
-      nome VARCHAR(50) NOT NULL,
-      CPF VARCHAR(50) NOT NULL UNIQUE, 
-      email VARCHAR(50) NOT NULL UNIQUE,
+      cpf VARCHAR(14) UNIQUE PRIMARY KEY,
+      nome_completo VARCHAR(255),
+      email VARCHAR(255),
       telefone VARCHAR(50) NOT NULL UNIQUE,
-      data_nascimento DATE NOT NULL,
-      senha VARCHAR(25) NOT NULL,
-      ativo BOOLEAN DEFAULT TRUE
-    );`
+      data_de_nascimento DATE,
+      senha VARCHAR(255)
+    );
+    
+    CREATE TABLE IF NOT EXISTS conta (
+      cpf VARCHAR(14) UNIQUE PRIMARY KEY,
+      nome_usuario VARCHAR(255),
+      saldo FLOAT,
+      ativo BOOLEAN
+    );
+    
+    CREATE TABLE IF NOT EXISTS transferencia (
+      cpf_envia VARCHAR(14),
+      valor_anterior FLOAT,
+      valor_pos_transferencia FLOAT,
+      cpf_recebe VARCHAR(14),
+      saldo_anterior FLOAT,
+      saldo_pos_transferencia FLOAT,
+      date TIMESTAMP
+    );
+    `
     
     await clients.query(query)
   }
