@@ -5,7 +5,7 @@ const { Pool } = require('pg')
 const clients = new Pool({
   host: 'localhost',
   port: '5432',
-  database: 'postgres',
+  database: 'clientes',
   user: 'postgres',
   password: 'root',
   max: 100
@@ -18,18 +18,37 @@ async function createTable() {
   try {
 
     await clients.connect()
+  
+    // MUDANÇA AQUI:
 
-    // mudei para length 50 cpf e telefone pq tava dando erro de tamanho
+    // Inseri a criação de dados_clientes, conta e transferência na query inicial
+
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
-      ID serial NOT NULL PRIMARY KEY UNIQUE,
-      nome VARCHAR(50) NOT NULL,
-      CPF VARCHAR(50) NOT NULL UNIQUE, 
-      email VARCHAR(50) NOT NULL UNIQUE,
+      cpf VARCHAR(14) UNIQUE PRIMARY KEY,
+      nome_completo VARCHAR(255),
+      email VARCHAR(255),
       telefone VARCHAR(50) NOT NULL UNIQUE,
-      data_nascimento DATE NOT NULL,
-      senha VARCHAR(25) NOT NULL,
-      ativo BOOLEAN DEFAULT TRUE
-    );`
+      data_de_nascimento DATE,
+      senha VARCHAR(255)
+    );
+    
+    CREATE TABLE IF NOT EXISTS conta (
+      cpf VARCHAR(14) UNIQUE PRIMARY KEY,
+      nome_usuario VARCHAR(255),
+      saldo FLOAT,
+      ativo BOOLEAN
+    );
+    
+    CREATE TABLE IF NOT EXISTS transferencia (
+      cpf_envia VARCHAR(14),
+      valor_anterior FLOAT,
+      valor_pos_transferencia FLOAT,
+      cpf_recebe VARCHAR(14),
+      saldo_anterior FLOAT,
+      saldo_pos_transferencia FLOAT,
+      date TIMESTAMP
+    );
+    `
     
     await clients.query(query)
   }
@@ -42,6 +61,9 @@ async function createTable() {
   return isDatabaseConnected
 }
 
+// CREATE: Essa função de objetivo de criar alguma coluna dentro de uma tabela, recebendo como parâmetro:
+  // 1. Dados que serão salvos na tabela
+  // 2. A query customizada para salvar na tabela
 async function createColumn(data, custom_query) {
 
   var data_values = []
@@ -67,6 +89,8 @@ async function createColumn(data, custom_query) {
   
 }
 
+// READ: Essa função tem objetivo de ler os dados da coluna, utilizado no projeto para:
+  // 1. Capturar dados extraídos do banco e renderizá-los na DOM
 async function readColumn(custom_query) {
 
   let result
@@ -100,7 +124,7 @@ async function updateColumn(custom_query, data) {
       console.log(err)
     }
     finally {
-      return {outcome, error }
+      return { outcome, error }
     }
 }
 

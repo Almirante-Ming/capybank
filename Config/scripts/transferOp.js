@@ -1,6 +1,6 @@
 
 const { readColumn } = require('../database/db')
-
+/*
 async function checkCPF(cpf, fetchID) {
 
     let id = fetchID()
@@ -22,8 +22,6 @@ async function checkCPF(cpf, fetchID) {
 
 }
 
-
-
 async function transferCash(cpf, fetchID, value) {
     
     let id = fetchID()
@@ -35,5 +33,5 @@ async function transferCash(cpf, fetchID, value) {
 
 }
 
-
 module.exports = {transferCash, checkCPF}
+*/

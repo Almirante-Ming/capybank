@@ -1,7 +1,9 @@
 
+// Aqui é realizado o FETCH para extrair informações do banco e renderizar na DOM.
+    // Por conveniência, esses dados são armazenados como atributos de um objeto e são repassados para
+    // uma função auxiliar (no script renderData.js) que recebe esses dados e renderiza eles nos campos.
 export class Cliente {
-    constructor (id, nome, cpf, email, telefone, senha) {
-        this.id = id
+    constructor (nome, cpf, email, telefone, senha) {
         this.nome = nome
         this.cpf = cpf
         this.email = email
@@ -16,13 +18,12 @@ export async function getUserData() {
         
         const response = await fetch('http://localhost:8080/api/user')
         const database = await response.json()
-        console.log(database)
-        return new Cliente(database.id, database.nome, database.cpf, database.email, database.telefone, database.senha)
+        return new Cliente(database.nome, database.cpf, database.email, database.telefone, database.senha)
     
     }
 
     const userData = await getUser()
-    return userData
+    return userData // Retorno de um dado assíncrono (objeto contendo os dados do usuário)
 }
 
 
