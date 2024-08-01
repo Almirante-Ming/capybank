@@ -43,21 +43,20 @@ const server = http.createServer( async (req, res) => {
     }
 
     // Bloco desbloqueado pós-autenticação
-    if (typeof(fetchID) == 'function' && (req.url.includes('api'))) {
-
+    if ((req.url.includes('api'))) {
         // Os tratamentos abaixo possuem um único objetivo:
             // -> Extrair dados do banco, enviá-los para o servidor em formato JSON. 
             // -> Esses dados são capturados pela fetch API (visto no script Cliente.JS) e renderizados na DOM do projeto (home.js, meu-perfil.js...) .
 
-        let id = fetchID() // Acesso ao ID = CPF do usuário
-        let query 
-        
+        let id = fetchID() 
+
         if (req.url == '/api/users') {
             query = 'SELECT id, nome FROM dados_clientes'
         }
 
         else if (req.url == '/api/user') {
-            query = `SELECT * FROM dados_clientes WHERE cpf = '${id}'`
+            // MUDANÇA: Alteração da query para incluir as informações do usuário e conta como resposta JSON
+            query = `SELECT * FROM dados_clientes INNER JOIN conta ON dados_clientes.cpf = '${id}'`;
         }
          
         const database = await readColumn(query)
