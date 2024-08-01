@@ -1,4 +1,4 @@
-CREATE TABLE dados_clientes (
+CREATE TABLE IF NOT EXISTS dados_clientes (
   cpf VARCHAR(14) PRIMARY KEY,
   nome_completo VARCHAR(255),
   email VARCHAR(255),
@@ -7,14 +7,14 @@ CREATE TABLE dados_clientes (
   senha VARCHAR(255)
 );
 
-CREATE TABLE conta (
+CREATE TABLE IF NOT EXISTS conta (
   cpf VARCHAR(14) UNIQUE,
   nome_usuario VARCHAR(255),
   saldo FLOAT,
   ativo BOOLEAN
 );
 
-CREATE TABLE transferencia (
+CREATE TABLE IF NOT EXISTS transferencia (
   cpf_envia VARCHAR(14),
   valor_anterior FLOAT,
   valor_pos_transferencia FLOAT,
@@ -36,7 +36,8 @@ CREATE TRIGGER cadastro_usuario
 AFTER INSERT ON dados_clientes
 FOR EACH ROW
 EXECUTE FUNCTION criar_conta_usuario();
-INSERT INTO usuario (cpf, nome_completo, email, telefone, data_de_nascimento, senha)
+
+INSERT INTO dados_clientes (cpf, nome_completo, email, telefone, data_de_nascimento, senha)
 VALUES 
 ('111.111.111-11', 'saque', 'saque@conta.saque', '(11) 1111-1111', '2000-01-01', '111111'),
 ('999.999.999-99', 'deposito', 'deposito@conta.deposito', '(99) 9999-9999', '1999-09-09', '999999');
