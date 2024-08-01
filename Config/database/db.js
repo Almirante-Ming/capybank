@@ -18,17 +18,17 @@ async function createTable() {
   try {
 
     await clients.connect()
-  
+
     // MUDANÇA AQUI:
 
-    // Inseri a criação de dados_clientes, conta e transferência na query inicial
-
+    // ALteração da query inicial pra criar o dados_clientes, conta e transferencia e ativar o trigger de criação de conta.
+      // --- COLOQUEI "500" NO SALDO NO TRIGGER ABAIXO, PARA FINS DE TESTE
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
       cpf VARCHAR(14) UNIQUE PRIMARY KEY,
-      nome_completo VARCHAR(255),
+      nome VARCHAR(255),
       email VARCHAR(255),
       telefone VARCHAR(50) NOT NULL UNIQUE,
-      data_de_nascimento DATE,
+      data_nascimento DATE,
       senha VARCHAR(255)
     );
     
@@ -48,8 +48,24 @@ async function createTable() {
       saldo_pos_transferencia FLOAT,
       date TIMESTAMP
     );
+
+    DROP FUNCTION IF EXISTS criar_conta_usuario() CASCADE;
+
+    CREATE OR REPLACE FUNCTION criar_conta_usuario()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO conta (cpf, nome_usuario, saldo, ativo)
+      VALUES (NEW.cpf, NEW.nome, 500, TRUE);
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    CREATE TRIGGER cadastro_usuario
+    AFTER INSERT ON dados_clientes
+    FOR EACH ROW
+    EXECUTE FUNCTION criar_conta_usuario();
     `
-    
+
     await clients.query(query)
   }
 
@@ -61,36 +77,26 @@ async function createTable() {
   return isDatabaseConnected
 }
 
-// CREATE: Essa função de objetivo de criar alguma coluna dentro de uma tabela, recebendo como parâmetro:
-  // 1. Dados que serão salvos na tabela
-  // 2. A query customizada para salvar na tabela
 async function createColumn(data, custom_query) {
 
-  var data_values = []
   var outcome = 400
   var error
 
-  Object.keys(data).forEach((item) => {
-    data_values.push(String(data[item])) // Pegando os valores do dicionário, convertendo todos para STRING e armazenando em um array
-  })
-
   try {
     await clients.connect()
-    const result = await clients.query(custom_query, data_values)
+    const result = await clients.query(custom_query, [data.nome, data.cpf, data.email, data.telefone, data.data_nascimento, data.senha])
     if (result.rowCount > 0) { outcome = 200 }
   }
   catch (err) {
     console.log(err)
     error = err
   }
-  finally { 
-      return { outcome , error }
+  finally {
+    return { outcome, error }
   }
-  
+
 }
 
-// READ: Essa função tem objetivo de ler os dados da coluna, utilizado no projeto para:
-  // 1. Capturar dados extraídos do banco e renderizá-los na DOM
 async function readColumn(custom_query) {
 
   let result
@@ -124,9 +130,9 @@ async function updateColumn(custom_query, data) {
       console.log(err)
     }
     finally {
-      return { outcome, error }
+      return {outcome, error }
     }
 }
 
-  
+
 module.exports = { createTable, createColumn, readColumn, updateColumn };
