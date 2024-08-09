@@ -9,7 +9,7 @@ stack atual (para avaliação das dissiplinas):
 stack original do projeto (ainda em testes e desenvolvimento):
 - ruby (com rbenv)
 - sqlite (banco de dados padrao)
-- Rails (framework)
+- Sinatra (framework)
 ------------------------------------------------------------------------------------------------------------------------
 em breve o projeto pode e certamentes sofrera mudanças, por agora o objetivo primario se trata um projeto para avaliação
 dos docentes, e em breve um treino de adaptação e aprendizado de outras linguagens bem como melhores praticas de codigo.
