@@ -186,8 +186,7 @@ function transferOperation() {
         fetch('http://localhost:8080/sendData', requestOptions).then(async (response) => {
 
             const result = await response.json()
-            console.log(result.message)
-            alert(result.message.logged + result.message.transfer + result.message.cash)
+            alert(result.message)
 
         })
 
@@ -196,6 +195,7 @@ function transferOperation() {
     formInteraction()
 
 }
+
 
 
 

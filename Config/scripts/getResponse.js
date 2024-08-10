@@ -20,7 +20,7 @@ function getResponse() {
 
     // Função para salvar cadastro de usuário
     const saveData = async (data, res) => {
-        const operation = await createColumn(data, `INSERT INTO dados_clientes (nome, cpf, email, telefone, data_nascimento, senha) VALUES ($1, $2, $3, $4, $5, $6)`).catch((err) => { console.log(err) })
+        const operation = await createColumn(`INSERT INTO dados_clientes (nome, cpf, email, telefone, data_nascimento, senha) VALUES ($1, $2, $3, $4, $5, $6)`, [data.nome, data.cpf, data.email, data.telefone, data.data_nascimento, data.senha]).catch((err) => { console.log(err) })
         const response = operation.outcome == 400 ? getError(operation.error) : 'Cadastro concluído com sucesso!'
         returnResponse(res, operation.outcome, response)
     }

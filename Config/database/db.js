@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS transferencia (
   saldo_anterior FLOAT,
   saldo_pos_transferencia FLOAT,
   date TIMESTAMP
-);`
+);
+`
 
     await clients.query(query)
   }
@@ -56,14 +57,14 @@ CREATE TABLE IF NOT EXISTS transferencia (
   return isDatabaseConnected
 }
 
-async function createColumn(data, custom_query) {
+async function createColumn(custom_query, data) {
 
   var outcome = 400
   var error
 
   try {
     await clients.connect()
-    const result = await clients.query(custom_query, [data.nome, data.cpf, data.email, data.telefone, data.data_nascimento, data.senha])
+    const result = await clients.query(custom_query, data)
     if (result.rowCount > 0) { outcome = 200 }
   }
   catch (err) {
