@@ -4,17 +4,15 @@
     // uma função auxiliar (no script renderData.js) que recebe esses dados e renderiza eles nos campos.
 
 
-// MUDANÇA: Inclusão do saldo como atributo do Cliente
-
 export class Cliente {
-    constructor (id, nome, cpf, email, telefone, senha, saldo) {
-        this.id = id
+    constructor (nome, cpf, email, telefone, senha, saldo, status) {
         this.nome = nome
-        this.cpf = cpf
-        this.email = email
-        this.telefone = telefone
-        this.senha = senha
+        this.__cpf = cpf
+        this.__email = email
+        this.__telefone = telefone
+        this.__senha = senha
         this.saldo = saldo
+        this.status = status
     }
 }
 
@@ -22,15 +20,18 @@ export async function getUserData() {
 
     async function getUser() {
         
-        const response = await fetch('http://localhost:8080/api/user')
-        const database = await response.json()
-        console.log(database)
-        return new Cliente(database.id, database.nome, database.cpf, database.email, database.telefone, database.senha, database.saldo)
+        const database_fetch = await fetch('http://localhost:8080/api/user')
+        const database_fetch_2 = await fetch('http://localhost:8080/api/conta')
+        
+        const user = await database_fetch.json()
+        const conta = await database_fetch_2.json()
+
+        return new Cliente(user.nome, user.cpf, user.email, user.telefone, user.senha, conta.saldo, conta.status)
     
     }
 
     const userData = await getUser()
-    return userData // Retorno de um dado assíncrono (objeto contendo os dados do usuário)
+    return userData 
 }
 
 
