@@ -26,28 +26,40 @@ async function DOMBuilder() {
         
     }
 
-    function getOperation(transfer_entrada_nome, nome, valor, data) {
+    function getOperation(row) {
 
-        let operation_type
+        let campo_nome, campo_valor, campo_data, campo_op
+    
+        if (user.nome == row.nome_recebe) {
 
-        if (user.nome == transfer_entrada_nome) {
-            operation_type = createData('Entrada')
-            nome.style.color = 'green'
-            valor.style.color = 'green'
-            valor.innerHTML += '+'
-            data.style.color = 'green'
-            operation_type.style.color = 'green'
+            campo_nome = createData(row.nome_envia)
+            campo_valor = createData(row.valor)
+            campo_data = createData(row.date)
+            campo_op = createData('Entrada')
+            campo_valor.innerHTML += '+'
+
+            campo_nome.style.color = 'green'
+            campo_valor.style.color = 'green'
+            campo_data.style.color = 'green'
+            campo_op.style.color = 'green'
+
         }
+
         else {
-            operation_type = createData('Saída')
-            nome.style.color = 'red'
-            valor.style.color = 'red'
-            valor.innerHTML += '-'
-            data.style.color = 'red'
-            operation_type.style.color = 'red'
+            campo_nome = createData(row.nome_recebe)
+            campo_valor = createData(row.valor)
+            campo_data = createData(row.date)
+            campo_op = createData('Saída')
+            campo_valor.innerHTML += '-'
+
+            campo_nome.style.color = 'red'
+            campo_valor.style.color = 'red'
+            campo_data.style.color = 'red'
+            campo_op.style.color = 'red'
         }
 
-        return operation_type
+
+        return {campo_nome, campo_valor, campo_data, campo_op}
 
     }
     
@@ -56,13 +68,9 @@ async function DOMBuilder() {
     const response = await getTransferData()
 
     response.forEach((row) => {
-        const campo_nome = createData(row.nome_recebe)
-        const campo_valor = createData(row.valor)
-        const campo_data = createData(row.date)
+        const operation = getOperation(row)
+        table.append(operation.campo_nome, operation.campo_valor, operation.campo_data, operation.campo_op)
 
-        const operation = getOperation(row.nome_recebe, campo_nome, campo_valor, campo_data)
-
-        table.append(campo_nome, campo_valor, campo_data, operation)
     })
 }
 
