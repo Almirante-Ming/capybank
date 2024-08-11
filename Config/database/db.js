@@ -8,7 +8,7 @@ const clients = new Pool({
   database: 'clientes',
   user: 'postgres',
   password: 'root',
-  max: 100
+  max: 1000
 })
 
 async function createTable() {
@@ -21,10 +21,10 @@ async function createTable() {
 //nunca se deve apagar as funcoes, vc faz a primeira vez pra configurar e apaga logo em seguida, ja q nao tem clausura pra ignorar
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
   cpf VARCHAR(14) PRIMARY KEY,
-  nome_completo VARCHAR(255),
+  nome VARCHAR(255),
   email VARCHAR(255),
   telefone VARCHAR(50) NOT NULL UNIQUE,
-  data_de_nascimento DATE,
+  data_nascimento DATE,
   senha VARCHAR(255)
 );
 
@@ -37,11 +37,10 @@ CREATE TABLE IF NOT EXISTS conta (
 
 CREATE TABLE IF NOT EXISTS transferencia (
   cpf_envia VARCHAR(14),
-  valor_anterior FLOAT,
-  valor_pos_transferencia FLOAT,
   cpf_recebe VARCHAR(14),
-  saldo_anterior FLOAT,
-  saldo_pos_transferencia FLOAT,
+  nome_envia VARCHAR(255),
+  nome_recebe VARCHAR(255),
+  valor FLOAT,
   date TIMESTAMP
 );
 `

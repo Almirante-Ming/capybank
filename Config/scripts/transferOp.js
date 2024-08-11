@@ -54,13 +54,20 @@ async function transferCash(cpf, fetchID, value) {
 
     let message = result == 200 ? 'Transferência realizada com sucesso!' : 'Não foi possível realizar transferência!'
     
+    // Salva os dados na tabela de transferência
+    if (result == 200) {
+        const transferUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${cpf}';`)
+        const loggedUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${id}';`)
+        saveTransferHistory(id, cpf, loggedUser_name.rows[0].nome, transferUser_name.rows[0].nome, value, new Date())
+    }
 
     return { outcome: result, response: message }
 
 }
 
-function saveTransferHistory() {
-    
+async function saveTransferHistory(cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data) {
+    const response = await createColumn(`INSERT INTO transferencia (cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, date) VALUES ($1, $2, $3, $4, $5, $6)`, [cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data])
+    return
 }
 
 module.exports = {transferCash, checkCPF}
