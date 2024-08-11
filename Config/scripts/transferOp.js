@@ -59,4 +59,8 @@ async function transferCash(cpf, fetchID, value) {
 
 }
 
+function saveTransferHistory() {
+    
+}
+
 module.exports = {transferCash, checkCPF}
