@@ -70,7 +70,6 @@ async function DOMBuilder() {
     response.forEach((row) => {
         const operation = getOperation(row)
         table.append(operation.campo_nome, operation.campo_valor, operation.campo_data, operation.campo_op)
-
     })
 }
 
