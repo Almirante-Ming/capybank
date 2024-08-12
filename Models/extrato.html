@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style/extrato.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="barra" class="cima">
+       
+        <div class="titulo">
+            <span>CapiBank</span>
+
+        </div>
+
+        <div class="search">
+                <span><i class='bx bx-search-alt-2'></i></span>
+
+            <input type="text" id="searchInput" placeholder="Pesquisar">
+        </div>
+
+        <!-- ---------------------------------------------------- -->
+        
+        <div class="user">
+            <span><i class='bx bxs-caret-down-circle'></i></span>
+
+            <span id = 'name'></span>
+
+            <div class="imag">
+                <img src="#" alt="">
+            </div>
+        </div>
+
+    </div>
+
+    
+
+    <nav id="menu">
+
+        <header >
+            <a href="#" class="btn-expandir" onclick="abrirMenu()" ><img src="./imgs/capi.png" alt=""></a>
+        </header>
+
+        <div class="part1">
+        <a class="color" href="#">
+            <span class="icon"><i class='bx bxs-grid-alt'></i></span>
+            <span class="txt-link">Saldo</span>
+        </a>
+
+        <a href="#">
+            <span class="icon"><i class='bx bxs-bank'></i></span>
+            <span class="txt-link">Transferências</span>
+        </a>
+
+        <a href="#">
+            <span class="icon"><i class='bx bx-credit-card'></i></span>
+            <span class="txt-link">Notificações</span>
+        </a>
+
+        <a href="#">
+            <span class="icon"><i class='bx bx-credit-card'></i></span>
+            <span class="txt-link">Pagamentos</span>
+        </a>
+    </div>
+
+    <div class="part2">
+        <li class="item-menu">
+            <a href="#">
+                <span class="icon"><i class='bx bxs-user-circle' ></i></span>
+                <span class="txt-link">Minha Conta</span>
+            </a>
+
+            <a href="#">
+                <span class="icon"><i class='bx bxs-cog' ></i></span>
+                <span class="txt-link">Configurações</span>
+            </a>
+
+            <a href="#">
+                <span class="icon"><i class='bx bx-body'></i></span>
+                <span class="txt-link">Ajuda</span>
+            </a>
+
+            <a href="#" onclick="fecharMenu()">
+                <span class="icon"><i class='bx bx-log-out-circle'></i></span>
+                <span class="txt-link">Diminuir</span>
+            </a>
+    </div>
+    </nav>
+
+    <!-- ---------------------------------------------------- -->
+
+
+    <div id="conteudo-1" class="container">
+
+        <div class="main">
+
+            <div class="top">
+
+                <div class="titulo-top">
+                    <span>Saldo Disponivel</span>
+                    <i class='bx bxs-coin'></i>
+                </div>
+
+
+
+              
+            </div>
+
+
+            <!-- -------------half----------------------- -->
+
+            <div class="obs">
+
+                <div class="pesquisa">
+                    <span><i class='bx bx-search-alt-2'></i></span>
+                </div>
+
+                <div class="datas glob">
+                    <span>Datas</span>
+                </div>
+
+                <div class="categoria glob">
+                    <span>Categoria</span>
+                </div>
+
+                <div class="tipos glob">
+                    <span>Tipos</span>
+                </div>
+
+
+            </div>
+         
+
+            <!-- ------baixo---------- -->
+
+            <div class="extratos">
+
+                <div class="pago1">
+                    <div class="icone">
+                        <i class='bx bx-store-alt'></i>
+                    </div>
+
+                    <div class="data global">
+                        <span>11/10/2024</span>
+                    </div>
+
+                    <div class="lugar global">
+                        <span>Dragon Bar</span>
+                    </div>
+
+                    <div class="pagamento global">
+                        <span>Crédito</span>
+                    </div>
+
+                    <div class="valor global">
+                        <span>2x R$250,00</span>
+                    </div>
+
+                </div>
+               
+                <!--  -->
+                <div class="pago1">
+                    <div class="icone">
+                        <i class='bx bx-restaurant' ></i>
+                    </div>
+
+                    <div class="data global">
+                        <span>11/10/2024</span>
+                    </div>
+
+                    <div class="lugar global">
+                        <span> Cleytinho Lanches</span>
+                    </div>
+
+                    <div class="pagamento global">
+                        <span>Débito</span>
+                    </div>
+
+                    <div class="valor global">
+                        <span>2x R$50,00</span>
+                    </div>
+
+                </div>
+
+                <!--  -->
+                <div class="pago1">
+                    <div class="icone">
+                        <i class='bx bxs-ev-station'></i>                    
+                    </div>
+
+                    <div class="data global">
+                        <span>24/10/2024</span>
+                    </div>
+
+                    <div class="lugar global">
+                        <span>Posto Ipiranga</span>
+                    </div>
+
+                    <div class="pagamento global">
+                        <span>Crédito</span>
+                    </div>
+
+                    <div class="valor global">
+                        <span>2x R$500,00</span>
+                    </div>
+
+                </div>
+
+                <!--  -->
+                <div class="pago1">
+                    <div class="icone">
+                        <i class='bx bx-store'></i>                    
+                    </div>
+
+                    <div class="data global">
+                        <span>05/10/2024</span>
+                    </div>
+
+                    <div class="lugar global">
+                        <span>Americanas</span>
+                    </div>
+
+                    <div class="pagamento global">
+                        <span>Crédito</span>
+                    </div>
+
+                    <div class="valor global">
+                        <span>2x R$15,00</span>
+                    </div>
+
+                </div>
+               
+            
+            </div>   
+
+            </div>
+
+           
+
+    </div>
+   
+
+
+    <script type="text/javascript" src="script/central.js"></script>
+
+    
+</body>
+</html>

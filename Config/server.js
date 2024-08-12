@@ -55,7 +55,7 @@ const server = http.createServer( async (req, res) => {
         }
 
         else if (req.url == '/api/transferencia') {
-            query = `SELECT * FROM transferencia WHERE cpf_envia = '${id}'`;
+            query = `SELECT * FROM transferencia WHERE cpf_envia = '${id}' OR cpf_recebe = '${id}'`;
         }
 
         else if (req.url == '/api/conta') {
@@ -63,8 +63,8 @@ const server = http.createServer( async (req, res) => {
         }
          
         const database = await readColumn(query)
-        const userData = database.rows[0]
 
+        const userData = query.includes('transferencia') ? database.rows : database.rows[0]
         res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
         res.end(JSON.stringify(userData))
 
