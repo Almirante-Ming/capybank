@@ -41,9 +41,7 @@ CREATE TABLE IF NOT EXISTS transferencia (
   nome_envia VARCHAR(255),
   nome_recebe VARCHAR(255),
   valor FLOAT,
-  date TIMESTAMP
-);
-`
+  date TIMESTAMP);`
 
     await clients.query(query)
   }
