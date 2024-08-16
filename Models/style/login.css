@@ -8,8 +8,8 @@
 }
 
 .mae .direita{
-    background-color: #77B255;
-    width: 30%;
+    background-color: #8cd163;
+    width: 40%;
     height: 100vh;
 }
 
@@ -31,15 +31,15 @@
     align-items: center;
     width: 450px;
     height: 550px;
-    top: 50px;
-    left: 20%;
+    top: 100px;
+    left: 1%;
     z-index: 1;
     position: absolute;  
 }
 
 .mae .login-central{
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* border-radius: 8px; */
+    /* border: 1px solid rgba(255, 255, 255, 0.5); */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -53,6 +53,11 @@
     align-items: center;
 }
 
+.mae .login-central .form-box label {
+        color: rgb(255, 255, 255); 
+        font-weight: bold;
+}
+
 .mae .login-central .form-box .Error-Message {
     color: red;
     background: black;
@@ -64,6 +69,16 @@
     width: 200px;
     font-weight: bolder;
     height: 50px;
+    font-weight: bolder;
+    border-radius: 10px;
+}  
+.mae .login-central .form-box #cad {
+    background: #77B255;
+    color: white;
+    width: 200px;
+    font-weight: bolder;
+    height: 50px;
+    border-radius: 10px;
     font-weight: bolder;
 }  
 

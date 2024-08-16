@@ -10,20 +10,14 @@
 <body>
 
     <div class="mae">
-
         <div class="direita">
-
         </div>
-
         <div class="login-central">
-
             <div class="form-box">
                 <span class="titulo">Acesse sua conta</span>
-          
-                <form>
-                    
+                <form> 
                     <div class="input-box">
-                        <label for = 'cpf'>IDentificação: </label>
+                        <label for = 'cpf'>Identificação: </label>
                         <div class = 'Inputs'> <input name = 'cpf' type="text" id="cpf" placeholder= "Insira seu CPF" maxlength="14"> </div>
                         <div class="Error-Message"></div>
                     </div>                  
@@ -32,34 +26,22 @@
                         <div class = 'Inputs'> <input name='senha' type="password" id="senha" placeholder="Digite seu passphase"> </div>
                         <div class="Error-Message"></div>
                     </div>
-
-                    <div class="remember">
-                        <label>
-                            <input type="checkbox" > Remember-me
-                        </label>
-                        <a>Forgot password</a>
-                    </div>
-
                     <input type="submit" class="btn" value="Login" id="submit">
-                    <a href="./cadastro.html">Cadastre-se</a>
-                    
+                    <input type="submit" class="btn" value="Cadastrar-se" id="cad" >
                 </form>
-                    
-
-                   
                     <div class="center-button">
                         <div class="bott">
                         </div>
                     </div>
             </div>
-
         </div>
-    
         <div class="esquerda">
-    
         </div>
-
     </div>
-   
 </body>
+<script>
+    document.getElementById("cad").addEventListener("click", function() {
+        window.location.href = "./cadastro.html";
+    });
+</script>
 </html>
