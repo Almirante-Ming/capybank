@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style/perfil.css">
+    <title>CapyBank</title>
+</head>
+<body>
+    <div id="container">
+        <aside class="aside">
+            <nav>
+                <div class="user">
+                    <img src="imgs/girl.jpeg" alt="Imagem do usuário">
+                    <span>CapyBank</span>
+                </div>
+                <ul class="itens">
+                    <div class="list-item">
+                        <li><a href="#">Saldo e Extrato</a></li>
+                        <li><a href="#">Transferência</a></li>
+                        <li><a href="#">Pagamento</a></li>
+                        <li><a href="#">Notificações</a></li>
+                    </div>
+                    <div >
+                        <li><a href="#">Minha conta</a></li>
+                        <li><a href="#">Configurações</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                    </div>
+                </ul>
+            </nav>
+        </aside>
+        <main class="page">
+            <header>
+                <h1>Dados do usuário</h1>
+                <img src="imgs/girl.jpeg" alt="Imagem de perfil do usuário">
+            </header>
+            <section class="box">
+                <form>
+                    <div class="box-1">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" id="nome" required>
+                        
+                        <label for="cpf">CPF:</label>
+                        <input type="text" name="cpf" id="cpf" required>
+                        
+                        <label for="fone">Telefone:</label>
+                        <input type="tel" name="fone" id="fone" required>
+                        
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email" required>
+                        
+                        <label for="nasc">Data de Nascimento:</label>
+                        <input type="date" name="nasc" id="nasc" required>
+                        
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" id="senha" placeholder="*****" required>
+                    </div>
+                    <div class="box-2">
+                        <label for="agencia">Agência:</label>
+                        <input type="number" name="agencia" id="agencia" placeholder="0000" required>
+                        
+                        <label for="conta">Conta:</label>
+                        <input type="number" name="conta" id="conta" placeholder="00000000-0" required>
+                        
+                        <span>Banco: 0000 | CAPYBANK MS</span>
+                        
+                        <div class="link">
+                            <a href="#">Deletar conta</a>
+                            <a href="#">Alterar senha</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
