@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --fontColor: #87b344;
+    --cinza: #e8e8e8;
+    --corTela: #eaf6e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+#container {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid greenyellow;
+}
+
+aside {
+    width: 250px;
+    height: 100vh;
+    border-right: 2px solid var(--cinza);
+    display: flex;
+    flex-direction: column;
+}
+
+.aside .itens {
+    list-style: none;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.aside .itens div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.aside .itens div li {
+    margin-top: 15px;
+}
+
+.aside .itens div li a {
+    color: var(--fontColor);
+    text-decoration: none;
+}
+
+.aside .itens div li a:hover,
+.aside .itens div li a:focus {
+    text-decoration: underline;
+}
+
+.aside .user {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+    font-size: 20px;
+    color: var(--fontColor);
+}
+
+#container .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#container .page header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    width: 800px;
+}
+
+#container .page header h1 {
+    color: var(--fontColor);
+}
+
+#container .page header img {
+    width: 90px;
+    height: 90px;
+}
+
+section form {
+    background-color: var(--corTela);
+    display: flex;
+    gap: 15px;
+    width: 800px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+section form .box-1,
+section form .box-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+section form .box-1 input,
+section form .box-2 input {
+    border-radius: 15px;
+    border: 1px solid var(--fontColor);
+    padding: 10px;
+    outline: none;
+}
+
+section form .box-2 span {
+    margin-top: 20px;
+    color: var(--fontColor);
+}
+
+section form .box-2 .link a {
+    display: block;
+    color: red;
+    text-decoration: none;
+}
+
+section form .box-2 .link a:hover {
+    color: darkred;
+}
+

@@ -88,9 +88,9 @@ a{
     height: 35px;
     width: 205px;
     margin: 10px;
-
-
 }
+
+
 
 .cima .user span{
     font-size: 20px;
@@ -106,6 +106,57 @@ a{
     margin-top: 4px;
 
 }
+
+.cima .user .dropdown-menu{
+    display: none;
+    flex-direction: column;
+    font-size: 12px;
+    margin-top: 160px;
+   
+    z-index: 1;
+    margin-left: 30px;
+   
+}
+
+
+
+.cima .user .dropdown-menu .opcoes a{
+    display: flex;
+    color: black;
+    font-size: 17px;
+    margin: 0px;
+    background-color: white;
+    width: 130px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cima .user:hover .dropdown-menu{
+
+    display: flex;
+
+}
+
+.cima .user .dropdown-menu a:hover{
+    background-color:#68b856;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,6 +238,8 @@ nav .color:hover {
 
 .container{
     display: flex;
+    margin-left: 35px;
+
 
 }
 .main{
@@ -249,6 +302,19 @@ nav .color:hover {
     background: #86df71;
     margin-left: 60px;
     margin-bottom: 30px;
+    transition: 0.7s;
+
+}
+
+
+.savings:hover{
+
+    width: 220px;
+    height: 180px;
+    transition: 0.7s;
+    background-color: white;
+    border: 1px solid #68b856;
+    border-radius: 20px;
 
 }
 
@@ -260,18 +326,40 @@ nav .color:hover {
     width: 200px;
     height: 120px;
     z-index: 0;
-
+    transition: 0.7s;
 
 }
+
+.savings:hover img{
+    width: 240px;
+    height: 130px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+
+}
+
+
 
 .savings .description h1 {
     font-size: 20px;
     color: white;
 }
 
+.savings:hover h1{
+    color:#68b856;
+
+}
+
+
+
 .savings .description span {
     font-size: 15px;
     color: white;
+}
+
+.savings:hover span{
+    color:#68b856;
+
 }
 
 
@@ -299,6 +387,17 @@ nav .color:hover {
     
 }
 
+.bottom_bx:hover{
+
+    background: white;
+    border-radius: 20px;
+    width: 530px;
+    height: 190px;
+    margin-left: 50px;
+    transition: 0.7s;
+    border: 1px solid #68b856;
+}
+
 .bottom_bx .meio{
     display: flex;
 }
@@ -310,6 +409,11 @@ nav .color:hover {
     margin: 10px 30px ;
     color: white;
 
+}
+
+.bottom_bx:hover .info{
+
+    color: #68b856;
 }
 
 .bottom_bx .cartao .info h1{
@@ -338,6 +442,12 @@ display: flex;
 color: #68b856;
 border-radius: 5px;
 margin: 5px ;
+}
+
+.bottom_bx:hover .info .botao{
+    background-color: #68b856;
+    color: white;
+
 }
 
 .bottom_bx .cartao .info .botao span{

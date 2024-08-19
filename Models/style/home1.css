@@ -188,12 +188,15 @@ nav .color:hover {
 .container{
     display: flex;
 
+
 }
 .main{
 
     transition: margin-left 0.5s;
     width: 80%;
     height: 100vh;
+    margin-top: 100px;
+
 
 }
 
