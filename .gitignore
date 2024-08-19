@@ -11,4 +11,5 @@ config.json
 
 # Ignore SASS config files
 .sass-cache
-
+.config/.vscode
+.Models/.vscode
