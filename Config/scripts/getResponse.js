@@ -71,12 +71,8 @@ function getResponse() {
             operation = sendEmail(data.email)
         }
         
-        else if (data.type == 'check_cpf') {
-            operation = checkCPF(data.cpf, fetchID)
-        }
-
         else if (data.type == 'transfer_cash') {
-            operation = transferCash(data.cpf, fetchID, data.value)
+            operation = transferCash(data, fetchID)
         }
 
         operation.then((result) => {

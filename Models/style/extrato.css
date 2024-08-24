@@ -288,7 +288,7 @@ nav .color:hover {
     width: 100%;
     height: 50vh;
     margin: 40px;
-
+    overflow: scroll;
 
 }
 

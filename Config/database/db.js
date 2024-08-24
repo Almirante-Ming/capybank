@@ -5,7 +5,7 @@ const { Pool } = require('pg')
 const clients = new Pool({
   host: 'localhost',
   port: '5432',
-  database: 'postgres',
+  database: 'clientes',
   user: 'postgres',
   password: 'root',
   max: 1000
@@ -107,7 +107,7 @@ async function updateColumn(custom_query, data) {
       console.log(err)
     }
     finally {
-      return {outcome, error }
+      return { outcome, error }
     }
 }
 
