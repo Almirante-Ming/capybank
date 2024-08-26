@@ -293,7 +293,8 @@ nav .color:hover {
 }
 
 .main .extratos .pago1{
-    display: flex;
+    display: grid;
+    grid-template-columns: 10% repeat(4, 1fr);
     justify-content: space-between;
     width: 90%;
     margin: 10px;

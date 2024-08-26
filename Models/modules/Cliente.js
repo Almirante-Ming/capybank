@@ -3,15 +3,16 @@
     // Por conveniência, esses dados são armazenados como atributos de um objeto e são repassados para
     // uma função auxiliar (no script renderData.js) que recebe esses dados e renderiza eles nos campos.
 
+import { formatDate } from "./formDealer.js"
 
 export class Cliente {
-    constructor (nome, cpf, email, telefone, senha, nasc, saldo, status) {
+    constructor (nome, cpf, email, telefone, senha, data_nascimento, saldo, status) {
         this.nome = nome
         this.__cpf = cpf
         this.__email = email
         this.__telefone = telefone
         this.__senha = senha
-        this.nasc = nasc
+        this.data_nascimento = data_nascimento
         this.saldo = saldo
         this.status = status
     }
@@ -26,13 +27,17 @@ export async function getUserData() {
         
         const user = await database_fetch.json()
         const conta = await database_fetch_2.json()
+        user[0].data_nascimento = formatDate(user[0].data_nascimento)
 
-        return new Cliente(user.nome, user.cpf, user.email, user.telefone, user.senha, user.data_nascimento, conta.saldo, conta.status)
+        return new Cliente(user[0].nome, user[0].cpf, user[0].email, user[0].telefone, user[0].senha, user[0].data_nascimento, conta[0].saldo, conta[0].status)
     
     }
 
     const userData = await getUser()
     return userData 
 }
+
+
+
 
 

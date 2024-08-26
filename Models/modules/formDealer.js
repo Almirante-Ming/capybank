@@ -189,4 +189,11 @@ function errorController() {
     return { checkRelation, toggleSubmit }
 }
 
+export function formatDate(str) {
+    const day = str.slice(8, 10)
+    const month = str.slice(5, 7)
+    const year = str.slice(0, 4)
+    const  date = day + '/' + month + '/' + year
+    return date
+}
 

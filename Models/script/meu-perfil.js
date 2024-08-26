@@ -14,6 +14,7 @@ async function renderUserData() {
         render.telefone(user.__telefone)
         render.email(user.__email)
         render.senha(user.senha)
+        render.nasc(user.data_nascimento)
         /*
         const button = document.querySelectorAll('.Alterate') 
         button.forEach((btn) => {
