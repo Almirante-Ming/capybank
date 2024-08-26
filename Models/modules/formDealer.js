@@ -111,9 +111,11 @@ export function DataFormatter() {
 export function DataValidator() {
 
     const checkRelation = (input, relation) => {
+
         relation.forEach((relation) => {
             if (relation.id == input.id) {
                 lookForErrors(relation, input)
+                deleteEmptySpaces(input)
             }
         })
     }
@@ -189,4 +191,22 @@ function errorController() {
     return { checkRelation, toggleSubmit }
 }
 
+// FORMATA DATAS
+export function formatDate(str) {
+    const day = str.slice(8, 10)
+    const month = str.slice(5, 7)
+    const year = str.slice(0, 4)
+    const  date = day + '/' + month + '/' + year
+    return date
+}
 
+// DELETA ESPAÇO VAZIO PARA SENHA
+export function deleteEmptySpaces(input) {
+    if (input.id == 'senha') {
+        input.addEventListener('input', () => {
+            if (input.value.includes(" ")) {
+                input.value = ""
+            }
+        })
+    }
+ }

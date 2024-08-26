@@ -61,9 +61,9 @@ const server = http.createServer( async (req, res) => {
         else if (req.url == '/api/conta') {
             query = `SELECT * FROM conta WHERE cpf = '${id}'`;
         }
-         
         const database = await readColumn(query)
-        const userData = query.includes('transferencia') ? database.rows : database.rows[0]
+        console.log('PUXANDO QUERY... DO DB', database.rows, req.url)
+        const userData = database.rows 
         res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
         res.end(JSON.stringify(userData))
 

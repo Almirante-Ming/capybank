@@ -46,18 +46,18 @@ function getResponse() {
         if (is_user_found) { return authentication_id }
     }
 
-    // Função para atualizar dados
+    // Função para atualizar dados (senha)
     const updateData = async (data, res, fetchID) => {
 
         let id = fetchID()
         
         for (key in data) {
-
-            const operation = await updateColumn(`UPDATE dados_clientes SET ${key} = $1 WHERE id = $2`, [data[key], id])
+            
+            const operation = await updateColumn(`UPDATE dados_clientes SET ${key} = $1 WHERE cpf = $2`, [data[key], id])
             const outcome = operation.outcome
-            const response = operation.outcome == 400 ? getError(operation.error) : 'Cadastro concluído com sucesso!'
-
-            returnResponse(res, outcome, response)
+            
+            returnResponse(res, outcome, "")
+        
 
         }
     }
