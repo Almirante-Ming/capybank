@@ -63,7 +63,6 @@ const server = http.createServer( async (req, res) => {
         }
          
         const database = await readColumn(query)
-
         const userData = query.includes('transferencia') ? database.rows : database.rows[0]
         res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
         res.end(JSON.stringify(userData))

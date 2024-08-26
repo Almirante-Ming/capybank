@@ -107,7 +107,7 @@ async function updateColumn(custom_query, data) {
       console.log(err)
     }
     finally {
-      return {outcome, error }
+      return { outcome, error }
     }
 }
 

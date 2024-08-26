@@ -36,17 +36,16 @@ function validateForm() {
             if (input.id == 'cpf') { format.CPF(e) }
             if (input.id == 'telefone') { format.phone(e) }
         })
-        /*
+        
         input.addEventListener('blur', () => {
-            validate.checkRelation(input, relation)
-            validate.toggleSubmit(submit, Inputs)
+            if (input.id == 'confirmar-senha') {
+                const senha = document.querySelector("#senha")
+                validate.checkRelation(senha, relation)
+                validate.toggleSubmit(submit, Inputs)
+            }
         })
         
-        input.addEventListener('focus', () => {
-            validate.checkRelation(input, relation)            
-            validate.toggleSubmit(submit, Inputs)
-        })
-        */
+        
        /*
         bx.forEach((check) => {
             check.addEventListener('click', () => {

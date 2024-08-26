@@ -84,23 +84,46 @@ section header span{
 .content .form .tranferir div input{
     width: 200px;
 }
-.content .btn {
+.content > .form > .btn {
+    display: flex;
+    flex-direction: row;
     padding: 10px;
 }
-.content .btn button{
+.content .btn button, 
+.content .btn a {
     width:120px;
     height:40px;
     border-radius: 6px;
     cursor: pointer;
 }
-.content .btn .btn-enviar{
+.content form > .btn .btn-enviar{
     border: none;
     background-color: var(--corDeFundoAba);
     color: white;
     font-weight: bold;
 }
-.content .btn .btn-cancelar{
+.content .btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 15px;
     border: 1px solid grey;
     background-color: white;
     font-weight: bold;
+    text-decoration: none;
+
+}
+
+/* murilo */
+
+.content form .Inputs {
+    position: relative;
+}
+
+.content form .Error-Message {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 20px;
 }

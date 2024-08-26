@@ -5,12 +5,13 @@
 
 
 export class Cliente {
-    constructor (nome, cpf, email, telefone, senha, saldo, status) {
+    constructor (nome, cpf, email, telefone, senha, nasc, saldo, status) {
         this.nome = nome
         this.__cpf = cpf
         this.__email = email
         this.__telefone = telefone
         this.__senha = senha
+        this.nasc = nasc
         this.saldo = saldo
         this.status = status
     }
@@ -26,7 +27,7 @@ export async function getUserData() {
         const user = await database_fetch.json()
         const conta = await database_fetch_2.json()
 
-        return new Cliente(user.nome, user.cpf, user.email, user.telefone, user.senha, conta.saldo, conta.status)
+        return new Cliente(user.nome, user.cpf, user.email, user.telefone, user.senha, user.data_nascimento, conta.saldo, conta.status)
     
     }
 

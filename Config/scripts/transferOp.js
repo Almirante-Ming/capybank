@@ -1,36 +1,68 @@
 const { readColumn, updateColumn, createColumn } = require('../database/db')
 
-async function checkCPF(cpf, fetchID) {
+async function transferCash(data, fetchID) {
 
     let id = fetchID()
 
-    const database = await readColumn(`SELECT * FROM dados_clientes WHERE cpf = '${cpf}';`)
-    const loggedUser = await readColumn(`SELECT cpf FROM dados_clientes WHERE cpf = '${id}';`)
-
-    if (database.rowCount == 0) {
-        return { outcome: 400, response: "CPF não encontrado" }
-    } 
-
-    const userData = database.rows[0] 
-
-    if (userData.cpf == loggedUser.rows[0].cpf) {
-        return { outcome: 400, response: "Esse é o CPF do usuário logado"}
+    async function checkCPF() {
+        const checkCPF = await readColumn(`SELECT cpf FROM dados_clientes where cpf = '${data.cpf}';`)
+        return checkCPF
     }
 
-    return { outcome: 200, response: userData.nome}
+    async function getUserInfo() {
+        const consulta_database_1 = await readColumn(`SELECT * FROM conta WHERE cpf = '${data.cpf}';`)
+        const consulta_database_2 = await readColumn(`SELECT * FROM conta WHERE cpf = '${id}';`)
+        const favorecido = consulta_database_1.rows[0]
+        const transferidor = consulta_database_2.rows[0]
+        return { transferidor , favorecido }
+    }
 
-}
+    async function initiateTransfer(transferidor, favorecido) {
 
-async function transferCash(cpf, fetchID, value) {
+
+        const valor_transferido =  favorecido.saldo + parseInt(data.valor)
+        const valor_retirado = transferidor.saldo - parseInt(data.valor)
+
+        if (valor_retirado < 0) {
+            return { status: 400, message: 'Saldo não pode ficar negativo!'}
+        }
+
+        await updateColumn(`UPDATE conta SET saldo = $1 WHERE cpf = $2`, [valor_transferido, favorecido.cpf])
+        await updateColumn(`UPDATE conta SET saldo = $1 WHERE cpf = $2`, [valor_retirado, transferidor.cpf])
+
+        return { status: 200, message: 'Transferência concluída!' }
+    }
     
-    let id = fetchID()
-
-    const transferUser = await readColumn(`SELECT * FROM conta WHERE cpf = '${cpf}';`)
-    const loggedUser = await readColumn(`SELECT * FROM conta WHERE cpf = '${id}';`)
-
-    if (value > loggedUser.rows[0].saldo) {
-        return {outcome: 400, response: "Erro! Não há saldo disponível para essa operação!"}
+    async function getUserNames_Extrato(transferidor, favorecido) {
+        // renomear essas variaveis
+        const transferUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${favorecido.cpf}';`)
+        const loggedUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${transferidor.cpf}';`)
+        saveExtrato(transferidor.cpf, favorecido.cpf, loggedUser_name.rows[0].nome, transferUser_name.rows[0].nome, data.valor, new Date())
     }
+
+    async function saveExtrato(cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data) {
+        const response = await createColumn(`INSERT INTO transferencia (cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, date) VALUES ($1, $2, $3, $4, $5, $6)`, [cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data])
+        return
+    }
+    
+    
+    const validate_CPF = await checkCPF()
+    if (validate_CPF.rowCount == 0) { return { outcome: 400, response : "Esse CPF não existe!"}}
+    if (validate_CPF.rows[0].cpf == id) { return { outcome: 400, response: "Esse é o CPF do usuário logado!"}}
+
+    let user = await getUserInfo()
+
+    if (data.valor > user.transferidor.saldo) { return { outcome: 400, response: "Não há saldo suficiente para essa operação!"}}
+
+    const transferencia = await initiateTransfer(user.transferidor, user.favorecido)
+
+    if (transferencia.status == 200) {
+        getUserNames_Extrato(user.transferidor, user.favorecido)
+    }
+  
+    return { outcome: transferencia.status, response: transferencia.message }
+    
+    /*
 
     // Parte que são realizadas as operações básicas de transferência, para o usuário logado e 'beneficiário'
     const valor_anterior1 = transferUser.rows[0].saldo
@@ -62,12 +94,10 @@ async function transferCash(cpf, fetchID, value) {
     }
 
     return { outcome: result, response: message }
+    */
+   return { outcome : 200, response : 'idhissddskh'}
 
 }
 
-async function saveTransferHistory(cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data) {
-    const response = await createColumn(`INSERT INTO transferencia (cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, date) VALUES ($1, $2, $3, $4, $5, $6)`, [cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data])
-    return
-}
 
-module.exports = {transferCash, checkCPF}
+module.exports = {transferCash}
