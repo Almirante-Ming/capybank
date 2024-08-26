@@ -4,26 +4,37 @@ export  function renderData() {
     const name = (data) => {
         let name = document.querySelector('#name')
         name.textContent = data
+        name.value = data
     }
 
     const cpf = (data) => {
         let cpf = document.querySelector('#cpf')
         cpf.textContent = data
+        cpf.value = data
     }
 
     const email = (data) => {
         let email = document.querySelector('#email')
         email.textContent = data
+        email.value = data
     }
 
     const telefone = (data) => {
         let telefone = document.querySelector('#telefone')
         telefone.textContent = data
+        telefone.value = data
     }
 
     const senha = (data) => {
         let senha = document.querySelector('#senha')
         senha.textContent = data
+        senha.value = data
+    }
+
+    const nasc = (data) => {
+        let nasc = document.querySelector('#nasc')
+        nasc.textContent = data 
+        nasc.value = data
     }
 
     const saldo = (data) => {
@@ -40,26 +51,10 @@ export  function renderData() {
         outcome.textContent = data
     }
 
-    //CLIENTES 
-    // Essa função abaixo precisa ser quebrada em partes menores, caso continue sendo utilizada no projeto
-    const select = async (user) => {
-        /*
-        const select = document.querySelector('select')
-        const response = await fetch('http://localhost:8080/api/users')
-        const database = await response.json()
-        
-        database.forEach((row) => {
-            const option = document.createElement('option')
-            if (user != row.id) {
-                option.setAttribute('value', `${row.nome}`)
-                option.textContent = `${row.nome}`
-                select.append(option)
-            }
-        })
-        */
-    }
+    
+
   
-    return { name , cpf, email , telefone, senha, saldo, outcome, select }
+    return { name , cpf, email , telefone, senha, saldo, nasc, outcome }
 }
 
 

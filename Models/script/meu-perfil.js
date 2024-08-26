@@ -9,16 +9,13 @@ async function renderUserData() {
     const data = getUserData()
 
     .then((user) => {
-
-        render.name("Nome: " + user.nome)
-        render.cpf("CPF: " + user.cpf)
-        render.telefone("Telefone: " + user.telefone)
-        render.email("Email: " + user.email)
-        render.senha("Senha: " + user.senha)
-        render.name("Nome: " + user.nome)
-
+        render.name(user.nome)
+        render.cpf(user.__cpf)
+        render.telefone(user.__telefone)
+        render.email(user.__email)
+        render.senha(user.senha)
+        /*
         const button = document.querySelectorAll('.Alterate') 
-
         button.forEach((btn) => {
             btn.addEventListener('click', () => {
                 openDialogue(btn)
@@ -26,15 +23,16 @@ async function renderUserData() {
         })
 
         openDeleteDialogue(user.id)
+        */
 
     })
     .catch((err) => {
-        ProtectRoute()
+        //ProtectRoute()
     })
 
 
 }
-
+/*
 function openDialogue(btn) {
     const dialog = document.querySelector('.Dialog')
     if (!(dialog.className.includes('Open'))) {
@@ -210,13 +208,14 @@ function openDeleteDialogue(id) {
                 ProtectRoute()
             }
         })
-        */
     }
     
-
+    
     openDialogue()
     getAnswer()
     
 }
+*/
+
 
 document.addEventListener('DOMContentLoaded', renderUserData)
