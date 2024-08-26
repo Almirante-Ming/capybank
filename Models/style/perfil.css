@@ -138,3 +138,22 @@ section form .box-2 .link a:hover {
     color: darkred;
 }
 
+
+/* Dialog-box */
+
+.Blur {
+    filter: blur(10px)
+}
+
+.Dialog {
+    position: absolute;
+    margin: 0 auto;
+    top: 25%;
+    width: 500px;
+    height: 400px;
+    display: none;
+}
+
+.Dialog.Open {
+    display: block;
+}
