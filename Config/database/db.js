@@ -41,7 +41,21 @@ CREATE TABLE IF NOT EXISTS transferencia (
   nome_envia VARCHAR(255),
   nome_recebe VARCHAR(255),
   valor FLOAT,
-  date TIMESTAMP);`
+  date TIMESTAMP);
+  
+  CREATE OR REPLACE FUNCTION criar_conta_usuario()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO conta (cpf, nome_usuario, saldo, ativo)
+    VALUES (NEW.cpf, NEW.nome_completo, 0.0, TRUE);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+DROP TRIGGER IF EXISTS cadastro_usuario ON dados_clientes;
+CREATE TRIGGER cadastro_usuario
+AFTER INSERT ON dados_clientes
+FOR EACH ROW
+EXECUTE FUNCTION criar_conta_usuario();`
 
     await clients.query(query)
   }

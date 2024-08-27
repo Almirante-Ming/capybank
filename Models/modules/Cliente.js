@@ -27,9 +27,9 @@ export async function getUserData() {
         
         const user = await database_fetch.json()
         const conta = await database_fetch_2.json()
-        user[0].data_nascimento = formatDate(user[0].data_nascimento)
+        user[0].data_nascimento = formatDate(user[0].data_de_nascimento)
 
-        return new Cliente(user[0].nome, user[0].cpf, user[0].email, user[0].telefone, user[0].senha, user[0].data_nascimento, conta[0].saldo, conta[0].status)
+        return new Cliente(user[0].nome_completo, user[0].cpf, user[0].email, user[0].telefone, user[0].senha, user[0].data_nascimento, conta[0].saldo, conta[0].status)
     
     }
 
