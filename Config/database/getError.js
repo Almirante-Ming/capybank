@@ -1,3 +1,5 @@
+// Função auxiliar para processar erros internos do banco de dados e retornar mensagem customizada
+
 function getError(error) {
     if (typeof(error.detail) === 'string') { return getMessage_Detail(error.detail, already_exists) }
     else { return 'Algo deu errado' }  

@@ -209,4 +209,35 @@ export function deleteEmptySpaces(input) {
             }
         })
     }
- }
+}
+
+export function ValidateForm(relation) {
+
+    const Inputs = document.querySelectorAll('.Inputs')
+    const submit = document.querySelector('#submit')
+    
+    const format = DataFormatter()
+    const validate = DataValidator()
+    
+    validate.toggleSubmit(submit, Inputs)
+    
+    Inputs.forEach((box) => {
+
+        const input = box.firstElementChild 
+        input.addEventListener('input', (e) => {
+            validate.checkRelation(input, relation)
+            validate.toggleSubmit(submit, Inputs)
+            if (input.id == 'cpf') { format.CPF(e) }
+            if (input.id == 'telefone') { format.phone(e) }
+        })
+        
+        input.addEventListener('blur', () => {
+            if (input.id == 'confirmar-senha') {
+                const senha = document.querySelector("#senha")
+                validate.checkRelation(senha, relation)
+                validate.toggleSubmit(submit, Inputs)
+            }
+        })
+
+    })
+}

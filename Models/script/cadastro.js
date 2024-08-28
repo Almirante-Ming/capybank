@@ -1,5 +1,5 @@
 import { renderData } from '../modules/renderData.js'
-import { DataFormatter } from '../modules/formDealer.js'
+import { ValidateForm } from '../modules/formDealer.js'
 import { DataValidator } from '../modules/formDealer.js'
 
 // Relação entre o ID dos inputs e a posição deles no array de .Inputs 
@@ -14,50 +14,13 @@ const relation = [
     { id: "confirmar-senha", position: 6, minimum: 6, requiredString: [], mustMatch: 'senha', regex: null }
 ]
 
-// Função principal
-function validateForm() {
+function DOMInteraction() {
+    ValidateForm(relation)
+    getFormData()
+}
 
-    const Inputs = document.querySelectorAll('.Inputs')
-    const submit = document.querySelector('#submit')
-    //const bx = document.querySelectorAll('.bx')
-    
-    const format = DataFormatter()
-    const validate = DataValidator()
-    
-    validate.toggleSubmit(submit, Inputs)
-    
-    Inputs.forEach((box) => {
-
-        const input = box.firstElementChild 
-        // Verifica erros em todos os inputs
-        input.addEventListener('input', (e) => {
-            validate.checkRelation(input, relation)
-            validate.toggleSubmit(submit, Inputs)
-            if (input.id == 'cpf') { format.CPF(e) }
-            if (input.id == 'telefone') { format.phone(e) }
-        })
-        
-        input.addEventListener('blur', () => {
-            if (input.id == 'confirmar-senha') {
-                const senha = document.querySelector("#senha")
-                validate.checkRelation(senha, relation)
-                validate.toggleSubmit(submit, Inputs)
-            }
-        })
-        
-        
-       /*
-        bx.forEach((check) => {
-            check.addEventListener('click', () => {
-                check.classList.toggle('show')
-                let showPassword = (input.type == 'password' ? 'text' : 'password')
-                if (input.id == 'senha' && check.id == 'p1') { input.type = showPassword }
-                if (input.id == 'confirmar-senha' && check.id == 'p2') { input.type = showPassword }
-            })
-        })
-        */
-    })
-
+function getFormData() {
+    const submit = document.querySelector("#submit")
     submit.addEventListener('click', (e) => {
         e.preventDefault()
         const form = document.querySelector('form')
@@ -66,12 +29,10 @@ function validateForm() {
 
 }
 
- 
 
 // Envia as informações para servidor
 function sendFormData(form) {
 
-    const render = renderData()
     let formData = new FormData(form)
 
     let userData = {
@@ -105,4 +66,4 @@ function sendFormData(form) {
 
 }
 
-document.addEventListener('DOMContentLoaded', validateForm)
+document.addEventListener('DOMContentLoaded', DOMInteraction)

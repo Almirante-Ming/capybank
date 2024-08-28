@@ -1,34 +1,24 @@
 import { renderData } from "../modules/renderData.js"
-import { DataValidator } from "../modules/formDealer.js"
+import { ValidateForm } from "../modules/formDealer.js"
 
 const relation = [
     { id: "email", position: 0, minimum: 3, requiredString: [".com", "@"], mustMatch: null, regex: null},
 ]
 
-function validateForm() {
+function DOMInteraction() {
 
-    const Inputs = document.querySelectorAll('.Input')
-    const submit = document.querySelector('#submit-1')
-    
-    const validate = DataValidator()
-    validate.toggleSubmit(submit, Inputs)
+  ValidateForm(relation)
+  getFormData()
 
-    Inputs.forEach((box) => {
-        let input = box.firstElementChild
+}
 
-        input.addEventListener('input', (e) => {
-            validate.checkRelation(input, relation)
-            validate.toggleSubmit(submit, Inputs)
-            if (input.id == 'cpf') { format.CPF(e) }
-        })
-    })
-    
+function getFormData() {
+        
     submit.addEventListener('click', (e) => {
         e.preventDefault()
         const form = document.querySelector('.Forgot-PWD')
         sendFormData(form)
     })
-
 }
 
 function sendFormData(form) {
@@ -104,4 +94,4 @@ function toggleLoader(toggle) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', validateForm)
+document.addEventListener('DOMContentLoaded', DOMInteraction)

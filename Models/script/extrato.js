@@ -2,18 +2,23 @@ import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { ProtectRoute } from '../modules/ProtectRoute.js'
 import { formatDate } from '../modules/formDealer.js'
+import { MenuInteraction } from '../modules/MenuInteraction.js'
+
 
 function DOMInteraction() {
+    
     const render = renderData()
     const data = getUserData()
         .then((user) => {
             renderExtrato(user)
+            MenuInteraction()
             render.name(user.nome)
         })
         .catch((err) => {
             ProtectRoute()
         })
 }
+
 
 async function getTransferData() {
     const database_fetch = await fetch('http://localhost:8080/api/transferencia')
@@ -101,7 +106,7 @@ function renderExtrato(user) {
     const container = document.querySelector(".extratos")
 
     const response = getTransferData().then((r) => {
-
+        console.log(r)
         r.forEach((row) => {
             var extrato = buildDOM.wrapper()
             var operacao = buildDOM.tipo_operacao(row)
