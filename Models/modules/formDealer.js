@@ -111,9 +111,11 @@ export function DataFormatter() {
 export function DataValidator() {
 
     const checkRelation = (input, relation) => {
+
         relation.forEach((relation) => {
             if (relation.id == input.id) {
                 lookForErrors(relation, input)
+                deleteEmptySpaces(input)
             }
         })
     }
@@ -189,4 +191,53 @@ function errorController() {
     return { checkRelation, toggleSubmit }
 }
 
+// FORMATA DATAS
+export function formatDate(str) {
+    const day = str.slice(8, 10)
+    const month = str.slice(5, 7)
+    const year = str.slice(0, 4)
+    const  date = day + '/' + month + '/' + year
+    return date
+}
 
+// DELETA ESPAÇO VAZIO PARA SENHA
+export function deleteEmptySpaces(input) {
+    if (input.id == 'senha') {
+        input.addEventListener('input', () => {
+            if (input.value.includes(" ")) {
+                input.value = ""
+            }
+        })
+    }
+}
+
+export function ValidateForm(relation) {
+
+    const Inputs = document.querySelectorAll('.Inputs')
+    const submit = document.querySelector('#submit')
+    
+    const format = DataFormatter()
+    const validate = DataValidator()
+    
+    validate.toggleSubmit(submit, Inputs)
+    
+    Inputs.forEach((box) => {
+
+        const input = box.firstElementChild 
+        input.addEventListener('input', (e) => {
+            validate.checkRelation(input, relation)
+            validate.toggleSubmit(submit, Inputs)
+            if (input.id == 'cpf') { format.CPF(e) }
+            if (input.id == 'telefone') { format.phone(e) }
+        })
+        
+        input.addEventListener('blur', () => {
+            if (input.id == 'confirmar-senha') {
+                const senha = document.querySelector("#senha")
+                validate.checkRelation(senha, relation)
+                validate.toggleSubmit(submit, Inputs)
+            }
+        })
+
+    })
+}

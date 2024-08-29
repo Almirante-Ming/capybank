@@ -1,4 +1,4 @@
-const { readColumn, updateColumn, createColumn } = require('../database/db')
+const { readColumn, updateColumn } = require('../database/db')
 
 async function transferCash(data, fetchID) {
 
@@ -35,13 +35,14 @@ async function transferCash(data, fetchID) {
     
     async function getUserNames_Extrato(transferidor, favorecido) {
         // renomear essas variaveis
-        const transferUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${favorecido.cpf}';`)
-        const loggedUser_name = await readColumn(`SELECT nome FROM dados_clientes WHERE cpf = '${transferidor.cpf}';`)
-        saveExtrato(transferidor.cpf, favorecido.cpf, loggedUser_name.rows[0].nome, transferUser_name.rows[0].nome, data.valor, new Date())
+        const transferUser_name = await readColumn(`SELECT nome_completo FROM dados_clientes WHERE cpf = '${favorecido.cpf}';`)
+        const loggedUser_name = await readColumn(`SELECT nome_completo FROM dados_clientes WHERE cpf = '${transferidor.cpf}';`)
+        
+        saveExtrato(transferidor.cpf, favorecido.cpf, loggedUser_name.rows[0].nome_completo, transferUser_name.rows[0].nome_completo, data.valor, new Date())
     }
 
     async function saveExtrato(cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data) {
-        const response = await createColumn(`INSERT INTO transferencia (cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, date) VALUES ($1, $2, $3, $4, $5, $6)`, [cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data])
+        const response = await updateColumn(`INSERT INTO transferencia (cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, date) VALUES ($1, $2, $3, $4, $5, $6)`, [cpf_envia, cpf_recebe, nome_envia, nome_recebe, valor, data])
         return
     }
     

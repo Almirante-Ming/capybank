@@ -1,19 +1,24 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { ProtectRoute } from '../modules/ProtectRoute.js'
+import { formatDate } from '../modules/formDealer.js'
+import { MenuInteraction } from '../modules/MenuInteraction.js'
 
-async function DOMInteraction() {
+
+function DOMInteraction() {
+    
     const render = renderData()
-    const data = await getUserData()
+    const data = getUserData()
         .then((user) => {
-            console.log(user)
-            renderDOM(user)
+            renderExtrato(user)
+            MenuInteraction()
             render.name(user.nome)
         })
         .catch((err) => {
             ProtectRoute()
         })
 }
+
 
 async function getTransferData() {
     const database_fetch = await fetch('http://localhost:8080/api/transferencia')
@@ -41,6 +46,7 @@ function buildDIVS(user) {
     const tipo_operacao = (row) => {
         const pagamento = document.createElement('div')
         const pagamento_span = document.createElement('span')
+        // Se o nome de quem RECEBEU dinheiro no banco é o mesmo nome do usuário logado, significa que foi uma operação de entrada
         if (user.nome == row.nome_recebe) {
             var tipo = 'Entrada'
         }
@@ -69,9 +75,9 @@ function buildDIVS(user) {
     const data = (valor) => {
         const data = document.createElement('div')
         const span_data = document.createElement('span')
-        span_data.textContent = valor
-        data.append(span_data)
+        span_data.textContent = formatDate(valor)
         data.className = 'data global'
+        data.append(span_data)
         return data
     }
 
@@ -94,14 +100,14 @@ function buildDIVS(user) {
     return { wrapper, icone, nome, tipo_operacao, data, total }
 }
 
-function renderDOM(user) {
+function renderExtrato(user) {
 
     const buildDOM = buildDIVS(user)
     const container = document.querySelector(".extratos")
 
     const response = getTransferData().then((r) => {
+        console.log(r)
         r.forEach((row) => {
-
             var extrato = buildDOM.wrapper()
             var operacao = buildDOM.tipo_operacao(row)
 
@@ -118,9 +124,7 @@ function renderDOM(user) {
             }
 
             var data = buildDOM.data(row.date)
-
-
-            extrato.append(icon, data, nome, operacao, valor)
+            extrato.append(icon, data, nome, operacao, valor,)
             container.append(extrato)
         })
     })
