@@ -56,24 +56,11 @@ function getResponse() {
         
         let operation 
         
-        if (data.type == 'send_email') {
-            operation = await sendEmail(data.email)
-        }
-        
-        else if (data.type == 'transfer_cash') {
+        if (data.type == 'transfer_cash') {
             operation = await transferCash(data, fetchID)
         }
 
-        
         returnResponse(res, operation.outcome, operation.response)
-        /*
-        operation.then((result) => {
-            res.writeHead(result.outcome, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
-            res.end(JSON.stringify({
-                message: result.response
-            }))
-        })
-        */
 
     }   
 
