@@ -2,7 +2,6 @@
 const { readColumn, updateColumn } = require('../database/db')
 const { getError } = require('../database/getError')
 
-const { sendEmail } = require('../modules/sendEmail')
 const { transferCash } = require('../modules/transferOp')
 
 // Funções que interagem com banco e recebem as requisições do "Front-End" e voltam uma resposta para a página
