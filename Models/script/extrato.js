@@ -13,6 +13,7 @@ function DOMInteraction() {
             renderExtrato(user)
             MenuInteraction()
             render.name(user.nome)
+            render.saldo('R$ ' + user.saldo)
         })
         .catch((err) => {
             ProtectRoute()
