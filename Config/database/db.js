@@ -11,6 +11,14 @@ const clients = new Pool({
   max: 1000
 })
 
+// Função que instancia a conexão ao database
+async function ConnectDatabase() {
+  await clients.connect()
+  return
+}
+
+ConnectDatabase()
+
 // Função que instancia as configurações iniciais do DB, configurando as tabelas e triggers
 async function createTable() {
 
@@ -18,7 +26,6 @@ async function createTable() {
 
   try {
 
-    await clients.connect()
 //nunca se deve apagar as funcoes, vc faz a primeira vez pra configurar e apaga logo em seguida, ja q nao tem clausura pra ignorar
     const query = `CREATE TABLE IF NOT EXISTS dados_clientes (
                   cpf VARCHAR(14) PRIMARY KEY,
@@ -77,7 +84,6 @@ async function readColumn(custom_query) {
   let result
 
   try {
-    await clients.connect()
     result = await clients.query(custom_query)
     // clients.end()
   }
@@ -97,7 +103,6 @@ async function updateColumn(custom_query, data) {
     let outcome = 400
     let error
     try {
-      await clients.connect()
       let result = await clients.query(custom_query, data)
       if (result.rowCount > 0) { outcome = 200 }
       // clients.end()
