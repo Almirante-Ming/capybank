@@ -24,71 +24,87 @@
         </div>
 
         <!-- ---------------------------------------------------- -->
-        
+      
         <div class="user">
             <span><i class='bx bxs-caret-down-circle'></i></span>
 
-            <span id = 'name'></span>
+            <span id='name'></span>
 
             <div class="imag">
-                <img src="#" alt="">
+                <img src="#" alt="" id='icon'>
+            </div>
+
+            <div class="dropdown-menu">
+
+                <div class="opcoes">
+                    <a  href="perfil.html"><i class='bx bxs-user-circle'></i> User</a>
+                </div>
+    
+                <div class="opcoes">
+                    <a  href="pix.html"><i class='bx bxs-dollar-circle'></i> Pix</a>
+                </div>
+
+                <div class="opcoes">
+                    <a  href="login.html"> <i class='bx bxs-exit' ></i> Sair</a>
+                </div>
+                    
             </div>
         </div>
-
     </div>
 
     
-
     <nav id="menu">
 
-        <header >
-            <a href="#" class="btn-expandir" onclick="abrirMenu()" ><img src="./imgs/capi.png" alt=""></a>
+        <header>
+            <a href="#" class="btn-expandir" onclick="fecharMenu()"><img src="./imgs/capi.png" alt=""></a>
         </header>
 
         <div class="part1">
-        <a class="color" href="#">
-            <span class="icon"><i class='bx bxs-grid-alt'></i></span>
-            <span class="txt-link">Saldo</span>
-        </a>
-
-        <a href="#">
-            <span class="icon"><i class='bx bxs-bank'></i></span>
-            <span class="txt-link">Transferências</span>
-        </a>
-
-        <a href="#">
-            <span class="icon"><i class='bx bx-credit-card'></i></span>
-            <span class="txt-link">Notificações</span>
-        </a>
-
-        <a href="#">
-            <span class="icon"><i class='bx bx-credit-card'></i></span>
-            <span class="txt-link">Pagamentos</span>
-        </a>
-    </div>
-
-    <div class="part2">
-        <li class="item-menu">
-            <a href="#">
-                <span class="icon"><i class='bx bxs-user-circle' ></i></span>
-                <span class="txt-link">Minha Conta</span>
+            <a class="color" href="home.html">
+                <span class="icon"><i class='bx bxs-home' ></i></span>
+                <span class="txt-link">Home</span>
             </a>
 
-            <a href="#">
-                <span class="icon"><i class='bx bxs-cog' ></i></span>
-                <span class="txt-link">Configurações</span>
+            <a class="color" href="./extrato.html">
+                <span class="icon"><i class='bx bxs-card'></i></span>
+                <span class="txt-link">Extrato</span>
             </a>
 
-            <a href="#">
-                <span class="icon"><i class='bx bx-body'></i></span>
-                <span class="txt-link">Ajuda</span>
+            <a class="color" href="#">
+                <span class="icon"><i class='bx bx-credit-card'></i></span>
+                <span class="txt-link">Notificações</span>
             </a>
 
-            <a href="#" onclick="fecharMenu()">
-                <span class="icon"><i class='bx bx-log-out-circle'></i></span>
-                <span class="txt-link">Diminuir</span>
+            <a class="color" href="./transferencia.html" id = 't-button'>
+                <span class="icon"><i class='bx bxs-dollar-circle'></i></span>
+                <span class="txt-link">Pix</span>
             </a>
-    </div>
+        </div>
+
+        <div class="part2">
+            <li class="item-menu">
+
+                <a href="perfil.html" class="color">
+                    <span class="icon"><i class='bx bxs-user-circle'></i></span>
+                    <span class="txt-link">Minha Conta</span>
+                </a>
+
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bxs-cog'></i></span>
+                    <span class="txt-link">Configurações</span>
+                </a>
+
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bx-body'></i></span>
+                    <span class="txt-link">Ajuda</span>
+                </a>
+<!-- 
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bx-log-out-circle'></i></span>
+                    <span class="txt-link">Diminuir</span>
+                </a> -->
+        </div>
+        <!-- <button id = 't-button'> Transferencia</button> -->
     </nav>
 
     <!-- ---------------------------------------------------- -->
