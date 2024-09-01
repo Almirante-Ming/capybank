@@ -9,31 +9,70 @@
 </head>
 <body>
     <div id="container">
-        <aside class="aside">
-            <nav>
-                <div class="user">
-                    <img src="imgs/girl.jpeg" alt="Imagem do usuário">
-                    <span>CapyBank</span>
-                </div>
-                <ul class="itens">
-                    <div class="list-item">
-                        <li><a href="#">Saldo e Extrato</a></li>
-                        <li><a href="#">Transferência</a></li>
-                        <li><a href="#">Pagamento</a></li>
-                        <li><a href="#">Notificações</a></li>
-                    </div>
-                    <div >
-                        <li><a href="#">Minha conta</a></li>
-                        <li><a href="#">Configurações</a></li>
-                        <li><a href="#">Ajuda</a></li>
-                    </div>
-                </ul>
-            </nav>
-        </aside>
+        <nav id="menu">
+
+            <header>
+                <a href="#" class="btn-expandir" onclick="fecharMenu()"><img src="./imgs/capi.png" alt=""></a>
+            </header>
+    
+            <div class="part1">
+                <a class="color" href="home.html">
+                    <span class="icon"><i class='bx bxs-home' ></i></span>
+                    <span class="txt-link">Home</span>
+                </a>
+    
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bxs-bank'></i></span>
+                    <span class="txt-link">Transferências</span>
+                </a>
+    
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bx-credit-card'></i></span>
+                    <span class="txt-link">Notificações</span>
+                </a>
+    
+                <a class="color" href="./transferencia.html" id = 't-button'>
+                    <span class="icon"><i class='bx bxs-dollar-circle'></i></span>
+                    <span class="txt-link">Pix</span>
+                </a>
+            </div>
+    
+            <div class="part2">
+                <li class="item-menu">
+    
+                    <a href="perfil.html" class="color">
+                        <span class="icon"><i class='bx bxs-user-circle'></i></span>
+                        <span class="txt-link">Minha Conta</span>
+                    </a>
+    
+                    <a class="color" href="#">
+                        <span class="icon"><i class='bx bxs-cog'></i></span>
+                        <span class="txt-link">Configurações</span>
+                    </a>
+    
+                    <a class="color" href="#">
+                        <span class="icon"><i class='bx bx-body'></i></span>
+                        <span class="txt-link">Ajuda</span>
+                    </a>
+    
+                    <a class="color" href="#">
+                        <span class="icon"><i class='bx bx-log-out-circle'></i></span>
+                        <span class="txt-link">Diminuir</span>
+                    </a>
+            </div>
+            <!-- <button id = 't-button'> Transferencia</button> -->
+        </nav>
+
+
+        <!-- ----------------FIM---------------------- -->
+    
         <main class="page">
             <header>
-                <h1>Dados do usuário</h1>
-                <img src="imgs/girl.jpeg" alt="Imagem de perfil do usuário">
+                <h1>Perfil do Cliente</h1>
+
+                <div class="ftperfil">
+                    <img src="imgs/girl.jpeg" alt="Imagem de perfil do usuário">
+                </div>
             </header>
             <section class="box">
                 <form>
@@ -65,9 +104,16 @@
                         
                         <span>Banco: 0000 | CAPYBANK MS</span>
                         
-                        <div class="link">
-                            <a href="#">Deletar conta</a>
-                            <a href="#">Alterar senha</a>
+                        <div class="opcoes">
+                           
+                            <div class="alt">
+                                <a href="#">Mudar Senha</a>
+                            </div>
+
+                            <div class="del">
+                                <a href="#"><i class='bx bx-message-square-x'></i></a>
+                            </div>
+
                         </div>
                     </div>
                 </form>

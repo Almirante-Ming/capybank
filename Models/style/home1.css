@@ -255,16 +255,8 @@ nav .color:hover {
 
 }
 
-.savings .capix{
-    margin-top: 20px;
-}
-
-.savings img{
-    width: 200px;
-    height: 120px;
-    z-index: 0;
-
-
+.savings .imgcofre img{
+    width: 300px;
 }
 
 .savings .description h1 {

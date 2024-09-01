@@ -169,28 +169,28 @@ function transferOperation() {
         })
     }
 
-    function transferCash_send(form) {
+    // function transferCash_send(form) {
 
-        let formData = new FormData(form)
-        const render = renderData()
+    //     let formData = new FormData(form)
+    //     const render = renderData()
 
-        let userData = {
-            'cpf': formData.get('cpf'), 'value': formData.get('value'), 'type': 'transfer_cash'
-        }
+    //     let userData = {
+    //         'cpf': formData.get('cpf'), 'value': formData.get('value'), 'type': 'transfer_cash'
+    //     }
 
-        let requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(userData),
-        }
+    //     let requestOptions = {
+    //         method: 'POST',
+    //         body: JSON.stringify(userData),
+    //     }
 
-        fetch('http://localhost:8080/sendData', requestOptions).then(async (response) => {
+    //     fetch('http://localhost:8080/sendData', requestOptions).then(async (response) => {
 
-            const result = await response.json()
-            alert(result.message)
+    //         const result = await response.json()
+    //         alert(result.message)
 
-        })
+    //     })
 
-    }
+    // }
 
     formInteraction()
 

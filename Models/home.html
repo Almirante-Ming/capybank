@@ -60,54 +60,55 @@
     <nav id="menu">
 
         <header>
-            <a href="#" class="btn-expandir"><img src="./imgs/capi.png" alt=""></a>
+            <a href="#" class="btn-expandir" onclick="fecharMenu()"><img src="./imgs/capi.png" alt=""></a>
         </header>
 
         <div class="part1">
-            <a class="color" href="#">
-                <span class="icon"><i class='bx bxs-grid-alt'></i></span>
-                <span class="txt-link">Saldo</span>
+            <a class="color" href="home.html">
+                <span class="icon"><i class='bx bxs-home' ></i></span>
+                <span class="txt-link">Home</span>
             </a>
 
-            <a href="#">
+            <a class="color" href="#">
                 <span class="icon"><i class='bx bxs-bank'></i></span>
                 <span class="txt-link">Transferências</span>
             </a>
 
-            <a href="#">
+            <a class="color" href="#">
                 <span class="icon"><i class='bx bx-credit-card'></i></span>
                 <span class="txt-link">Notificações</span>
             </a>
 
-            <a href="./transferencia.html">
-                <span class="icon"><i class='bx bx-credit-card'></i></span>
-                <span class="txt-link">Pagamentos</span>
+            <a class="color" href="./transferencia.html" id = 't-button'>
+                <span class="icon"><i class='bx bxs-dollar-circle'></i></span>
+                <span class="txt-link">Pix</span>
             </a>
         </div>
 
         <div class="part2">
             <li class="item-menu">
-                <a href="#">
+
+                <a href="perfil.html" class="color">
                     <span class="icon"><i class='bx bxs-user-circle'></i></span>
                     <span class="txt-link">Minha Conta</span>
                 </a>
 
-                <a href="#">
+                <a class="color" href="#">
                     <span class="icon"><i class='bx bxs-cog'></i></span>
                     <span class="txt-link">Configurações</span>
                 </a>
 
-                <a href="#">
+                <a class="color" href="#">
                     <span class="icon"><i class='bx bx-body'></i></span>
                     <span class="txt-link">Ajuda</span>
                 </a>
 
-                <a href="#">
+                <a class="color" href="#">
                     <span class="icon"><i class='bx bx-log-out-circle'></i></span>
                     <span class="txt-link">Diminuir</span>
                 </a>
         </div>
-        <button id = 't-button'> Transferencia</button>
+        <!-- <button id = 't-button'> Transferencia</button> -->
     </nav>
 
     <!-- ---------------------------------------------------- -->
@@ -142,13 +143,30 @@
             <!-- -------------half----------------------- -->
             <!-- savings = cofrinho -->
 
-            <div class="half">
+
+            <div class="servicos">
 
                 <div class="savings">
-                    <div class="capix">
-                        <img src="imgs/capix.jpg" alt="">
 
+                    <div class="imgcofre">
+                        <img src="imgs/credito.png" alt="">
                     </div>
+                
+                   
+
+                    <div class="description">
+                        <h1>Capi Credito</h1>
+                        <span>R$ 1.000</span>
+                    </div>
+                </div>
+
+                <div class="savings">
+
+                    <div class="imgcofre">
+                        <img src="imgs/capi-logo.jpg" alt="">
+                    </div>
+                
+                   
 
                     <div class="description">
                         <h1>Cofrinho</h1>
@@ -156,7 +174,22 @@
                     </div>
                 </div>
 
+                <div class="savings">
+
+                    <div class="imgcofre">
+                        <img src="imgs/capistonks.png" alt="">
+                    </div>
+                
+                   
+
+                    <div class="description">
+                        <h1>Investimento</h1>
+                        <span>R$ 1,00</span>
+                    </div>
+                </div>
+
             </div>
+              
 
             <!-- ------baixo---------- -->
 
