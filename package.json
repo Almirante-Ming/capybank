@@ -5,6 +5,32 @@
     "http": "^0.0.1-security",
     "node": "^20.14.0",
     "nodemailer": "^6.9.13",
+    "open": "^10.1.0",
     "pg": "^8.12.0"
-  }
+  },
+  "name": "capybank",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "./Config/app.js",
+  "scripts": {
+    "start": "node ./Config/app.js && npx open http://localhost:5500/Models/login.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Almirante-Ming/capyBank.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "pgsql",
+    "postgres",
+    "bank",
+    "capybara"
+  ],
+  "author": "almirante_ming",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Almirante-Ming/capyBank/issues"
+  },
+  "homepage": "https://github.com/Almirante-Ming/capyBank#readme"
 }
