@@ -1,3 +1,5 @@
+// Função auxiliar que recebe os dados do servidor
+
 function getBody(req) {
     return new Promise((resolve, reject) => {
         let body = '';

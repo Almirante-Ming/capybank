@@ -1,3 +1,4 @@
+// Biblioteca principal
 const http = require('http')
 
 const { createTable, readColumn } = require('./database/db')
@@ -49,6 +50,7 @@ const server = http.createServer( async (req, res) => {
             // -> Esses dados são capturados pela fetch API (visto no script Cliente.JS) e renderizados na DOM do projeto (home.js, meu-perfil.js...) .
 
         let id = fetchID() 
+        let query 
 
         if (req.url == '/api/user') {
             query = `SELECT * FROM dados_clientes where cpf = '${id}'`;
@@ -61,10 +63,9 @@ const server = http.createServer( async (req, res) => {
         else if (req.url == '/api/conta') {
             query = `SELECT * FROM conta WHERE cpf = '${id}'`;
         }
-         
         const database = await readColumn(query)
+        const userData = database.rows
 
-        const userData = query.includes('transferencia') ? database.rows : database.rows[0]
         res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
         res.end(JSON.stringify(userData))
 
