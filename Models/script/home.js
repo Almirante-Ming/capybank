@@ -2,14 +2,10 @@
 import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { ProtectRoute } from '../modules/ProtectRoute.js'
-import { MenuInteraction } from '../modules/MenuInteraction.js'
 
 
 async function DOMInteraction() {
-
-    MenuInteraction()
     renderServerData()
-
 }
 
 function renderServerData() {
@@ -20,7 +16,7 @@ function renderServerData() {
 
         .then((user) => {
             render.name(user.nome)
-            render.saldo(user.saldo)
+            render.saldo("R$ " + user.saldo)
         })
 
         .catch((err) => {

@@ -2,16 +2,15 @@ import { getUserData } from '../modules/Cliente.js'
 import { renderData } from '../modules/renderData.js'
 import { ProtectRoute } from '../modules/ProtectRoute.js'
 import { formatDate } from '../modules/formDealer.js'
-import { MenuInteraction } from '../modules/MenuInteraction.js'
 
 
 function DOMInteraction() {
     
     const render = renderData()
     const data = getUserData()
+
         .then((user) => {
             renderExtrato(user)
-            MenuInteraction()
             render.name(user.nome)
             render.saldo('R$ ' + user.saldo)
         })

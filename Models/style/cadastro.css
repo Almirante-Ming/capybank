@@ -127,6 +127,19 @@
     background: #56823c;
     box-shadow: 5px 5px 5px #86df71;
     transition: 0.5s;
+}
 
+form, .input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+form {
+    justify-content: start;
+}
+
+form > .input-box > .Error-Message {
+    width: 100%;
+    color: red;
 }
