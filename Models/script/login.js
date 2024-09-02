@@ -9,6 +9,15 @@ const relation = [
 function DOMInteraction() {
     ValidateForm(relation)
     getFormData()
+    enterRegister()
+}
+
+function enterRegister() {
+    const register = document.querySelector("#cad")
+    register.addEventListener('click', (e) => {
+        e.preventDefault()
+        window.location.href = 'cadastro.html'
+    })
 }
 
 function getFormData() {

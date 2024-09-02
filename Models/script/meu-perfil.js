@@ -31,29 +31,23 @@ async function DOMInteraction() {
 }
 
 function InteractWithSenha(senha) {
-    const campo_senha = document.querySelector('#senha')
-    const form_senha = document.querySelector('form')
+    const campo_senha = document.querySelector('#alterate-pwd')
 
-    deleteEmptySpaces(campo_senha)
+    campo_senha.addEventListener('click', () => {
+        const nova_senha = window.prompt('Digite sua nova senha: ')
+        if (nova_senha.length < 6) { 
+            alert ("Sua senha não pode ter menos de 6 chars!")
+            return
+        }
+        if (nova_senha == senha) {
+            alert ("Você digitou a mesma senha cadastrada!")
+            return
+        }
 
-    campo_senha.addEventListener('mouseenter', () => {
-        campo_senha.value = ''
-        campo_senha.style.cursor = 'pointer'
-        campo_senha.setAttribute('placeholder', 'Digite aqui para alterar sua senha')
+        openDialogue(nova_senha)
     })
-    campo_senha.addEventListener('mouseleave', () => {
-        campo_senha.setAttribute('value', '')
-        campo_senha.value = senha
-    })
-    form_senha.addEventListener('submit', (e) => {
-        e.preventDefault()
-        if (campo_senha.value.length < 6) {
-            alert('Senha precisa ter no mínimo 6 chars!')
-        }
-        else {
-            openDialogue(campo_senha.value)
-        }
-    })
+
+  
 }
 
 function openDialogue(senha) {
