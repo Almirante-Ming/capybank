@@ -29,74 +29,115 @@ img {
     border: 1px solid greenyellow;
 }
 
-aside {
-    width: 250px;
-    height: 100vh;
-    border-right: 2px solid var(--cinza);
-    display: flex;
-    flex-direction: column;
+/* --------------menu------------------------ */
+
+
+nav{
+    width: 265px;
+    height: 100%;
+    background-color:#dfdfdf;
+    box-shadow: 3px 0 0 #86df71;
+    padding: 0px 0 40px 1%;
+
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: .2s;
 }
 
-.aside .itens {
-    list-style: none;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+nav a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display:flex;
+    margin-bottom: 2px;
+    line-height: 25px;
 }
 
-.aside .itens div {
+nav .logo span{
+    color: #68b856;
+    font-size: 40px;
+    cursor: pointer;
+    justify-content: center;
     display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.aside .itens div li {
     margin-top: 15px;
 }
 
-.aside .itens div li a {
-    color: var(--fontColor);
+nav i{
+    color: #86df71;
+    font-size: 24px;
+    cursor: pointer;
+}
+nav .color:hover i{
+    color: white;
+
+}
+
+
+nav a{
+    color: black;
     text-decoration: none;
-}
-
-.aside .itens div li a:hover,
-.aside .itens div li a:focus {
-    text-decoration: underline;
-}
-
-.aside .user {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    gap: 15px;
     font-size: 20px;
-    color: var(--fontColor);
+    padding: 20px 4%;
+    display:flex;
+    margin-bottom: 2px;
+    line-height: 25px;
 }
 
-#container .page {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+nav .txt-link{
+    margin-left: 30px;
+    display: block;
+}
+
+nav a .icon > i{
+    font-size: 24px;
+}
+
+nav .color:hover {
+    background-color: #86df71;
+    color: #ffffff;
+    border-radius: 10px 0px 0px 10px;
+
+}
+
+/* ---------------fim menu----------------------- */
+
+
+
+.page{   
     justify-content: center;
     align-items: center;
+    margin-left: 30%;
+    margin-top: 5%;
+    z-index: 0;
 }
 
-#container .page header {
+.page h1{
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    width: 800px;
+    font-size: 60px;
+    color: #68b856;
 }
 
-#container .page header h1 {
-    color: var(--fontColor);
+.page .box-1{
+    margin-right: 10%;
 }
 
-#container .page header img {
-    width: 90px;
-    height: 90px;
+.page .ftperfil img{
+    width: 100px;
+    height: 100px;
+    
+}
+
+.page .ftperfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 section form {
@@ -128,14 +169,44 @@ section form .box-2 span {
     color: var(--fontColor);
 }
 
-section form .box-2 .link a {
-    display: block;
-    color: red;
+.opcoes{
+    display: flex;
+}
+
+.opcoes .del{
+    background-color: red;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+
+
+
+}
+
+.opcoes .del i{
+    font-size: 30px;
+    color: white;
     text-decoration: none;
+    margin-top: 5px;
 }
 
-section form .box-2 .link a:hover {
-    color: darkred;
+/* ----------------------- */
+
+.opcoes .alt{
+    background-color: #FFFF00;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
 }
 
-
+.opcoes .alt a{
+    font-size: 20px;
+    color:#68b856;
+    text-decoration: none;
+    margin-top: 5px;
+    text-align: center;
+}

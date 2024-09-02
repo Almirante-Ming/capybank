@@ -163,7 +163,7 @@ a{
 /* ------------------------------------------------- */
 
 nav{
-    width: 50px;
+    width: 265px;
     height: 100%;
     background-color:#dfdfdf;
     box-shadow: 3px 0 0 #86df71;
@@ -201,6 +201,11 @@ nav i{
     font-size: 24px;
     cursor: pointer;
 }
+nav .color:hover i{
+    color: white;
+
+}
+
 
 nav a{
     color: black;
@@ -230,17 +235,12 @@ nav .color:hover {
 
 }
 
-.nav .icon:hover {
-    color: #ffffff;
-
-}
-
 
 /* ---lado direito---- */
 
 .container{
     display: flex;
-    margin-left: 35px;
+    margin-left: 265px;
 
 
 }
@@ -292,6 +292,9 @@ nav .color:hover {
 }
 
 /* ---------------half--------------------- */
+.servicos{
+    display: flex;
+}
 
 .savings{
     display: flex;
@@ -325,26 +328,39 @@ nav .color:hover {
 }
 
 .savings img{
-    width: 200px;
-    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     z-index: 0;
     transition: 0.7s;
+
 
 }
 
 .savings:hover img{
-    width: 240px;
-    height: 130px;
-    border-radius: 5px;
-    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 
 }
 
 
 
 .savings .description h1 {
+    flex-direction: column;
     font-size: 20px;
     color: white;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
 }
 
 .savings:hover h1{
@@ -357,6 +373,8 @@ nav .color:hover {
 .savings .description span {
     font-size: 15px;
     color: white;
+    align-items: center;
+    margin-left: 20%;
 }
 
 .savings:hover span{
@@ -381,8 +399,8 @@ nav .color:hover {
     margin-left: 40px;
     display: flex;
     background: #86df71;
-    width: 520px;
-    height: 180px;
+    width: 600px;
+    height: 200px;
     overflow: hidden;
     border-radius: 5px;
     align-items: center;
@@ -392,9 +410,9 @@ nav .color:hover {
 .bottom_bx:hover{
 
     background: white;
-    border-radius: 20px;
-    width: 530px;
-    height: 190px;
+    border-radius: 10px;
+    width: 630px;
+    height: 220px;
     margin-left: 50px;
     transition: 0.7s;
     border: 1px solid #68b856;
@@ -410,6 +428,7 @@ nav .color:hover {
     justify-content:space-around;
     margin: 10px 30px ;
     color: white;
+    
 
 }
 
@@ -467,6 +486,13 @@ align-items: center;
     align-items: center;
     margin-right: 20px;
     margin-top: 15px;
+}
+
+.bottom_bx :hover .ilustracao img{
+    width: 190px;
+    height: 170px;
+    transition: 0.5s;
+    margin-bottom: 10px;
 }
 
 

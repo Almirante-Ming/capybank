@@ -54,6 +54,12 @@ a{
     color: #4b4b4b4b;
 }
 
+
+
+
+
+/* ------------------------------ */
+
 #searchInput{
     padding: 8px;
     border: none;
@@ -88,9 +94,9 @@ a{
     height: 35px;
     width: 205px;
     margin: 10px;
-
-
 }
+
+
 
 .cima .user span{
     font-size: 20px;
@@ -107,12 +113,50 @@ a{
 
 }
 
+.cima .user .dropdown-menu{
+    display: none;
+    flex-direction: column;
+    font-size: 12px;
+    margin-top: 160px;
+   
+    z-index: 1;
+    margin-left: 30px;
+   
+}
+
+
+
+.cima .user .dropdown-menu .opcoes a{
+    display: flex;
+    color: black;
+    font-size: 17px;
+    margin: 0px;
+    background-color: white;
+    width: 130px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cima .user:hover .dropdown-menu{
+
+    display: flex;
+
+}
+
+.cima .user .dropdown-menu a:hover{
+    background-color:#68b856;
+    color: white;
+}
+
+
+
 
 
 /* ------------------------------------------------- */
 
 nav{
-    width: 50px;
+    width: 265px;
     height: 100%;
     background-color:#dfdfdf;
     box-shadow: 3px 0 0 #86df71;
@@ -150,6 +194,11 @@ nav i{
     font-size: 24px;
     cursor: pointer;
 }
+nav .color:hover i{
+    color: white;
+
+}
+
 
 nav a{
     color: black;
@@ -177,16 +226,14 @@ nav .color:hover {
 
 }
 
-.nav .icon:hover {
-    color: #ffffff;
-
-}
 
 
 /* ---lado direito---- */
 
 .container{
     display: flex;
+    margin-left: 265px;
+
 
 }
 .main{
