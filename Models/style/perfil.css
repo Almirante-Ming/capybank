@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --fontColor: #87b344;
+    --cinza: #e8e8e8;
+    --corTela: #eaf6e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+#container {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid greenyellow;
+}
+
+/* --------------menu------------------------ */
+
+
+nav{
+    width: 265px;
+    height: 100%;
+    background-color:#dfdfdf;
+    box-shadow: 3px 0 0 #86df71;
+    padding: 0px 0 40px 1%;
+
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: .2s;
+}
+
+nav a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display:flex;
+    margin-bottom: 2px;
+    line-height: 25px;
+}
+
+nav .logo span{
+    color: #68b856;
+    font-size: 40px;
+    cursor: pointer;
+    justify-content: center;
+    display: flex;
+    margin-top: 15px;
+}
+
+nav i{
+    color: #86df71;
+    font-size: 24px;
+    cursor: pointer;
+}
+nav .color:hover i{
+    color: white;
+
+}
+
+
+nav a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display:flex;
+    margin-bottom: 2px;
+    line-height: 25px;
+}
+
+nav .txt-link{
+    margin-left: 30px;
+    display: block;
+}
+
+nav a .icon > i{
+    font-size: 24px;
+}
+
+nav .color:hover {
+    background-color: #86df71;
+    color: #ffffff;
+    border-radius: 10px 0px 0px 10px;
+
+}
+
+/* ---------------fim menu----------------------- */
+
+
+
+.page{   
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
+    margin-top: 5%;
+    z-index: 0;
+}
+
+.page h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: #68b856;
+}
+
+.page .box-1{
+    margin-right: 10%;
+}
+
+.page .ftperfil img{
+    width: 100px;
+    height: 100px;
+    
+}
+
+.page .ftperfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+section form {
+    background-color: var(--corTela);
+    display: flex;
+    gap: 15px;
+    width: 800px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+section form .box-1,
+section form .box-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+section form .box-1 input,
+section form .box-2 input {
+    border-radius: 15px;
+    border: 1px solid var(--fontColor);
+    padding: 10px;
+    outline: none;
+}
+
+section form .box-2 span {
+    margin-top: 20px;
+    color: var(--fontColor);
+}
+
+.opcoes{
+    display: flex;
+}
+
+.opcoes .del{
+    background-color: red;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+
+
+
+}
+
+.opcoes .del i{
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+/* ----------------------- */
+
+.opcoes .alt{
+    background-color: #FFFF00;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.opcoes .alt a{
+    font-size: 20px;
+    color:#68b856;
+    text-decoration: none;
+    margin-top: 5px;
+    text-align: center;
+}

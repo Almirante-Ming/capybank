@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style/pix.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<title></title>
+	<script type = "module" src = "./script/pix.js"></script>
+</head>
+<body>
+	<section id="container">
+		<section class="content">
+			<header>
+				<h1>Tranferência via Pix</h1>
+				<span>X</span>
+			</header>
+			<form class="form">
+				<div class="titulo"><label>Dados do Recebedor</label></div>
+				<!--
+					<div>
+						<label for="nome">Favorecido:</label>
+						<input type="text" name="nome" id="nome" required value ='oididoisdo'>
+					</div>
+				-->
+				<div>
+					<label for="cpf">CPF:</label>
+					<div class = "Inputs">
+						<input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required>
+						<div class = 'Error-Message'></div>
+					</div>
+				</div>
+				<div class="tranferir">
+					<div>
+						<label for="tranfe">Valor da Tranferência:</label>
+						<input class="fundoCinza" type="number" name="tranfe" id="tranfe" required>
+					</div>
+					<div>
+						<label for="dispo">Valor Disponível:</label>
+						<input class="fundoCinza" type="text" name="dispo" id="dispo" disabled>
+					</div>
+				</div>
+				<div>
+					<label for="descri">Descrição</label>
+					<input type="text" name="descri" id="descri">
+				</div>
+				<div><label class="texto"> Instituição CAPYBANK MS</label></div>
+				<div class="btn">
+					<button type="submit" class="btn-enviar" id = "submit">ENVIAR</button>
+					<a href="home.html">CANCELAR</a>
+				</div>
+			</form>
+		</section>
+	</section>
+</body>
+</html>

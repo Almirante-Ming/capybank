@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style/extrato.css">
+    <title>Document</title>
+    <script defer  type = "module" src = "./script/extrato.js"></script>
+</head>
+
+<body>
+
+    <div id="barra" class="cima">
+       
+        <div class="titulo">
+            <span>CapiBank</span>
+
+        </div>
+
+        <div class="search">
+                <span><i class='bx bx-search-alt-2'></i></span>
+
+            <input type="text" id="searchInput" placeholder="Pesquisar">
+        </div>
+
+        <!-- ---------------------------------------------------- -->
+      
+        <div class="user">
+            <span><i class='bx bxs-caret-down-circle'></i></span>
+
+            <span id='name'></span>
+
+            <div class="imag">
+                <img src="#" alt="" id='icon'>
+            </div>
+
+            <div class="dropdown-menu">
+
+                <div class="opcoes">
+                    <a  href="perfil.html"><i class='bx bxs-user-circle'></i> User</a>
+                </div>
+    
+                <div class="opcoes">
+                    <a  href="pix.html"><i class='bx bxs-dollar-circle'></i> Pix</a>
+                </div>
+
+                <div class="opcoes">
+                    <a  href="login.html"> <i class='bx bxs-exit' ></i> Sair</a>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+
+    
+    <nav id="menu">
+
+        <header>
+            <a href="#" class="btn-expandir" onclick="fecharMenu()"><img src="./imgs/capi.png" alt=""></a>
+        </header>
+
+        <div class="part1">
+            <a class="color" href="home.html">
+                <span class="icon"><i class='bx bxs-home' ></i></span>
+                <span class="txt-link">Home</span>
+            </a>
+
+            <a class="color" href="./extrato.html">
+                <span class="icon"><i class='bx bxs-card'></i></span>
+                <span class="txt-link">Extrato</span>
+            </a>
+
+            <a class="color" href="#">
+                <span class="icon"><i class='bx bx-credit-card'></i></span>
+                <span class="txt-link">Notificações</span>
+            </a>
+
+            <a class="color" href="./pix.html" id = 't-button'>
+                <span class="icon"><i class='bx bxs-dollar-circle'></i></span>
+                <span class="txt-link">Pix</span>
+            </a>
+        </div>
+
+        <div class="part2">
+            <li class="item-menu">
+
+                <a href="perfil.html" class="color">
+                    <span class="icon"><i class='bx bxs-user-circle'></i></span>
+                    <span class="txt-link">Minha Conta</span>
+                </a>
+
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bxs-cog'></i></span>
+                    <span class="txt-link">Configurações</span>
+                </a>
+
+                <a class="color" href="#">
+                    <span class="icon"><i class='bx bx-body'></i></span>
+                    <span class="txt-link">Ajuda</span>
+
+    </nav>
+
+    <!-- ---------------------------------------------------- -->
+
+
+    <div id="conteudo-1" class="container">
+
+        <div class="main">
+
+            <div class="top">
+
+                <div class="titulo-top">
+                    <span>Saldo Disponivel</span>
+                    <i class='bx bxs-coin'></i>
+                    <span id = 'saldo'></span>
+                </div>
+
+
+
+              
+            </div>
+
+
+            <!-- -------------half----------------------- -->
+
+            <div class="obs">
+
+                <div class="pesquisa">
+                    <span><i class='bx bx-search-alt-2'></i></span>
+                </div>
+
+                <div class="datas glob">
+                    <span>Datas</span>
+                </div>
+
+                <div class="categoria glob">
+                    <span>Categoria</span>
+                </div>
+
+                <div class="tipos glob">
+                    <span>Tipos</span>
+                </div>
+
+
+            </div>
+         
+
+            <!-- ------baixo---------- -->
+
+            <div class="extratos">
+            
+                
+            </div>   
+            
+        </div>
+        
+        
+        
+    </div>
+   
+
+
+
+    
+</body>
+</html>
