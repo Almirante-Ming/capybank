@@ -5,4 +5,4 @@ configure do
   MongoMapper.database = 'tarefas'
 end
 
-require_relative 'tarefa'
+require_relative 'tarefas'
