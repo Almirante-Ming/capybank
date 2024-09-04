@@ -1,9 +1,1 @@
-.DS_store
-node_modules
-*.txt
-config.json
-.env
-.sass-cache
-.config/.vscode
-.Models/.vscode
-.vscode
+ruby
